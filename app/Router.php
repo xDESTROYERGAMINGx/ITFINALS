@@ -43,30 +43,6 @@ class Router
             $data['studentId']
         ), 'POST');
 
-        //Grading Section - ADD
-        Router::add('/faculty-grading/AddStudentGrade/{facultyId}/{code}/{studentId}', fn($data) => (new FacultyController())->addStudentGrade(
-            $data['facultyId'],
-            $data['code'],
-            $data['studentId']
-        ), 'GET');
-        Router::add('/faculty-grading/AddStudentGrade/{facultyId}/{code}/{studentId}/add', fn($data) => (new FacultyController())->add(
-            $data['facultyId'],
-            $data['code'],
-            $data['studentId']
-        ), 'POST');
-
-        //Grading Section - EDIT
-        Router::add('/faculty-grading/EditStudentGrade/{facultyId}/{code}/{studentId}', fn($data) => (new FacultyController())->editStudentGrade(
-            $data['facultyId'],
-            $data['code'],
-            $data['studentId']
-        ), 'GET');
-        Router::add('/faculty-grading/EditStudentGrade/{facultyId}/{code}/{studentId}/edit', fn($data) => (new FacultyController())->edit(
-            $data['facultyId'],
-            $data['code'],
-            $data['studentId']
-        ), 'POST');
-
 
         Router::run();
     }
