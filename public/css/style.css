@@ -81,13 +81,12 @@ body::before {
     z-index: 1;
 }
 
-.profile-pic {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #4ac8e0;
-}
+.profile-pic, .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 
 /* Responsive Adjustments */
 @media (max-width: 991.98px) {
