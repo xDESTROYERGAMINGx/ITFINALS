@@ -27,17 +27,17 @@ class Router
 
         //Grading Section
         Router::add('/faculty-grading/{facultyId}/{code}', fn($data) => (new FacultyController())->facultyGradingStudents($data['facultyId'], $data['code']));
-        Router::add('/faculty-grading/ViewStudent/{facultyId}/{code}/{studentId}', fn($data) => (new FacultyController())->recordedStudentGrade(
+        Router::add('/faculty-grading/GradeStudent/{facultyId}/{code}/{studentId}', fn($data) => (new FacultyController())->recordedStudentGrade(
             $data['facultyId'],
             $data['code'],
             $data['studentId']
         ), 'GET');
-        Router::add('/faculty-grading/ViewStudent/{facultyId}/{code}/{studentId}/edit', fn($data) => (new FacultyController())->edit(
+        Router::add('/faculty-grading/GradeStudent/{facultyId}/{code}/{studentId}/edit', fn($data) => (new FacultyController())->edit(
             $data['facultyId'],
             $data['code'],
             $data['studentId']
         ), 'POST');
-        Router::add('/faculty-grading/ViewStudent/{facultyId}/{code}/{studentId}/add', fn($data) => (new FacultyController())->add(
+        Router::add('/faculty-grading/GradeStudent/{facultyId}/{code}/{studentId}/add', fn($data) => (new FacultyController())->add(
             $data['facultyId'],
             $data['code'],
             $data['studentId']

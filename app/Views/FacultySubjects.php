@@ -207,7 +207,7 @@ $this->insert('Errors/Toasts');
   <a href="/faculty-dashboard/<?= $faculty['user_id'] ?>"><i class="bi bi-house"></i> Dashboard</a>
   <a href="/faculty-subjectsAvailable/<?= $faculty['user_id'] ?>"><i class="bi bi-book"></i> Available Subjects</a>
   <a href="/faculty-subjects/<?= $faculty['user_id'] ?>" class="active"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
-    <a href="/faculty-profile/<?= $faculty['user_id'] ?>" class="active"><i class="bi bi-person-circle"></i> Profile</a>
+    <a href="/faculty-profile/<?= $faculty['user_id'] ?>"><i class="bi bi-person-circle"></i> Profile</a>
   <a href="#"><i class="bi bi-gear"></i> Settings</a>
   <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
 </nav>
