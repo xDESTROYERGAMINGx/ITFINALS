@@ -247,8 +247,8 @@ $this->insert('Errors/Toasts');
 <main class="main-content">
     <div class="row mb-3">
         <div class="col-md-6">
-            <h1 class="h4">Available Subjects</h1>
-            <p class="text-muted">Subjects created by admin that you can apply to teach.</p>
+            <h1 class="h2">Available Subjects</h1>
+            <p class="text-light ">Subjects created by admin that you can apply to teach.</p>
         </div>
         <div class="col-md-6 text-end">
             <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search subject...">

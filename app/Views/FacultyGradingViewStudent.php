@@ -109,7 +109,7 @@ $this->insert('Errors/Toasts');
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        color: #e0f0ff;
+        color: #1607ebff;
     }
 
     .table-glass tbody tr:hover {
@@ -127,12 +127,7 @@ $this->insert('Errors/Toasts');
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     }
 
-    /* List Group Items */
-    .list-group-item {
-        background: transparent;
-        border-color: rgba(74, 200, 224, 0.25);
-        color: #e0f0ff;
-    }
+    
 
     /* return a */
     .return a {
@@ -150,16 +145,7 @@ $this->insert('Errors/Toasts');
         background-color: rgba(5, 175, 62, 0.1);
     }
 
-    /* Glass Card */
-    .card-glass {
-        background: rgba(74, 200, 224, 0.15);
-        border: 1px solid rgba(74, 200, 224, 0.3);
-        /* backdrop-filter: blur(14px); */
-        border-radius: 20px;
-        padding: 20px;
-        color: #e0f0ff;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    }
+    
 
     .form-control {
         background: rgba(255, 255, 255, 0.1);
@@ -292,9 +278,7 @@ $this->insert('Errors/Toasts');
             </button>
         <?php else: ?>
             <!-- Show Edit Grade if grades already exist -->
-            <a href="/faculty-grading/EditStudentGrade/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>" class="btn btn-sm btn-outline-light px-3">
-                Edit Grade
-            </a>
+            
             <button type="button" class="btn btn-sm btn-outline-light px-3" data-bs-toggle="modal" data-bs-target="#editFormModal">
                 Edit Grade - Modal
             </button>
