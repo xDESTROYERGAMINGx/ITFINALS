@@ -93,6 +93,25 @@ $this->insert('Errors/Toasts');
 
   <div class="table-responsive">
 
+        <table class="table table-hover table-glass-avaialable table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-black">Code</th>
+                    <th class="text-black">Title</th>
+                    <th class="text-black">Units</th>
+                    <th class="text-black">Action</th>
+                </tr>
+            </thead>
+            <?php foreach ($subjects as $subject): ?>
+                <tbody>
+                    <td class="text-black"><?= htmlspecialchars($subject['code']) ?></td>
+                    <td class="text-black"><?= htmlspecialchars($subject['Description']) ?></td>
+                    <td class="text-black"><?= htmlspecialchars($subject['Units']) ?></td>
+                    <td><a href="/faculty-subjectApplication/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>">Apply</a></td>
+                </tbody>
+            <?php endforeach; ?>
+        </table>
+    </div>
     <table class="table table-hover table-glass-available">
       <thead>
         <tr>

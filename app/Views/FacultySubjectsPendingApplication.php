@@ -84,7 +84,7 @@ $this->insert('Errors/Toasts');
 <!-- Main Content -->
 <main class="main-content">
     <div class="card-glass2 mb-4">
-        <h1 class="h4">My Subjects - Pending</h1>
+        <h1 class="h2">My Subjects - Pending</h1>
         <p class="text-light">Subjects assigned to you by the admin.</p>
     </div>
 

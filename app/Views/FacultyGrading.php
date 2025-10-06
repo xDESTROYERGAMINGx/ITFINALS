@@ -83,14 +83,14 @@ $this->insert('Errors/Toasts');
 
 <!-- Main Content -->
 <main class="main-content">
-    <div class="card-glass2 mb-4">
-        <h1 class="h4"><?= htmlspecialchars($subject['code']) ?></h1>
+    <div class=" mb-4">
+        <h1 class="h2"><?= htmlspecialchars($subject['code']) ?></h1>
         <p class="text-light"><?= htmlspecialchars($subject['Description']) ?></p>
     </div>
     <!-- My Subjects (List Style) -->
     <div class="card-glass2 mb-4">
         <h5><i class="bi bi-journal-text"></i> STUDENTS</h5>
-        <table class="table table-hover table-glass2">
+        <table class="table table-hover table-glass table-bordered">
             <thead>
                 <tr>
                     <th class="text-white">Student ID</th>

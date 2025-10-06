@@ -11,8 +11,8 @@ $this->insert('Errors/Toasts');
 <nav class="navbar navbar-expand-lg navbar-blur fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-            <i class="bi bi-building"></i>
-            Christ the King College
+            <img src="/img/logo.png" alt="logo" class="logo" >
+            CKC information Technology
         </a>
 
         <!-- Toggle Button for Offcanvas -->
