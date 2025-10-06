@@ -233,7 +233,7 @@ $this->insert('Errors/Toasts');
                     <td class="text-white"><?= htmlspecialchars($student['user_id']) ?></td>
                     <td class="text-white"><?= htmlspecialchars($student['name']) ?></td>
                     <td><a href="/faculty-grading/ViewStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>" class="btn btn-sm btn-outline-light px-3">
-                            View Student
+                            View Student Grade
                         </a>
                     </td>
                 </tbody>
