@@ -257,7 +257,7 @@ $this->insert('Errors/Toasts');
 
     <div class="table-responsive">
 
-        <table class="table table-hover table-glass">
+        <table class="table table-hover table-glass table-bordered">
             <thead>
                 <tr>
                     <th class="text-black">Code</th>

@@ -101,12 +101,11 @@ $this->insert('Errors/Toasts');
         }
     }
 
-    .profile-pic {
+    .profile-pic, .logo {
         width: 36px;
         height: 36px;
         border-radius: 50%;
         object-fit: cover;
-        border: 2px solid #4ac8e0;
     }
 
     .card-glass {
@@ -173,8 +172,8 @@ $this->insert('Errors/Toasts');
 <nav class="navbar navbar-expand-lg navbar-blur fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-            <i class="bi bi-building"></i>
-            Christ the King College
+            <img src="/img/logo.png" alt="logo" class="logo" >
+            CKC information Technology
         </a>
 
         <!-- Toggle Button for Offcanvas -->

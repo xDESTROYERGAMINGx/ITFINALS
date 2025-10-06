@@ -1,4 +1,5 @@
- body {
+
+    body {
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: #0d2a4e;
@@ -92,12 +93,11 @@
         }
     }
 
-    .profile-pic {
+    .profile-pic, .logo {
         width: 36px;
         height: 36px;
         border-radius: 50%;
         object-fit: cover;
-        border: 2px solid #4ac8e0;
     }
 
     .card-glass {

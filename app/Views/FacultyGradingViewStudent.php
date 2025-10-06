@@ -244,8 +244,8 @@ $this->insert('Errors/Toasts');
 
 <!-- Main Content -->
 <main class="main-content">
-    <div class="card-glass mb-4">
-        <h1 class="h4"><?= htmlspecialchars($subject['code']) ?></h1>
+    <div class="mb-4">
+        <h1 class="h2"><?= htmlspecialchars($subject['code']) ?></h1>
         <p class="text-light"><?= htmlspecialchars($subject['Description']) ?></p>
     </div>
 

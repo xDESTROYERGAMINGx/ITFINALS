@@ -49,6 +49,15 @@ $this->start('mainContent');
     object-fit: cover;
     border: 2px solid #4ac8e0;
   }
+  
+  .profile-pics {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4ac8e0;
+  }
+
 
   /* Sidebar */
   .sidebar {
@@ -198,13 +207,14 @@ $this->start('mainContent');
 
   <!-- Content -->
   <main class="main-content">
-    <div class="card-glass mb-4">
-      <h1 class="h4"><i class="bi bi-person-circle"></i> Profile Dashboard</h1>
+    <div class=" mb-4">
+      <h1 class="h2"><i class="bi bi-person-circle"></i> Profile Dashboard</h1>
       <p class="text-light">Manage your account information.</p>
     </div>
 
     <!-- Profile Form -->
     <div class="card-glass">
+      <img src="/img/juswa.jpg" class="profile-pics" alt="Prof. Atis"  />
       <h5>Full Name : <span class="fw-light"><?= $profile['first_name'] ?> <?= $profile['last_name'] ?> </span></h5>
       <hr>
       <h5>Email : <span class="fw-light"><?= $profile['email'] ?></span></h5>

@@ -229,15 +229,15 @@ $this->insert('Errors/Toasts');
 
 <!-- Main Content -->
 <main class="main-content">
-    <div class="card-glass mb-4">
-        <h1 class="h4">My Subjects - Pending</h1>
+    <div class=" mb-4">
+        <h1 class="h2">My Subjects - Pending</h1>
         <p class="text-light">Subjects assigned to you by the admin.</p>
     </div>
 
     <!-- Subject Applications -->
     <div class="card-glass">
         <h5><i class="bi bi-hourglass"></i> Pending Applications</h5>
-        <table class="table table-glass table-hover  ">
+        <table class="table table-glass table-hover  table-bordered">
             <thead>
                 <tr>
                     <th class="text-white">Code</th>
