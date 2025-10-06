@@ -133,6 +133,21 @@ $this->insert('Errors/Toasts');
         border-color: rgba(74, 200, 224, 0.25);
         color: #e0f0ff;
     }
+
+    /* return a */
+    .return a {
+        color: #d1f0ff;
+        padding: 12px 20px;
+        gap: 10px;
+        text-decoration: none;
+        font-weight: 500;
+        background-color: rgba(74, 200, 224, 0.25);
+        border: 1px solid rgba(74, 200, 224, 0.3);
+        border-radius: 10px ;
+    }
+    .return a:hover {
+        background-color: rgba(5, 175, 62, 0.1);
+    }
 </style>
 
 
@@ -191,8 +206,9 @@ $this->insert('Errors/Toasts');
     <a href="/faculty-dashboard/<?= $faculty['user_id'] ?>"><i class="bi bi-house"></i> Dashboard</a>
     <a href="/faculty-subjectsAvailable/<?= $faculty['user_id'] ?>"><i class="bi bi-book"></i> Available Subjects</a>
     <a href="/faculty-subjects/<?= $faculty['user_id'] ?>"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
-    <a href="#" class="active"><i class="bi bi-journal-code"></i> Subject - <?= $subject['code']?></a>
-    <hr>
+    <a href="/profile"><i class="bi bi-person-circle"></i> Profile</a>
+    <a href="#"><i class="bi bi-gear"></i> Settings</a>
+    <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
 </nav>
 
 <!-- Offcanvas Sidebar -->
@@ -213,38 +229,35 @@ $this->insert('Errors/Toasts');
 
 <!-- Main Content -->
 <main class="main-content">
-    <div class=" mb-4">
-        <h1 class="h2"><?= htmlspecialchars($subject['code']) ?></h1>
-        <p class="text-light"><?= htmlspecialchars($subject['Description']) ?></p>
-    </div>
-    <!-- My Subjects (List Style) -->
     <div class="card-glass mb-4">
-        <h5><i class="bi bi-journal-text"></i> STUDENTS</h5>
-        <table class="table table-hover table-glass table-bordered">
+        <h1 class="h4">Student Applications</h1>
+        <p class="text-light">Students applying for your class.</p>
+    </div>
+
+    <!-- Subject Applications -->
+    <div class="card-glass">
+        <h5><i class="bi bi-hourglass"></i> Pending Applications</h5>
+        <table class="table table-glass table-hover  ">
             <thead>
                 <tr>
-                    <th class="text-white">Student ID</th>
-                    <th class="text-white">Name</th>
-                    <th class="text-white">Action</th>
+                    <th class="text-white">Code</th>
+                    <th class="text-white">Title</th>
+                    <th class="text-white">Units</th>
+                    <th class="text-white">Status</th>
                 </tr>
             </thead>
-            <?php foreach ($students as $student): ?>
+            <?php foreach ($pendingSubjects as $subject): ?>
                 <tbody>
-                    <td class="text-white"><?= htmlspecialchars($student['user_id']) ?></td>
-                    <td class="text-white"><?= htmlspecialchars($student['name']) ?></td>
-                    <td><a href="/faculty-grading/GradeStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>" class="btn btn-sm btn-outline-light px-3">
-                            View Grade
-                        </a>
-                    </td>
+                    <td class="text-white"><?= htmlspecialchars($subject['code']) ?></td>
+                    <td class="text-white"><?= htmlspecialchars($subject['Description']) ?></td>
+                    <td class="text-white"><?= htmlspecialchars($subject['Units']) ?></td>
+                    <td>Waiting Admin Confirmation...</td>
                 </tbody>
             <?php endforeach; ?>
         </table>
     </div>
-
-    <!-- Student Applications -->
-    <div class="card-glass">
-        <h5><i class="bi bi-person-check"></i> Student Applications</h5>
-        <ul class="list-group list-group-flush mt-3" id="applicationsList"></ul>
+    <div class="return mt-4">
+        <a href="/faculty-subjects/<?= $faculty['user_id'] ?> "><i class="bi bi-person-lines-fill"></i> View Subjects</a>
     </div>
 </main>
 

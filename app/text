@@ -1,0 +1,12 @@
+SELECT 
+    s.subject_id,
+    s.subject_name,
+    st.student_id,
+    st.first_name AS student_firstname,
+    st.last_name AS student_lastname,
+    st.course
+FROM faculty_subject fs
+JOIN subjects s ON fs.subject_id = s.subject_id
+JOIN student_subject ss ON s.subject_id = ss.subject_id
+JOIN students st ON ss.student_id = st.student_id
+WHERE fs.faculty_id = 123;   -- replace 123 with the faculty_id you want

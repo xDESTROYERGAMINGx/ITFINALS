@@ -236,7 +236,7 @@ $this->insert('Errors/Toasts');
         <a href="/" class="active px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Dashboard</a>
         <a href="/subjects_available" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-book"></i> Available Subjects</a>
         <a href="/my_subjects" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
-        <a href="/profile" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-circle"></i> Profile</a>
+    <a href="/faculty-profile/<?= $faculty['user_id'] ?>" class="active"><i class="bi bi-person-circle"></i> Profile</a>
         <a href="#" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-gear"></i> Settings</a>
         <a href="#" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-box-arrow-right"></i> Logout</a>
     </div>
@@ -270,17 +270,14 @@ $this->insert('Errors/Toasts');
         </table>
         <?php if (empty($grade['prelim']) && empty($grade['midterm']) && empty($grade['finals'])): ?>
             <!-- Show Add Grade if no grades exist -->
-            <a href="/faculty-grading/AddStudentGrade/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>" class="btn btn-sm btn-outline-light px-3">
-                Add Grade
-            </a>
             <button type="button" class="btn btn-sm btn-outline-light px-3" data-bs-toggle="modal" data-bs-target="#addFormModal">
-                Add Grade - Modal
+                Add Grade
             </button>
         <?php else: ?>
             <!-- Show Edit Grade if grades already exist -->
             
             <button type="button" class="btn btn-sm btn-outline-light px-3" data-bs-toggle="modal" data-bs-target="#editFormModal">
-                Edit Grade - Modal
+                Edit Grade
             </button>
         <?php endif; ?>
 
@@ -300,7 +297,7 @@ $this->insert('Errors/Toasts');
                     <h1 class="modal-title fs-5" id="editFormLabel">Edit Student Grade</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>    
                 </div>
-                <form method="POST" action="/faculty-grading/ViewStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>/edit">
+                <form method="POST" action="/faculty-grading/GradeStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>/edit">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Prelim</label>
@@ -332,7 +329,7 @@ $this->insert('Errors/Toasts');
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile Details</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="/faculty-grading/ViewStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>/add">
+                <form method="POST" action="/faculty-grading/GradeStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>/add">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Prelim</label>

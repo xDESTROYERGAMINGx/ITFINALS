@@ -108,7 +108,7 @@ class FacultyController
         $student = $this->FacultyModel->getStudentInfo($studentId);
         $subject = $this->FacultyModel->getSubjectInfo($code);
         $faculty  = $this->FacultyModel->getFacultyInfo($facultyId);
-        echo $GLOBALS['templates']->render('FacultyGradingViewStudent', [
+        echo $GLOBALS['templates']->render('FacultyGradingGradeStudent', [
             'grade' => $grade,
             'student' => $student,
             'subject' => $subject,
@@ -138,7 +138,7 @@ class FacultyController
 
             $this->FacultyModel->add($studentId, $code, $prelim, $midterm, $finals);
 
-            header("Location:/faculty-grading/ViewStudent/$facultyId/$code/$studentId");
+            header("Location:/faculty-grading/GradeStudent/$facultyId/$code/$studentId");
             exit;
         } else {
             header("Location: /");
@@ -170,7 +170,7 @@ class FacultyController
 
             $this->FacultyModel->edit($studentId, $code, $prelim, $midterm, $finals);
 
-            header("Location:/faculty-grading/ViewStudent/$facultyId/$code/$studentId");
+            header("Location:/faculty-grading/GradeStudent/$facultyId/$code/$studentId");
             exit;
         } else {
             header("Location: /");

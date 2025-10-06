@@ -95,7 +95,7 @@ $this->start('mainContent');
   .main-content {
     margin-left: 240px;
     padding: 90px 30px 30px;
-    z-index: 1;
+    text-align: center;
   }
 
   @media (max-width: 991.98px) {
@@ -136,6 +136,38 @@ $this->start('mainContent');
   label {
     color: #b2d4ec;
     font-weight: 500;
+  }
+
+  .teacher-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(74, 200, 224, 0.3);
+    backdrop-filter: blur(18px);
+    border-radius: 20px;
+    padding: 30px;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    max-width: 800px;
+    margin: 40px auto;
+  }
+
+  .teacher-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #4ac8e0;
+    margin-bottom: 15px;
+  }
+
+  .info-title {
+    color: #75e3a4;
+    font-weight: 600;
+  }
+
+  .about-tab {
+    font-weight: 600;
+    color: #4ac8e0;
+    text-transform: uppercase;
+    margin-bottom: 20px;
   }
 </style>
 </head>
@@ -207,24 +239,33 @@ $this->start('mainContent');
 
   <!-- Content -->
   <main class="main-content">
-    <div class=" mb-4">
-      <h1 class="h2"><i class="bi bi-person-circle"></i> Profile Dashboard</h1>
-      <p class="text-light">Manage your account information.</p>
-    </div>
 
-    <!-- Profile Form -->
-    <div class="card-glass">
-      <img src="/img/juswa.jpg" class="profile-pics" alt="Prof. Atis"  />
-      <h5>Full Name : <span class="fw-light"><?= $profile['first_name'] ?> <?= $profile['last_name'] ?> </span></h5>
-      <hr>
-      <h5>Email : <span class="fw-light"><?= $profile['email'] ?></span></h5>
-      <hr>
-      <h5>ID Number :<span class="fw-light"> <?= $profile['id_number'] ?> </span></h5>
-      <hr>
-      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Edit Profile Details
-      </button>
+    <h2>Teacher Details</h2>
+    <p class="text-light">Dashboard / Teacher Details</p>
+
+    <div class="teacher-card">
+      <img src="/img/juswa.jpg" alt="Teacher Photo">
+
+      <h4><?= $profile['first_name'] ?> <?= $profile['last_name'] ?></h4>
+      <div class="about-tab">About</div>
+
+      <div class="row text-start">
+        <div class="col-md-6">
+          <p><span class="info-title">First Name:</span> <?= $profile['first_name']?></p>
+          <p><span class="info-title">Last Name:</span> <?= $profile['last_name']?></p>
+          <p><span class="info-title">Gender:</span> <?= $profile['gender']?></p>
+          <p><span class="info-title">Email:</span> <?= $profile['email']?></p>
+          <p><span class="info-title">Mobile Number:</span> <?= $profile['phone_number']?></p>
+          <p><span class="info-title">ID Number:</span> <?= $profile['id_number']?></p>
+
+        </div>
+
+      </div>
     </div>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Edit Profile Details
+    </button>
+
 
     <!--Update Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -246,7 +287,7 @@ $this->start('mainContent');
               </div>
               <div class="mb-3">
                 <label for="email">Email Address</label>
-                <input type="email" class="form-control" id="email" >
+                <input type="email" class="form-control" id="email">
               </div>
               <hr>
               <div class="mb-3">
