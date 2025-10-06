@@ -6,152 +6,6 @@ $this->insert('Errors/Toasts');
 
 <!-- Add your content here to be displayed in the browser -->
 
-<style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d2a4e;
-    color: #e0f0ff;
-    overflow-x: hidden;
-    min-height: 100vh;
-    z-index: 0;
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('/img/bg.jpg') no-repeat center center/cover;
-    filter: blur(10px) brightness(0.6);
-    z-index: -1;
-  }
-
-  /* Navbar */
-  .navbar-blur {
-    background: rgba(0, 44, 89, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(74, 200, 224, 0.15);
-  }
-
-  .navbar-blur .navbar-brand {
-    color: #4ac8e0;
-    font-weight: 600;
-  }
-
-  .navbar-blur .nav-link,
-  .navbar-blur .navbar-text {
-    color: #cde9fb;
-  }
-
-  .profile-pic {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #4ac8e0;
-  }
-
-  /* Sidebar */
-  .sidebar {
-    background: rgba(4, 66, 121, 0.75);
-    backdrop-filter: blur(12px);
-    height: 100vh;
-    width: 240px;
-    position: fixed;
-    top: 56px;
-    left: 0;
-    padding-top: 1rem;
-    border-right: 1px solid rgba(74, 200, 224, 0.15);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sidebar a {
-    color: #a6d1f7;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .sidebar a:hover,
-  .sidebar a.active {
-    background-color: rgba(74, 200, 224, 0.25);
-    border-left: 4px solid #4ac8e0;
-    padding-left: 16px;
-    color: #d1f0ff;
-  }
-
-  .main-content {
-    margin-left: 240px;
-    padding: 90px 30px 30px;
-    z-index: 1;
-  }
-
-  @media (max-width: 991.98px) {
-    .sidebar {
-      display: none !important;
-    }
-
-    .main-content {
-      margin-left: 0;
-      padding: 90px 15px 20px;
-    }
-  }
-
-  /* Glass Card */
-  .card-glass {
-    background: rgba(74, 200, 224, 0.15);
-    border: 1px solid rgba(74, 200, 224, 0.3);
-    backdrop-filter: blur(14px);
-    border-radius: 20px;
-    padding: 20px;
-    color: #e0f0ff;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  }
-
-  .table-glass th,
-  .table-glass td {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: #e0f0ff;
-  }
-
-  .table-glass tbody tr:hover {
-    background-color: rgba(5, 175, 62, 0.1)
-  }
-
-  /* List Group Items */
-  .list-group-item {
-    background: transparent;
-    border-color: rgba(74, 200, 224, 0.25);
-    color: #e0f0ff;
-  }
-
-  /* return a */
-  .return a {
-    color: #d1f0ff;
-    padding: 12px 20px;
-    gap: 10px;
-    text-decoration: none;
-    font-weight: 500;
-    background-color: rgba(74, 200, 224, 0.25);
-    border: 1px solid rgba(74, 200, 224, 0.3);
-    border-radius: 10px;
-  }
-
-  .return a:hover {
-    background-color: rgba(5, 175, 62, 0.1);
-  }
-</style>
-
-
 <!-- Top Navigation -->
 <nav class="navbar navbar-expand-lg navbar-blur fixed-top">
   <div class="container-fluid">
@@ -236,9 +90,9 @@ $this->insert('Errors/Toasts');
   </div>
 
   <!-- My Subjects (List Style) -->
-  <div class="card-glass mb-4">
+  <div class="card-glass2 mb-4">
     <h5><i class="bi bi-journal-text"></i> My Subjects</h5>
-    <table class="table table-glass table-hover  ">
+    <table class="table table-glass2 table-hover  ">
       <thead>
         <tr>
           <th class="text-white">Code</th>
@@ -260,7 +114,7 @@ $this->insert('Errors/Toasts');
 
   <!-- Subject Applications -->
   <div class="return mt-4">
-    <a href="/faculty-subjectsPendingApplication/<?= $faculty['user_id'] ?> "><i class="bi bi-clock-history metric-icon"></i> View Pending Applications</a>
+    <a href="/faculty-subjectsPendingApplication/<?= $faculty['user_id'] ?> "><i class="bi bi-clock-history"></i> View Pending Applications</a>
   </div>
 </main>
 

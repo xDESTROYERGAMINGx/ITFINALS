@@ -1,159 +1,298 @@
- body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #0d2a4e;
-        /* fallback solid blue */
-        color: #e0f0ff;
-        overflow-x: hidden;
-        position: relative;
-        min-height: 100vh;
-        z-index: 0;
-    }
+/* ========================= GLOBAL STYLES ========================= */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d2a4e;
+    /* fallback solid blue */
+    color: #e0f0ff;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    z-index: 0;
+}
 
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('/img/bg.jpg') no-repeat center center/cover;
-        filter: blur(10px) brightness(0.6);
-        z-index: -1;
-    }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/img/bg.jpg') no-repeat center center/cover;
+    filter: blur(10px) brightness(0.6);
+    z-index: -1;
+}
 
-    /* Top Navbar */
-    .navbar-blur {
-        background: rgba(0, 44, 89, 0.85);
-        /* darker blue with opacity */
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(74, 200, 224, 0.15);
-    }
+/* Top Navbar */
+.navbar-blur {
+    background: rgba(0, 44, 89, 0.85);
+    /* darker blue with opacity */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(74, 200, 224, 0.15);
+}
 
-    .navbar-blur .navbar-brand {
-        color: #4ac8e0;
-        font-weight: 600;
-    }
+.navbar-blur .navbar-brand {
+    color: #4ac8e0;
+    font-weight: 600;
+}
 
-    .navbar-blur .nav-link,
-    .navbar-blur .navbar-text {
-        color: #cde9fb;
-    }
+.navbar-blur .nav-link,
+.navbar-blur .navbar-text {
+    color: #cde9fb;
+}
 
-    /* Sidebar */
+/* Sidebar */
+.sidebar {
+    background: rgba(4, 66, 121, 0.75);
+    backdrop-filter: blur(12px);
+    height: 100vh;
+    width: 240px;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    padding-top: 1rem;
+    border-right: 1px solid rgba(74, 200, 224, 0.15);
+    z-index: 1020;
+    display: none;
+    flex-direction: column;
+}
+
+.sidebar a {
+    color: #a6d1f7;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background-color: rgba(74, 200, 224, 0.25);
+    border-left: 4px solid #4ac8e0;
+    padding-left: 16px;
+    color: #d1f0ff;
+}
+
+.main-content {
+    margin-left: 240px;
+    padding: 90px 30px 30px;
+    z-index: 1;
+}
+
+.profile-pic {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4ac8e0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
     .sidebar {
-        background: rgba(4, 66, 121, 0.75);
-        backdrop-filter: blur(12px);
-        height: 100vh;
-        width: 240px;
-        position: fixed;
-        top: 56px;
-        left: 0;
-        padding-top: 1rem;
-        border-right: 1px solid rgba(74, 200, 224, 0.15);
-        z-index: 1020;
-        display: none;
-        flex-direction: column;
-    }
-
-    .sidebar a {
-        color: #a6d1f7;
-        padding: 12px 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    .sidebar a:hover,
-    .sidebar a.active {
-        background-color: rgba(74, 200, 224, 0.25);
-        border-left: 4px solid #4ac8e0;
-        padding-left: 16px;
-        color: #d1f0ff;
+        display: none !important;
     }
 
     .main-content {
-        margin-left: 240px;
-        padding: 90px 30px 30px;
-        position: relative;
-        z-index: 1;
+        margin-left: 0;
+        padding: 90px 15px 20px;
     }
+}
 
-    @media (max-width: 991.98px) {
-        .sidebar {
-            display: none !important;
-        }
+#mobileSidebar a {
+    color: #a6d1f7;
+    text-decoration: none;
+}
 
-        .main-content {
-            margin-left: 0;
-            padding: 90px 15px 20px;
-        }
-    }
+a {
+    color: #a6d1f7;
+    text-decoration: none;
+}
 
-    .profile-pic {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid #4ac8e0;
-    }
+#mobileSidebar a:hover,
+#mobileSidebar a:focus {
+    color: #d1f0ff;
+    text-decoration: none;
+}
 
-    .card-glass {
-        background: rgba(74, 200, 224, 0.15);
-        border: 1px solid rgba(74, 200, 224, 0.3);
-        backdrop-filter: blur(14px);
-        border-radius: 20px;
-        padding: 20px;
-        color: #e0f0ff;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        transition: transform 0.2s ease-in-out;
-    }
+#notifBadge {
+    font-size: 0.7rem;
+}
 
-    .card-glass:hover {
-        transform: translateY(-4px);
-    }
+/* ========================= FACULTY DASHBOARD =========================*/
 
-    .metric-icon {
-        font-size: 2.8rem;
-        flex-shrink: 0;
-        color: #4ac8e0;
-    }
+/* card glass */
+.card-glass {
+    background: rgba(74, 200, 224, 0.15);
+    border: 1px solid rgba(74, 200, 224, 0.3);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 20px;
+    color: #e0f0ff;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.2s ease-in-out;
+}
 
-    .card-title {
-        font-weight: 500;
-        font-size: 1rem;
-        color: #b2d4ec;
-    }
+.card-glass:hover {
+    transform: translateY(-4px);
+}
 
-    .card-value {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #ffffff;
-    }
+.metric-icon {
+    font-size: 2.8rem;
+    flex-shrink: 0;
+    color: #4ac8e0;
+}
 
-    .activity-list li {
-        background: transparent;
-        border-color: rgba(74, 200, 224, 0.25);
-        color: #a7cce5;
-    }
+.card-title {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #b2d4ec;
+}
 
-    #mobileSidebar a {
-        color: #a6d1f7;
-        text-decoration: none;
-    }
+.card-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
 
-    a {
-        color: #a6d1f7;
-        text-decoration: none;
-    }
+/* activity list */
+.activity-list li {
+    background: transparent;
+    border-color: rgba(74, 200, 224, 0.25);
+    color: #a7cce5;
+}
 
-    #mobileSidebar a:hover,
-    #mobileSidebar a:focus {
-        color: #d1f0ff;
-        text-decoration: none;
-    }
+
+/* Glass Card ver 2*/
+.card-glass2 {
+    background: rgba(74, 200, 224, 0.15);
+    border: 1px solid rgba(74, 200, 224, 0.3);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 20px;
+    color: #e0f0ff;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.table-glass2 th,
+.table-glass2 td {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #e0f0ff;
+}
+
+.table-glass2 tbody tr:hover {
+    background-color: rgba(5, 175, 62, 0.1)
+}
+
+
+/* List Group Items */
+.list-group-item {
+    background: transparent;
+    border-color: rgba(74, 200, 224, 0.25);
+    color: #e0f0ff;
+}
+
+
+/* return a */
+.return a {
+    color: #d1f0ff;
+    padding: 12px 20px;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    background-color: rgba(74, 200, 224, 0.25);
+    border: 1px solid rgba(74, 200, 224, 0.3);
+    border-radius: 10px;
+}
+
+.return a:hover {
+    background-color: rgba(5, 175, 62, 0.1);
+}
+
+/*========================== SUBJECTS AVAILABLE ========================= */
+.table-glass-available {
+    background: rgba(74, 200, 224, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(74, 200, 224, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-glass-available thead {
+    background: rgba(4, 66, 121, 0.8);
+}
+
+.table-glass-available thead th {
+    color: #cde9fb;
+    border: none;
+    font-weight: 600;
+}
+
+.table-glass-available tbody tr:hover {
+    background-color: rgba(74, 200, 224, 0.2);
+    color: #ffffff;
+}
+
+.table-glass-available tbody td {
+    border-top: 1px solid rgba(74, 200, 224, 0.2);
+    color: #e0f0ff;
+}
+
+/* form */
+.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(6, 72, 85, 0.3);
+    color: #0a0909ff;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #0f2327ff;
+    box-shadow: 0 0 0 0.25rem rgba(74, 200, 224, 0.25);
+    color: #00375eff;
+}
+
+label {
+    color: #00375eff;
+    font-weight: 500;
+}
+
+/* faculty-card */
+.teacher-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(74, 200, 224, 0.3);
+    backdrop-filter: blur(18px);
+    border-radius: 20px;
+    padding: 30px;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.teacher-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #4ac8e0;
+    margin-bottom: 15px;
+}
+
+.info-title {
+    color: #75e3a4;
+    font-weight: 600;
+}
+
+.about-tab {
+    font-weight: 600;
+    color: #4ac8e0;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}

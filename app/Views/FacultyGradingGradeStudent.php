@@ -5,168 +5,6 @@ $this->insert('Errors/Toasts');
 ?>
 
 <!-- Add your content here to be displayed in the browser -->
-
-<style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #0d2a4e;
-        color: #e0f0ff;
-        overflow-x: hidden;
-        min-height: 100vh;
-        z-index: 0;
-    }
-
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('/img/bg.jpg') no-repeat center center/cover;
-        filter: blur(10px) brightness(0.6);
-        z-index: -1;
-    }
-
-    /* Navbar */
-    .navbar-blur {
-        background: rgba(0, 44, 89, 0.85);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(74, 200, 224, 0.15);
-    }
-
-    .navbar-blur .navbar-brand {
-        color: #4ac8e0;
-        font-weight: 600;
-    }
-
-    .navbar-blur .nav-link,
-    .navbar-blur .navbar-text {
-        color: #cde9fb;
-    }
-
-    .profile-pic {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid #4ac8e0;
-    }
-
-    /* Sidebar */
-    .sidebar {
-        background: rgba(4, 66, 121, 0.75);
-        backdrop-filter: blur(12px);
-        height: 100vh;
-        width: 240px;
-        position: fixed;
-        top: 56px;
-        left: 0;
-        padding-top: 1rem;
-        border-right: 1px solid rgba(74, 200, 224, 0.15);
-        display: flex;
-        flex-direction: column;
-    }
-
-    .sidebar a {
-        color: #a6d1f7;
-        padding: 12px 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    .sidebar a:hover,
-    .sidebar a.active {
-        background-color: rgba(74, 200, 224, 0.25);
-        border-left: 4px solid #4ac8e0;
-        padding-left: 16px;
-        color: #d1f0ff;
-    }
-
-    .main-content {
-        margin-left: 240px;
-        padding: 90px 30px 30px;
-        z-index: 1;
-    }
-
-    @media (max-width: 991.98px) {
-        .sidebar {
-            display: none !important;
-        }
-
-        .main-content {
-            margin-left: 0;
-            padding: 90px 15px 20px;
-        }
-    }
-
-    .table-glass th,
-    .table-glass td {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        color: #1607ebff;
-    }
-
-    .table-glass tbody tr:hover {
-        background-color: rgba(5, 175, 62, 0.1)
-    }
-
-    /* Glass Card */
-    .card-glass {
-        background: rgba(74, 200, 224, 0.15);
-        border: 1px solid rgba(74, 200, 224, 0.3);
-        backdrop-filter: blur(14px);
-        border-radius: 20px;
-        padding: 20px;
-        color: #e0f0ff;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    
-
-    /* return a */
-    .return a {
-        color: #d1f0ff;
-        padding: 12px 20px;
-        gap: 10px;
-        text-decoration: none;
-        font-weight: 500;
-        background-color: rgba(74, 200, 224, 0.25);
-        border: 1px solid rgba(74, 200, 224, 0.3);
-        border-radius: 10px;
-    }
-
-    .return a:hover {
-        background-color: rgba(5, 175, 62, 0.1);
-    }
-
-    
-
-    .form-control {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(6, 72, 85, 0.3);
-        color: #0a0909ff;
-    }
-
-    .form-control:focus {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: #0f2327ff;
-        box-shadow: 0 0 0 0.25rem rgba(74, 200, 224, 0.25);
-        color: #00375eff;
-    }
-
-    label {
-        color: #00375eff;
-        font-weight: 500;
-    }
-</style>
-
-
 <!-- Top Navigation -->
 <nav class="navbar navbar-expand-lg navbar-blur fixed-top">
     <div class="container-fluid">
@@ -222,7 +60,7 @@ $this->insert('Errors/Toasts');
     <a href="/faculty-dashboard/<?= $faculty['user_id'] ?>"><i class="bi bi-house"></i> Dashboard</a>
     <a href="/faculty-subjectsAvailable/<?= $faculty['user_id'] ?>"><i class="bi bi-book"></i> Available Subjects</a>
     <a href="/faculty-subjects/<?= $faculty['user_id'] ?>"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
-    <a href="#" class="active"><i class="bi bi-journals"></i> Student Grade </a>
+    <a href="#" class="active"><i class="bi bi-journal-text"></i> Student Grade </a>
     <hr>
 </nav>
 
@@ -244,17 +82,17 @@ $this->insert('Errors/Toasts');
 
 <!-- Main Content -->
 <main class="main-content">
-    <div class="card-glass mb-4">
+    <div class="card-glass2 mb-4">
         <h1 class="h4"><?= htmlspecialchars($subject['code']) ?></h1>
         <p class="text-light"><?= htmlspecialchars($subject['Description']) ?></p>
     </div>
 
     <!-- My Subjects (List Style) -->
-    <div class="card-glass mb-4">
+    <div class="card-glass2 mb-4">
         <h5><i class="bi bi-journal-text"></i> STUDENT GRADE</h5>
         <hr>
         <h6><?= htmlspecialchars($student['name']) ?></h6>  
-        <table class="table table-hover table-glass table-bordered">
+        <table class="table table-hover table-glass2 table-bordered">
             <thead>
                 <tr>
                     <th class="text-white">Prelim</th>
