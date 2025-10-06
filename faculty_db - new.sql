@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2025 at 03:27 PM
+-- Generation Time: Oct 06, 2025 at 03:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,6 +53,7 @@ CREATE TABLE `faculty` (
   `password` varchar(10) DEFAULT NULL,
   `gender` enum('Male','Female') DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
+  `phone_number` int(11) NOT NULL,
   `id_number` varchar(50) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -61,14 +62,14 @@ CREATE TABLE `faculty` (
 -- Dumping data for table `faculty`
 --
 
-INSERT INTO `faculty` (`id`, `first_name`, `last_name`, `password`, `gender`, `email`, `id_number`, `created_at`) VALUES
-(1, 'Calvin Joshua', 'asdasd', '$2y$10$mv8', 'Male', 'calvinkiunisala07@gmail.com', 'c23-3434', '2025-10-04 08:57:29'),
-(4, 'joshua', 'kiunisala', '$2y$10$LPj', 'Male', 'suzette@gmail.com', 'c23-3436', '2025-10-04 08:58:24'),
-(10, 'janna', 'ocliaman', '$2y$10$oL1', 'Male', 'calvinkiunisala@gmail.com', 'c23-3435', '2025-10-04 09:05:48'),
-(13, 'jerccho', 'asdasd', '$2y$10$pJb', 'Male', 'calvinkiunisala3@gmail', 'c23-3437', '2025-10-04 11:45:00'),
-(14, 'long', 'rams', '$2y$10$gy7', 'Male', 'long@gmail.com', 'c23-0001', '2025-10-04 14:44:05'),
-(15, 'q', 'w', '$2y$10$6FF', 'Male', 'qw@gmail.com', 'c23-0002', '2025-10-04 15:57:22'),
-(16, 'Joshua', 'Atis', '123', 'Male', 'jastisa@gmail.com', 'C23-0033', '2025-10-05 11:46:39');
+INSERT INTO `faculty` (`id`, `first_name`, `last_name`, `password`, `gender`, `email`, `phone_number`, `id_number`, `created_at`) VALUES
+(1, 'Calvin Joshua', 'asdasd', '$2y$10$mv8', 'Male', 'calvinkiunisala07@gmail.com', 0, 'c23-3434', '2025-10-04 08:57:29'),
+(4, 'joshua', 'kiunisala', '$2y$10$LPj', 'Male', 'suzette@gmail.com', 0, 'c23-3436', '2025-10-04 08:58:24'),
+(10, 'janna', 'ocliaman', '$2y$10$oL1', 'Male', 'calvinkiunisala@gmail.com', 0, 'c23-3435', '2025-10-04 09:05:48'),
+(13, 'jerccho', 'asdasd', '$2y$10$pJb', 'Male', 'calvinkiunisala3@gmail', 0, 'c23-3437', '2025-10-04 11:45:00'),
+(14, 'long', 'rams', '$2y$10$gy7', 'Male', 'long@gmail.com', 0, 'c23-0001', '2025-10-04 14:44:05'),
+(15, 'q', 'w', '$2y$10$6FF', 'Male', 'qw@gmail.com', 0, 'c23-0002', '2025-10-04 15:57:22'),
+(16, 'Joshua', 'Atis', '123', 'Male', 'joshuaAtis@gmail.com', 952648975, 'C23-0033', '2025-10-05 11:46:39');
 
 -- --------------------------------------------------------
 

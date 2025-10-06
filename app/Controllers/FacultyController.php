@@ -90,7 +90,7 @@ class FacultyController
 
 
     //subject grading controller
-    public function facultyGradingStudents($facultyId, $code )
+    public function facultyGradingStudents($facultyId, $code)
     {
         $students = $this->FacultyModel->getFacultyGradingStudents($code, $facultyId);
         $subject  = $this->FacultyModel->getSubjectInfo($code);
@@ -175,6 +175,21 @@ class FacultyController
         } else {
             header("Location: /");
             exit;
+        }
+    }
+
+    // faculty Profile controller
+    public function editFacultyProfile($facultyId)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $firstName = $_POST['firstName'];
+            $lastName = $_POST['lastName'];
+            $email = $_POST['email'];
+            $phoneNumber = $_POST['phoneNumber'];
+
+            $this->FacultyModel->editFacultyProfile($facultyId, $firstName, $lastName, $email, $phoneNumber);
+
+            header("Location:/faculty-profile/$facultyId");
         }
     }
 }

@@ -68,8 +68,7 @@ $this->start('mainContent');
 <!-- Content -->
 <main class="main-content text-center">
 
-  <h2>Teacher Details</h2>
-  <p class="text-light">Dashboard / Teacher Details</p>
+  <h2>Faculty Profile</h2>
 
   <div class="teacher-card">
     <img src="/img/juswa.jpg" alt="Teacher Photo">
@@ -96,28 +95,32 @@ $this->start('mainContent');
 
 
   <!--Update Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade text-start" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content bg-primary-subtle">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile Details</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="profileForm">
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="fullName">First Name</label>
-              <input type="text" class="form-control" id="fullName">
+        <form method="POST" action="/faculty-profile/<?=$profile['id_number']?>/EditProfile">
+          <div class="modal-body row">
+            <div class="mb-3 col-6">
+              <label>First Name</label>
+              <input type="text" class="form-control" value="<?= $profile['first_name'] ?>" name="firstName">
+            </div>
+            <div class="mb-3 col-6">
+              <label>Last Name</label>
+              <input type="text" class="form-control" value="<?= $profile['last_name'] ?>" name="lastName">
             </div>
             <div class="mb-3">
-              <label for="fullName">Last Name</label>
-              <input type="text" class="form-control" id="fullName">
+              <label>Email Address</label>
+              <input type="email" class="form-control" value="<?= $profile['email'] ?>" name="email">
             </div>
             <div class="mb-3">
-              <label for="email">Email Address</label>
-              <input type="email" class="form-control" id="email">
+              <label>Mobile Number</label>
+              <input type="text" class="form-control" value="<?= $profile['phone_number'] ?>" name="phoneNumber">
             </div>
-            <hr>
+            <!-- <hr>
             <div class="mb-3">
               <label for="password">New Password</label>
               <input type="password" class="form-control" id="password" placeholder="Enter new password">
@@ -125,11 +128,11 @@ $this->start('mainContent');
             <div class="mb-3">
               <label for="confirmPassword">Confirm Password</label>
               <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
-            </div>
+            </div> -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </form>
       </div>

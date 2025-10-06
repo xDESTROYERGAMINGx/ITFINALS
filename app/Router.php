@@ -21,6 +21,9 @@ class Router
         Router::add('/faculty-subjects/{facultyId}', fn($data) => (new FacultyController())->facultySubjects($data['facultyId']));
         Router::add('/faculty-profile/{facultyId}', fn($data) => (new FacultyController())->facultyProfile($data['facultyId']));
 
+        //faculty profile
+        Router::add('/faculty-profile/{facultyId}/EditProfile', fn($data) => (new FacultyController())->editFacultyProfile($data['facultyId']));
+
         //subject application
         Router::add('/faculty-subjectApplication/{facultyId}/{code}', fn($data) => (new FacultyController())->facultySubjectApplication($data['facultyId'], $data['code']));
         Router::add('/faculty-subjectsPendingApplication/{facultyId}', fn($data) => (new FacultyController())->facultySubjectsPendingApplication($data['facultyId']));

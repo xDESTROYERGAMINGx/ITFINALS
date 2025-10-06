@@ -13,7 +13,7 @@ class FacultyModel
     {
         $this->db = $db->getConnection();
     }
-    
+
     //Faculty Information Model
     public function getFacultyInfo($faculty_id)
     {
@@ -28,6 +28,17 @@ class FacultyModel
         $stmt->bindParam(':id_number', $facultyId, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function editFacultyProfile($facultyId, $firstName, $lastName, $email, $phoneNumber)
+    {
+        $stmt = $this->db->prepare("UPDATE faculty SET first_name = :first_name, last_name = :last_name, email = :email, phone_number = :phone_number WHERE id_number = :id_number");
+        $stmt->bindParam(':first_name', $firstName, PDO::PARAM_STR);
+        $stmt->bindParam(':last_name', $lastName, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':phone_number', $phoneNumber, PDO::PARAM_STR);
+        $stmt->bindParam(':id_number', $facultyId, PDO::PARAM_STR);
+        return $stmt->execute();
+        
     }
 
     //Student Information Model
@@ -111,7 +122,7 @@ class FacultyModel
         $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } 
+    }
     public function postFacultySubjectApplication($facultyId, $code)
     {
         $sem = "First Semester";
@@ -131,7 +142,7 @@ class FacultyModel
         $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } 
+    }
 
     //subject grading model
     public function getFacultyGradingStudents($code)
@@ -177,7 +188,4 @@ class FacultyModel
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         return $stmt->execute();
     }
-    
-    
-    
 }
