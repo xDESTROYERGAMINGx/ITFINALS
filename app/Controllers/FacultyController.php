@@ -197,13 +197,6 @@ class FacultyController
 
     public function facultyProfileChangePassword($facultyId)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $password = $_POST['password'] ?? '';
-            
-            $this->FacultyModel->changePassword($facultyId, $password);
-
-            header("Location:/faculty-profile/$facultyId");
-            exit;
-        }
+        echo $GLOBALS['templates']->render('FacultyProfileChangePassword');
     }
 }

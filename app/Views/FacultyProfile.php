@@ -1,6 +1,7 @@
 <?php
-$this->layout('FacultyLayout', ['mainContent' => $this->fetch('FacultyLayout')]);
+$this->layout('Layout', ['mainContent' => $this->fetch('Layout')]);
 $this->start('mainContent');
+$this->insert('Errors/Toasts');
 ?>
 
 <!-- Navbar -->
@@ -31,8 +32,7 @@ $this->start('mainContent');
               Edit Profile
             </a>
             <br>
-            <a href="#" class="btn btn-link text-decoration-none text-light" data-bs-toggle="modal"
-              data-bs-target="#changePasswordModal">Change Password</a>
+            <a href="/faculty-profile/<?= $profile['id_number'] ?>/ChangePassword" class="btn btn-link text-decoration-none text-light">Change Password</a>
           </div>
         </div>
       </div>
@@ -90,39 +90,5 @@ $this->start('mainContent');
   </div>
 </div>
 
-<!-- Change Password Modal -->
-<div class="modal fade text-start" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordLabel"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content bg-primary-subtle">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="changePasswordLabel">Change Password</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form method="POST" action="/faculty-profile/<?= $profile['id_number'] ?>/ChangePassword">
-        <div class="modal-body row">
-          <div class="mb-3">
-            <label for="currentPassword">Enter Password</label>
-            <input type="password" class="form-control" id="currentPassword" name="password"
-              placeholder="Enter current password">
-          </div>
-          <!-- <hr>
-          <div class="mb-3">
-            <label for="newPassword">New Password</label>
-            <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter new password">
-          </div>
-          <div class="mb-3">
-            <label for="confirmPassword">Retype New Password</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password">
-          </div> -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 <?php $this->stop(); ?>

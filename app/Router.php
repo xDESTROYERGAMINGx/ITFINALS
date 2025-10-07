@@ -11,19 +11,20 @@ class Router
 
     public static function init()
     {
-        // login routes
+        // ========================= LOGIN ROUTES =========================
         Router::add('/', fn() => Router::render('pilotLogin'));
         Router::add('/login', fn() => (new FacultyController())->login(), 'POST');
 
-        //faculty dashboard
+        // ========================= FACULTY DASHBORAD ROUTES =========================
         Router::add('/faculty-dashboard/{facultyId}', fn($data) => (new FacultyController())->dashboard($data['facultyId']));
         Router::add('/faculty-subjectsAvailable/{facultyId}', fn($data) => (new FacultyController())->availableSubjects($data['facultyId']));
         Router::add('/faculty-subjects/{facultyId}', fn($data) => (new FacultyController())->facultySubjects($data['facultyId']));
         Router::add('/faculty-profile/{facultyId}', fn($data) => (new FacultyController())->facultyProfile($data['facultyId']));
 
-        //faculty profile
+        // ========================= FACULTY PROFILE ROUTES =========================
         Router::add('/faculty-profile/{facultyId}/EditProfile', fn($data) => (new FacultyController())->editFacultyProfile($data['facultyId']));
-        Router::add('faculty-profile/{facultyId}/ChangePassword', fn($data) => (new FacultyController())->facultyProfileChangePassword($data['facultyId']),'POST');
+        Router::add('faculty-profile/{facultyId}/ChangePassword/eme', fn($data) => (new FacultyController())->facultyProfileChangePassword($data['facultyId']));
+        
 
         //subject application
         Router::add('/faculty-subjectApplication/{facultyId}/{code}', fn($data) => (new FacultyController())->facultySubjectApplication($data['facultyId'], $data['code']));
