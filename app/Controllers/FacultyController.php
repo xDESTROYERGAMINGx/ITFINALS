@@ -14,6 +14,7 @@ class FacultyController
         $db = new DBConnection();
         $this->FacultyModel = new FacultyModel($db);
     }
+    
 
     // login controller
     public function login()
@@ -25,7 +26,10 @@ class FacultyController
             $faculty = $this->FacultyModel->login($username, $password); // only call once
 
             if ($faculty) {
-                header("Location: /faculty-dashboard/" . urlencode($faculty['user_id']));
+                $_SESSION['faculty_id'] = $faculty['user_id'];
+                $_SESSION['name'] = $faculty['name'];
+
+                header("Location:/faculty-dashboard/" . urlencode($faculty['user_id']));
             } else {
                 echo $GLOBALS['templates']->render('login', ['error' => 'Invalid username or password']);
             }

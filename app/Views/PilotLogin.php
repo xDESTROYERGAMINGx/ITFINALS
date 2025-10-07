@@ -1,7 +1,4 @@
-<?php 
-$this->layout('Layout', ['mainContent' => $this->fetch('Layout')]);
-$this->start('mainContent');
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -128,4 +125,3 @@ $this->start('mainContent');
 </body>
 </html>
 
-<?php $this->stop(); ?>
