@@ -83,11 +83,8 @@ $this->start('mainContent');
         <p><span class="info-title">Gender:</span> <?= $profile['gender'] ?></p>
         <p><span class="info-title">Email:</span> <?= $profile['email'] ?></p>
         <p><span class="info-title">Mobile Number:</span> <?= $profile['phone_number'] ?></p>
-        <a type="button" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
-          Change Password
-        </a>
       </div>
-
+      <a href="" class="text-start">Change Password</a>
     </div>
   </div>
   <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateProfileModal">
@@ -101,21 +98,17 @@ $this->start('mainContent');
       <div class="modal-content bg-primary-subtle">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile Details</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <a href="/faculty-profile/<?= $faculty['user_id'] ?>" class="btn-close" aria-label="Close"></a>
         </div>
         <form method="POST" action="/faculty-profile/<?= $profile['id_number'] ?>/EditProfile">
           <div class="modal-body row">
-            <div class="mb-3 col-6">
+            <div class="mb-3">
               <label>First Name</label>
               <input type="text" class="form-control" value="<?= $profile['first_name'] ?>" name="firstName">
             </div>
-            <div class="mb-3 col-6">
+            <div class="mb-3">
               <label>Last Name</label>
               <input type="text" class="form-control" value="<?= $profile['last_name'] ?>" name="lastName">
-            </div>
-            <div class="mb-3">
-              <label>Email Address</label>
-              <input type="email" class="form-control" value="<?= $profile['email'] ?>" name="email">
             </div>
             <div class="mb-3">
               <label>Mobile Number</label>
@@ -123,7 +116,7 @@ $this->start('mainContent');
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <a href="/faculty-profile/<?= $faculty['user_id'] ?>" class="btn btn-secondary">Close</a>
             <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </form>
@@ -160,10 +153,18 @@ $this->start('mainContent');
             </div>
           </div>
         </form>
+        <!-- KULANGAN PANI. NEED PAG ROUTER LETSGO -->
       </div>
     </div>
   </div>
 </main>
+
+<script>
+  const passbtn = document.getElementById('toggleButton');
+  passbtn.addEventListener('click', function() {
+    passbtn.style.display = 'none';
+  });
+</script>
 <?php
 $this->stop();
 ?>

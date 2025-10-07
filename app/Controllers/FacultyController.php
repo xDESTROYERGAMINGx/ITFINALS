@@ -184,12 +184,39 @@ class FacultyController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
-            $email = $_POST['email'];
             $phoneNumber = $_POST['phoneNumber'];
 
-            $this->FacultyModel->editFacultyProfile($facultyId, $firstName, $lastName, $email, $phoneNumber);
+            $this->FacultyModel->editFacultyProfile($facultyId, $firstName, $lastName, $phoneNumber);
 
             header("Location:/faculty-profile/$facultyId");
+        }
+    }
+
+    public function facultyProfileChangePassword($facultyId)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $currentPasswordInput = $_POST['currentPassword'] ?? '';
+            $newPassword          = $_POST['newPassword'] ?? '';
+            $confirmPassword      = $_POST['confirmPassword'] ?? '';
+
+            $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
+
+            // Verify current password first
+            if (!password_verify($currentPasswordInput, $faculty['password'])) {
+                die("Current password is incorrect!");
+            }
+
+            // Check if new password is provided
+            if (!empty($newPassword)) {
+                if ($newPassword !== $confirmPassword) {
+                    die("Passwords do not match!");
+                }
+                $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+                $this->FacultyModel->ChangePassword($facultyId, $hashedPassword);
+            }
+
+            header("Location:/faculty-profile/$facultyId");
+            exit;
         }
     }
 }

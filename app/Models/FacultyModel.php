@@ -29,17 +29,22 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function editFacultyProfile($facultyId, $firstName, $lastName, $email, $phoneNumber)
+    public function editFacultyProfile($facultyId, $firstName, $lastName, $phoneNumber)
     {
-        $stmt = $this->db->prepare("UPDATE faculty SET first_name = :first_name, last_name = :last_name, email = :email, phone_number = :phone_number WHERE id_number = :id_number");
+        $stmt = $this->db->prepare("UPDATE faculty SET first_name = :first_name, last_name = :last_name, phone_number = :phone_number WHERE id_number = :id_number");
         $stmt->bindParam(':first_name', $firstName, PDO::PARAM_STR);
         $stmt->bindParam(':last_name', $lastName, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->bindParam(':phone_number', $phoneNumber, PDO::PARAM_STR);
         $stmt->bindParam(':id_number', $facultyId, PDO::PARAM_STR);
         return $stmt->execute();
-        
     }
+    public function changePassword($facultyId, $newPassword)
+    {
+        $stmt = $this->db->prepare("UPDATE faculty SET password = :password WHERE id_number = :id_number");
+        $stmt->bindParam(':password', $newPassword, PDO::PARAM_STR);
+        $stmt->bindParam(':id_number', $facultyId, PDO::PARAM_STR);
+        return $stmt->execute();
+    }   
 
     //Student Information Model
     public function getStudentInfo($studenId)
