@@ -38,10 +38,10 @@ class FacultyModel
         $stmt->bindParam(':id_number', $facultyId, PDO::PARAM_STR);
         return $stmt->execute();
     }
-    public function changePassword($facultyId, $newPassword)
+    public function changePassword($facultyId, $password)
     {
         $stmt = $this->db->prepare("UPDATE faculty SET password = :password WHERE id_number = :id_number");
-        $stmt->bindParam(':password', $newPassword, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
         $stmt->bindParam(':id_number', $facultyId, PDO::PARAM_STR);
         return $stmt->execute();
     }   

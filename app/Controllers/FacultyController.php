@@ -75,7 +75,7 @@ class FacultyController
     public function facultySubjectApplication($facultyId, $code)
     {
         $this->FacultyModel->postFacultySubjectApplication($facultyId, $code);
-        header("Location: /faculty-subjects/$facultyId");
+        header("Location: /faculty-subjectsPendingApplication/$facultyId");
     }
     public function facultySubjectsPendingApplication($facultyId)
     {
@@ -93,13 +93,13 @@ class FacultyController
     public function facultyGradingStudents($facultyId, $code)
     {
         $students = $this->FacultyModel->getFacultyGradingStudents($code, $facultyId);
-        $subject  = $this->FacultyModel->getSubjectInfo($code);
-        $faculty  = $this->FacultyModel->getFacultyInfo($facultyId);
+        $subject = $this->FacultyModel->getSubjectInfo($code);
+        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
 
         echo $GLOBALS['templates']->render('FacultyGrading', [
             'students' => $students,
-            'subject'  => $subject,
-            'faculty'  => $faculty
+            'subject' => $subject,
+            'faculty' => $faculty
         ]);
     }
     public function recordedStudentGrade($facultyId, $code, $studentId)
@@ -107,7 +107,7 @@ class FacultyController
         $grade = $this->FacultyModel->getRecordedStudentGrade($studentId, $code) ?: [];
         $student = $this->FacultyModel->getStudentInfo($studentId);
         $subject = $this->FacultyModel->getSubjectInfo($code);
-        $faculty  = $this->FacultyModel->getFacultyInfo($facultyId);
+        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
         echo $GLOBALS['templates']->render('FacultyGradingGradeStudent', [
             'grade' => $grade,
             'student' => $student,
@@ -132,9 +132,9 @@ class FacultyController
     public function add($facultyId, $code, $studentId)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $prelim  = $_POST['prelim']  ?? '';
+            $prelim = $_POST['prelim'] ?? '';
             $midterm = $_POST['midterm'] ?? '';
-            $finals  = $_POST['finals']  ?? '';
+            $finals = $_POST['finals'] ?? '';
 
             $this->FacultyModel->add($studentId, $code, $prelim, $midterm, $finals);
 
@@ -152,21 +152,21 @@ class FacultyController
         $grade = $this->FacultyModel->getRecordedStudentGrade($studentId, $code) ?: [];
         $student = $this->FacultyModel->getStudentInfo($studentId);
         $subject = $this->FacultyModel->getSubjectInfo($code);
-        $faculty  = $this->FacultyModel->getFacultyInfo($facultyId);
+        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
 
         echo $GLOBALS['templates']->render('facultyGradingEditStudentGrade', [
             'student' => $student,
             'subject' => $subject,
             'grade' => $grade,
-            'faculty'  => $faculty
+            'faculty' => $faculty
         ]);
     }
     public function edit($facultyId, $code, $studentId)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $prelim  = $_POST['prelim']  ?? '';
+            $prelim = $_POST['prelim'] ?? '';
             $midterm = $_POST['midterm'] ?? '';
-            $finals  = $_POST['finals']  ?? '';
+            $finals = $_POST['finals'] ?? '';
 
             $this->FacultyModel->edit($studentId, $code, $prelim, $midterm, $finals);
 
@@ -185,7 +185,6 @@ class FacultyController
             $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
             $phoneNumber = $_POST['phoneNumber'];
-
             $this->FacultyModel->editFacultyProfile($facultyId, $firstName, $lastName, $phoneNumber);
 
             header("Location:/faculty-profile/$facultyId");
@@ -195,25 +194,9 @@ class FacultyController
     public function facultyProfileChangePassword($facultyId)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $currentPasswordInput = $_POST['currentPassword'] ?? '';
-            $newPassword          = $_POST['newPassword'] ?? '';
-            $confirmPassword      = $_POST['confirmPassword'] ?? '';
-
-            $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
-
-            // Verify current password first
-            if (!password_verify($currentPasswordInput, $faculty['password'])) {
-                die("Current password is incorrect!");
-            }
-
-            // Check if new password is provided
-            if (!empty($newPassword)) {
-                if ($newPassword !== $confirmPassword) {
-                    die("Passwords do not match!");
-                }
-                $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-                $this->FacultyModel->ChangePassword($facultyId, $hashedPassword);
-            }
+            $password = $_POST['password'] ?? '';
+            
+            $this->FacultyModel->changePassword($facultyId, $password);
 
             header("Location:/faculty-profile/$facultyId");
             exit;

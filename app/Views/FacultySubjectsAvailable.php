@@ -10,12 +10,14 @@ $this->insert('Errors/Toasts');
 <nav class="navbar navbar-expand-lg navbar-blur fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-      <i class="bi bi-building"></i>
-      Christ the King College
+      <img src="/img/logo.png" alt="logo" class="logo">
+      CKC information Technology
     </a>
 
+
     <!-- Toggle Button for Offcanvas -->
-    <button class="btn btn-outline-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+    <button class="btn btn-outline-light d-lg-none" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#mobileSidebar">
       <i class="bi bi-list fs-4"></i>
     </button>
 
@@ -24,11 +26,14 @@ $this->insert('Errors/Toasts');
 
       <!-- Notifications Dropdown -->
       <div class="dropdown">
-        <a href="#" class="text-light position-relative" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="#" class="text-light position-relative" id="notifDropdown" data-bs-toggle="dropdown"
+          aria-expanded="false">
           <i class="bi bi-bell fs-5"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notifBadge">2</span>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            id="notifBadge">2</span>
         </a>
-        <ul class="dropdown-menu dropdown-menu-end shadow-lg p-2" aria-labelledby="notifDropdown" style="min-width: 320px;">
+        <ul class="dropdown-menu dropdown-menu-end shadow-lg p-2" aria-labelledby="notifDropdown"
+          style="min-width: 320px;">
           <li class="dropdown-item d-flex justify-content-between align-items-start">
             <div>
               <small class="fw-bold">Student Application</small><br>
@@ -59,7 +64,8 @@ $this->insert('Errors/Toasts');
 <!-- Sidebar (Desktop) -->
 <nav class="sidebar d-none d-lg-flex flex-column">
   <a href="/faculty-dashboard/<?= $faculty['user_id'] ?>"><i class="bi bi-house"></i> Dashboard</a>
-  <a href="/available-subjects/<?= $faculty['user_id'] ?>" class="active"><i class="bi bi-book"></i> Available Subjects</a>
+  <a href="/available-subjects/<?= $faculty['user_id'] ?>" class="active"><i class="bi bi-book"></i> Available
+    Subjects</a>
   <a href="/faculty-subjects/<?= $faculty['user_id'] ?>"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
   <a href="/profile"><i class="bi bi-person-circle"></i> Profile</a>
   <a href="#"><i class="bi bi-gear"></i> Settings</a>
@@ -67,7 +73,8 @@ $this->insert('Errors/Toasts');
 </nav>
 
 <!-- Offcanvas Sidebar -->
-<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="mobileSidebar"
+  aria-labelledby="mobileSidebarLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="mobileSidebarLabel">Menu</h5>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -75,7 +82,8 @@ $this->insert('Errors/Toasts');
   <div class="offcanvas-body d-flex flex-column p-0">
     <a href="/" class="active px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Dashboard</a>
     <a href="/faculty-subjectsAvailable/<?= $faculty['user_id'] ?>"><i class="bi bi-book"></i> Available Subjects</a>
-    <a href="/my_subjects" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
+    <a href="/my_subjects" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-lines-fill"></i> My
+      Subjects</a>
     <a href="/faculty-profile/<?= $faculty['user_id'] ?>" class="active"><i class="bi bi-person-circle"></i> Profile</a>
     <a href="#" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-gear"></i> Settings</a>
     <a href="#" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-box-arrow-right"></i> Logout</a>
@@ -91,27 +99,28 @@ $this->insert('Errors/Toasts');
     </div>
   </div>
 
-  <div class="table-responsive">
-
-    <table class="table table-hover table-glass-avaialable table-bordered">
+  <div class="card-glass2 mb-4">
+    <h5><i class="bi bi-journal-text"></i> Available Subjects</h5>
+    <table class="table table-glass2 table-hover table-bordered ">
       <thead>
         <tr>
-          <th class="text-black">Code</th>
-          <th class="text-black">Title</th>
-          <th class="text-black">Units</th>
-          <th class="text-black">Action</th>
+          <th class="text-white">Code</th>
+          <th class="text-white">Title</th>
+          <th class="text-white">Units</th>
+          <th class="text-white">Action</th>
         </tr>
       </thead>
       <?php foreach ($subjects as $subject): ?>
         <tbody>
-          <td class="text-black"><?= htmlspecialchars($subject['code']) ?></td>
-          <td class="text-black"><?= htmlspecialchars($subject['Description']) ?></td>
-          <td class="text-black"><?= htmlspecialchars($subject['Units']) ?></td>
+          <td class="text-white"><?= htmlspecialchars($subject['code']) ?></td>
+          <td class="text-white"><?= htmlspecialchars($subject['Description']) ?></td>
+          <td class="text-white"><?= htmlspecialchars($subject['Units']) ?></td>
           <td><a href="/faculty-subjectApplication/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>">Apply</a></td>
         </tbody>
       <?php endforeach; ?>
     </table>
   </div>
+
   </div>
 </main>
 
