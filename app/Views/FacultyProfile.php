@@ -74,35 +74,36 @@ $this->start('mainContent');
     <img src="/img/juswa.jpg" alt="Teacher Photo">
 
     <h4><?= $profile['first_name'] ?> <?= $profile['last_name'] ?></h4>
-    <div class="about-tab">About</div>
+    <div class="about-tab"><?= $profile['id_number'] ?></div>
 
-    <div class="row text-start">
-      <div class="col-md-6">
+    <div class="row">
+      <div class="text-start">
         <p><span class="info-title">First Name:</span> <?= $profile['first_name'] ?></p>
         <p><span class="info-title">Last Name:</span> <?= $profile['last_name'] ?></p>
         <p><span class="info-title">Gender:</span> <?= $profile['gender'] ?></p>
         <p><span class="info-title">Email:</span> <?= $profile['email'] ?></p>
         <p><span class="info-title">Mobile Number:</span> <?= $profile['phone_number'] ?></p>
-        <p><span class="info-title">ID Number:</span> <?= $profile['id_number'] ?></p>
-
+        <a type="button" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+          Change Password
+        </a>
       </div>
 
     </div>
   </div>
-  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateProfileModal">
     Edit Profile Details
   </button>
 
 
   <!--Update Modal -->
-  <div class="modal fade text-start" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade text-start" id="updateProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content bg-primary-subtle">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile Details</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" action="/faculty-profile/<?=$profile['id_number']?>/EditProfile">
+        <form method="POST" action="/faculty-profile/<?= $profile['id_number'] ?>/EditProfile">
           <div class="modal-body row">
             <div class="mb-3 col-6">
               <label>First Name</label>
@@ -120,19 +121,43 @@ $this->start('mainContent');
               <label>Mobile Number</label>
               <input type="text" class="form-control" value="<?= $profile['phone_number'] ?>" name="phoneNumber">
             </div>
-            <!-- <hr>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!--Change Password Modal -->
+  <div class="modal fade text-start" id="changePasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-primary-subtle">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method="POST" action="/faculty-profile/<?= $profile['id_number'] ?>/EditProfile">
+          <div class="modal-body row">
+            <div class="mb-3">
+              <label for="password">Enter Current Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Enter new password">
+            </div>
+            <hr>
             <div class="mb-3">
               <label for="password">New Password</label>
               <input type="password" class="form-control" id="password" placeholder="Enter new password">
             </div>
             <div class="mb-3">
-              <label for="confirmPassword">Confirm Password</label>
+              <label for="confirmPassword">Retype New Password</label>
               <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
-            </div> -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
           </div>
         </form>
       </div>

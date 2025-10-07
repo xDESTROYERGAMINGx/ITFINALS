@@ -90,7 +90,7 @@ $this->insert('Errors/Toasts');
     <!-- My Subjects (List Style) -->
     <div class="card-glass2 mb-4">
         <h5><i class="bi bi-journal-text"></i> STUDENTS</h5>
-        <table class="table table-hover table-glass table-bordered">
+        <table class="table table-hover table-glass2 table-bordered">
             <thead>
                 <tr>
                     <th class="text-white">Student ID</th>
