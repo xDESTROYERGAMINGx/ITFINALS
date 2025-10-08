@@ -52,6 +52,7 @@ class Router
         Router::add('/faculty-students/{facultyId}', fn($data) => (new FacultyController())->facultyStudents($data['facultyId']));
         Router::add('/faculty-student/studentInformation/{studentId}', fn($data) => (new FacultyController())->facultyStudentInformation($data['studentId']));
         Router::add('/faculty-student/studentApplication/{studentId}', fn($data) => (new FacultyController())->facultyStudentAppplication($data['studentId']));
+        Router::add('/faculty-student/studentApplication/{facultyId}/{code}/{studentId}/confirm', fn($data) => (new FacultyController())->facultyStudentAppplicationConfirm($data['facultyId'],$data['code'], $data['studentId']));
 
         Router::run();
     }

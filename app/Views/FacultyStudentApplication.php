@@ -31,7 +31,7 @@ $this->insert('Errors/Toasts');
                         <td><?= $result['first_name'] ?> <?= $result['last_name'] ?></td>
                         <td><?= $result['code'] ?></td>
                         <td><?= $result['Description'] ?></td>
-                        <td><a href="">Confirm</a> | <a href="">Reject</a></td>
+                        <td><a href="/faculty-student/studentApplication/<?= $result['student_id']?>/<?= $result['code']?>/confirmApplication" class="btn btn-warning btn-sm me-2">Confirm</a> <a href="" class="btn btn-danger btn-sm ms-2">Reject</a></td>
 
                         </tr>
 

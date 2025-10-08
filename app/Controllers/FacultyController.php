@@ -228,4 +228,14 @@ class FacultyController
         $result = $this->FacultyModel->getFacultyStudentApplication($facultyId);
         echo $GLOBALS['templates']->render('FacultyStudentApplication', ['results' => $result]);
     }
+     public function facultyStudentAppplicationConfirm($facultyId,$code, $studentId )
+    {
+        $confirmStudent = $this->FacultyModel->setFacultyStudentApplicationConfirm($facultyId, $code, $studentId);
+        // echo $GLOBALS['templates']->render('FacultyStudentApplication', ['results' => $result]);
+        if($confirmStudent)
+        {
+            $_SESSION['success'] = "Student Application Confirmed!";
+        }
+        header("Location:/faculty-grading/$facultyId/$code/$studentId");
+    }
 }

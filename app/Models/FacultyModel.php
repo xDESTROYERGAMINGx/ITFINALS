@@ -233,6 +233,14 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function setFacultyStudentApplicationConfirm($facultyId, $code, $studentId)
+    {
+        $stmt = $this->db->prepare("UPDATE student_subject SET status = 1 WHERE student_id = :student_id AND subject_id = :subject_id AND faculty_id = :faculty_id");
+        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        $stmt->bindParam(':faculty_id', $facultyId, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
 
 }
                                   
