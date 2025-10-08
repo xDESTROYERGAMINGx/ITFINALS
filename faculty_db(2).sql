@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2025 at 03:40 PM
+-- Generation Time: Oct 08, 2025 at 05:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,14 +47,13 @@ INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 --
 
 CREATE TABLE `faculty` (
-  `id` int(11) NOT NULL,
   `first_name` varchar(100) DEFAULT NULL,
   `last_name` varchar(100) DEFAULT NULL,
-  `password` varchar(10) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `gender` enum('Male','Female') DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
   `phone_number` int(11) NOT NULL,
-  `id_number` varchar(50) DEFAULT NULL,
+  `id_number` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -62,14 +61,14 @@ CREATE TABLE `faculty` (
 -- Dumping data for table `faculty`
 --
 
-INSERT INTO `faculty` (`id`, `first_name`, `last_name`, `password`, `gender`, `email`, `phone_number`, `id_number`, `created_at`) VALUES
-(1, 'Calvin Joshua', 'asdasd', '$2y$10$mv8', 'Male', 'calvinkiunisala07@gmail.com', 0, 'c23-3434', '2025-10-04 08:57:29'),
-(4, 'joshua', 'kiunisala', '$2y$10$LPj', 'Male', 'suzette@gmail.com', 0, 'c23-3436', '2025-10-04 08:58:24'),
-(10, 'janna', 'ocliaman', '$2y$10$oL1', 'Male', 'calvinkiunisala@gmail.com', 0, 'c23-3435', '2025-10-04 09:05:48'),
-(13, 'jerccho', 'asdasd', '$2y$10$pJb', 'Male', 'calvinkiunisala3@gmail', 0, 'c23-3437', '2025-10-04 11:45:00'),
-(14, 'long', 'rams', '$2y$10$gy7', 'Male', 'long@gmail.com', 0, 'c23-0001', '2025-10-04 14:44:05'),
-(15, 'q', 'w', '$2y$10$6FF', 'Male', 'qw@gmail.com', 0, 'c23-0002', '2025-10-04 15:57:22'),
-(16, 'Joshua', 'Atis', '123', 'Male', 'joshuaAtis@gmail.com', 952648975, 'C23-0033', '2025-10-05 11:46:39');
+INSERT INTO `faculty` (`first_name`, `last_name`, `password`, `gender`, `email`, `phone_number`, `id_number`, `created_at`) VALUES
+('long', 'rams', '$2y$10$gy7', 'Male', 'long@gmail.com', 0, 'c23-0001', '2025-10-04 14:44:05'),
+('q', 'w', '$2y$10$6FF', 'Male', 'qw@gmail.com', 0, 'c23-0002', '2025-10-04 15:57:22'),
+('Joshua', 'Atis', '$2y$10$tbl3YDlJsAkz9DpxYJBBi.GwHdjOcgLl7ZZuQ5jkrqLkyrokdppnK', 'Male', 'joshuaAtis@gmail.com', 952648975, 'C23-0033', '2025-10-05 11:46:39'),
+('Calvin Joshua', 'asdasd', '$2y$10$mv8', 'Male', 'calvinkiunisala07@gmail.com', 0, 'c23-3434', '2025-10-04 08:57:29'),
+('janna', 'ocliaman', '$2y$10$oL1', 'Male', 'calvinkiunisala@gmail.com', 0, 'c23-3435', '2025-10-04 09:05:48'),
+('joshua', 'kiunisala', '$2y$10$LPj', 'Male', 'suzette@gmail.com', 0, 'c23-3436', '2025-10-04 08:58:24'),
+('jerccho', 'asdasd', '$2y$10$pJb', 'Male', 'calvinkiunisala3@gmail', 0, 'c23-3437', '2025-10-04 11:45:00');
 
 -- --------------------------------------------------------
 
@@ -90,9 +89,8 @@ CREATE TABLE `faculty_subject` (
 --
 
 INSERT INTO `faculty_subject` (`id`, `faculty_id`, `subject_id`, `semester`, `status`) VALUES
-(24, 'C23-0033', 'IT101', 'First Semester', 1),
-(25, 'C23-0033', 'IT303', 'First Semester', 0),
-(29, 'C23-0033', 'IT305', 'First Semester', 1);
+(30, 'C23-0033', 'IT101', 'First Semester', 1),
+(31, 'C23-0033', 'IT303', 'first semester', 1);
 
 -- --------------------------------------------------------
 
@@ -114,10 +112,29 @@ CREATE TABLE `grading` (
 --
 
 INSERT INTO `grading` (`id`, `subject_id`, `student_id`, `prelim`, `midterm`, `finals`) VALUES
-(1, '1', '1001', '85', '88', '90'),
-(6, 'IT101', 'C23-0131', '90', '92', '95'),
-(11, 'IT101', 'C23-0139', '91', '92', ''),
-(12, 'IT101', 'C23-0126', '90', '', '');
+(15, 'IT101', 'C23-0139', '90', '—', '—'),
+(16, 'IT303', 'C23-0139', '94', '—', '—');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `student_id` varchar(10) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `year_level` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`student_id`, `first_name`, `last_name`, `year_level`) VALUES
+('C23-0139', 'Elizabeth', 'Rebonza', '3rd Year'),
+('C23-0149', 'Cris Martin ', 'Tirariray', '1st Year');
 
 -- --------------------------------------------------------
 
@@ -136,10 +153,9 @@ CREATE TABLE `student_subject` (
 --
 
 INSERT INTO `student_subject` (`id`, `student_id`, `subject_id`) VALUES
-(2, 'C23-0139', 'IT101'),
-(4, 'C23-0139', 'IT303'),
-(5, 'C23-0131', 'IT101'),
-(6, 'C23-0126', 'IT101');
+(7, 'C23-0139', 'IT303'),
+(8, 'C23-0139', 'IT101'),
+(9, 'C23-0149', 'IT303');
 
 -- --------------------------------------------------------
 
@@ -202,17 +218,15 @@ ALTER TABLE `admin`
 -- Indexes for table `faculty`
 --
 ALTER TABLE `faculty`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `id_number` (`id_number`);
+  ADD PRIMARY KEY (`id_number`);
 
 --
 -- Indexes for table `faculty_subject`
 --
 ALTER TABLE `faculty_subject`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `faculty_id` (`faculty_id`),
-  ADD KEY `subject_id` (`subject_id`);
+  ADD KEY `subject_id` (`subject_id`),
+  ADD KEY `faculty_subject_ibfk_1` (`faculty_id`);
 
 --
 -- Indexes for table `grading`
@@ -223,12 +237,18 @@ ALTER TABLE `grading`
   ADD KEY `subject_id` (`subject_id`);
 
 --
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`student_id`);
+
+--
 -- Indexes for table `student_subject`
 --
 ALTER TABLE `student_subject`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `student_id` (`student_id`),
-  ADD KEY `subject_id` (`subject_id`);
+  ADD KEY `subject_id` (`subject_id`),
+  ADD KEY `student_subject_ibfk_1` (`student_id`);
 
 --
 -- Indexes for table `subject`
@@ -253,28 +273,22 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `faculty`
---
-ALTER TABLE `faculty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
 -- AUTO_INCREMENT for table `faculty_subject`
 --
 ALTER TABLE `faculty_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `grading`
 --
 ALTER TABLE `grading`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `student_subject`
 --
 ALTER TABLE `student_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -284,14 +298,14 @@ ALTER TABLE `student_subject`
 -- Constraints for table `faculty_subject`
 --
 ALTER TABLE `faculty_subject`
-  ADD CONSTRAINT `faculty_subject_ibfk_1` FOREIGN KEY (`faculty_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `faculty_subject_ibfk_1` FOREIGN KEY (`faculty_id`) REFERENCES `faculty` (`id_number`),
   ADD CONSTRAINT `faculty_subject_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`code`);
 
 --
 -- Constraints for table `student_subject`
 --
 ALTER TABLE `student_subject`
-  ADD CONSTRAINT `student_subject_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `student_subject_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
   ADD CONSTRAINT `student_subject_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`code`);
 COMMIT;
 
