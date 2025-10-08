@@ -13,7 +13,7 @@ $this->insert('Errors/Toasts');
     <p class="text-light">Overview of your subjects, applications, and notifications.</p>
 
     <div class="row g-4 mb-4">
-        <a href="/faculty-subjects/<?= $_SESSION['faculty_id'] ?>" class="col-md-4">
+        <a href="/faculty-subjects" class="col-md-4">
             <div class="card-glass">
                 <i class="bi bi-journal-text metric-icon"></i>
                 <div>
@@ -22,7 +22,7 @@ $this->insert('Errors/Toasts');
                 </div>
             </div>
         </a>
-        <a href="/faculty-subjectsPendingApplication/<?= $_SESSION['faculty_id'] ?>" class="col-md-4">
+        <a href="/faculty-subject/PendingApplication" class="col-md-4">
             <div class="card-glass">
                 <i class="bi bi-clock-history metric-icon"></i>
                 <div>
@@ -32,12 +32,12 @@ $this->insert('Errors/Toasts');
             </div>
         </a>
 
-        <a href="#" class="col-md-4">
+        <a href="/faculty-student/studentApplication" class="col-md-4">
             <div class="card-glass">
                 <i class="bi bi-bell metric-icon"></i>
                 <div>
                     <div class="card-title">Pending Student Applications</div>
-                    <div class="card-value"><span id="countNotifs">—</div>
+                    <div class="card-value"><?= $studentPending ?: '—' ?></div>
                 </div>
             </div>
         </a>

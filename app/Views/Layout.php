@@ -74,8 +74,8 @@
         </div>
         <a data-bs-toggle="collapse" href="#studentsCollapse" role="button" aria-expanded="false" aria-controls="studentsCollapse" class="d-flex justify-content-between align-items-center"><span><i class="bi bi-people-fill me-1"></i> Students </span> <i class="bi bi-chevron-down"></i></i></a>
         <div class="collapse ms-3" id="studentsCollapse">
-            <a href="/faculty-students/<?= $_SESSION['faculty_id'] ?>"><i class="bi bi-person-lines-fill"></i> My Students</a>
-            <a href="/faculty-student/studentApplication/<?= $_SESSION['faculty_id'] ?>"><i class="bi bi-file-person-fill"></i> Student Applications</a>
+            <a href="/faculty-students"><i class="bi bi-person-lines-fill"></i> My Students</a>
+            <a href="/faculty-student/studentApplication"><i class="bi bi-file-person-fill"></i> Student Applications</a>
 
         </div>
 

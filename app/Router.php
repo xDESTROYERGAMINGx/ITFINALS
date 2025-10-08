@@ -46,9 +46,9 @@ class Router
         ), 'POST');
 
         // ========================= FACULTY STUDENT ROUTES ========================= //
-        Router::add('/faculty-students/{facultyId}', fn($data) => (new FacultyController())->facultyStudents($data['facultyId']));
+        Router::add('/faculty-students', fn() => (new FacultyController())->facultyStudents());
         Router::add('/faculty-student/studentInformation/{studentId}', fn($data) => (new FacultyController())->facultyStudentInformation($data['studentId']));
-        Router::add('/faculty-student/studentApplication/{studentId}', fn($data) => (new FacultyController())->facultyStudentAppplication($data['studentId']));
+        Router::add('/faculty-student/studentApplication', fn() => (new FacultyController())->facultyStudentAppplication());
         Router::add('/faculty-student/studentApplication/{code}/{studentId}/confirm', fn($data) => (new FacultyController())->facultyStudentAppplicationConfirm($data['code'], $data['studentId']));
 
         Router::run();

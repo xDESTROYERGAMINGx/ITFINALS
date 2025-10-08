@@ -41,9 +41,11 @@ class FacultyController
     {
         $acceptedCount = $this->FacultyModel->countFacultySubjects($_SESSION['faculty_id']);
         $pendingCount = $this->FacultyModel->countFacultySubjectsPendingApplication($_SESSION['faculty_id']);
+        $studentPending = $this->FacultyModel->countFacultyStudentPendingApplication($_SESSION['faculty_id']);
         echo $GLOBALS['templates']->render('FacultyDashboard', [
             'acceptedCount' => $acceptedCount,
-            'pendingCount' => $pendingCount
+            'pendingCount' => $pendingCount,
+            'studentPending' => $studentPending
         ]);
     }
     public function facultyProfile()
@@ -194,9 +196,9 @@ class FacultyController
     }
 
     // ========================= FACULTY STUDENTS CONTROLLER ========================= //
-    public function facultyStudents($facultyId)
+    public function facultyStudents()
     {
-        $result = $this->FacultyModel->getFacultyStudents($facultyId);
+        $result = $this->FacultyModel->getFacultyStudents($_SESSION['faculty_id']);
         echo $GLOBALS['templates']->render('FacultyStudent', ['result' => $result]);
     }
     public function facultyStudentInformation($studentId)
@@ -205,9 +207,9 @@ class FacultyController
         $result = $this->FacultyModel->getFacultyStudentInformationSubject($studentId);
         echo $GLOBALS['templates']->render('FacultyStudentInformation', ['student' => $student, 'result' => $result]);
     }
-    public function facultyStudentAppplication($facultyId)
+    public function facultyStudentAppplication()
     {
-        $result = $this->FacultyModel->getFacultyStudentApplication($facultyId);
+        $result = $this->FacultyModel->getFacultyStudentApplication($_SESSION['faculty_id']);
         echo $GLOBALS['templates']->render('FacultyStudentApplication', ['results' => $result]);
     }
     public function facultyStudentAppplicationConfirm($code, $studentId)

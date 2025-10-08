@@ -89,6 +89,18 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)['subject_count'];
     }
+    public function countFacultyStudentPendingApplication($faculty_id)
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(*) AS subject_count
+        FROM student_subject ss
+        JOIN faculty_subject fs ON ss.subject_id = fs.subject_id
+        WHERE fs.faculty_id = :faculty_id AND ss.status = 0
+    ");
+        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)['subject_count'];
+    }
+
 
     //available subjects model
     public function getAvailableSubjects()
