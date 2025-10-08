@@ -17,7 +17,8 @@ $this->insert('Errors/Toasts');
 
   <div class="card-glass2 mb-4">
     <h5><i class="bi bi-journal-text"></i> Available Subjects</h5>
-    <table class="table table2 ">
+    <hr>
+    <table class="table table-hover text-center table2" id="table" >
       <thead>
         <tr>
           <th class="text-white">Code</th>
@@ -31,7 +32,7 @@ $this->insert('Errors/Toasts');
           <td class="text-white"><?= htmlspecialchars($subject['code']) ?></td>
           <td class="text-white"><?= htmlspecialchars($subject['Description']) ?></td>
           <td class="text-white"><?= htmlspecialchars($subject['Units']) ?></td>
-          <td><a href="/faculty-subjectApplication/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>">Apply</a></td>
+          <td><a href="/faculty-subjectApplication/<?= $subject['code'] ?>" class="btn btn-warning btn-sm">Apply</a></td>
         </tbody>
       <?php endforeach; ?>
     </table>

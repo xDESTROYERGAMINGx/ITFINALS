@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2025 at 05:52 AM
+-- Generation Time: Oct 08, 2025 at 03:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,7 +64,7 @@ CREATE TABLE `faculty` (
 INSERT INTO `faculty` (`first_name`, `last_name`, `password`, `gender`, `email`, `phone_number`, `id_number`, `created_at`) VALUES
 ('long', 'rams', '$2y$10$gy7', 'Male', 'long@gmail.com', 0, 'c23-0001', '2025-10-04 14:44:05'),
 ('q', 'w', '$2y$10$6FF', 'Male', 'qw@gmail.com', 0, 'c23-0002', '2025-10-04 15:57:22'),
-('Joshua', 'Atis', '$2y$10$tbl3YDlJsAkz9DpxYJBBi.GwHdjOcgLl7ZZuQ5jkrqLkyrokdppnK', 'Male', 'joshuaAtis@gmail.com', 952648975, 'C23-0033', '2025-10-05 11:46:39'),
+('Joshua', 'Atis', '$2y$10$rS2L3fFrwxGzMcy3f5mgEe69VTbXaYHtT1ad.zXnzA0eKM1uNxEMW', 'Male', 'joshuaAtis@gmail.com', 952648975, 'C23-0033', '2025-10-05 11:46:39'),
 ('Calvin Joshua', 'asdasd', '$2y$10$mv8', 'Male', 'calvinkiunisala07@gmail.com', 0, 'c23-3434', '2025-10-04 08:57:29'),
 ('janna', 'ocliaman', '$2y$10$oL1', 'Male', 'calvinkiunisala@gmail.com', 0, 'c23-3435', '2025-10-04 09:05:48'),
 ('joshua', 'kiunisala', '$2y$10$LPj', 'Male', 'suzette@gmail.com', 0, 'c23-3436', '2025-10-04 08:58:24'),
@@ -90,7 +90,8 @@ CREATE TABLE `faculty_subject` (
 
 INSERT INTO `faculty_subject` (`id`, `faculty_id`, `subject_id`, `semester`, `status`) VALUES
 (30, 'C23-0033', 'IT101', 'First Semester', 1),
-(31, 'C23-0033', 'IT303', 'first semester', 1);
+(31, 'C23-0033', 'IT303', 'first semester', 1),
+(33, 'C23-0033', 'IT305', 'First Semester', 0);
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,7 @@ CREATE TABLE `grading` (
 --
 
 INSERT INTO `grading` (`id`, `subject_id`, `student_id`, `prelim`, `midterm`, `finals`) VALUES
-(15, 'IT101', 'C23-0139', '90', '—', '—'),
+(15, 'IT101', 'C23-0139', '90', '92', '—'),
 (16, 'IT303', 'C23-0139', '94', '—', '—');
 
 -- --------------------------------------------------------
@@ -145,17 +146,18 @@ INSERT INTO `student` (`student_id`, `first_name`, `last_name`, `year_level`) VA
 CREATE TABLE `student_subject` (
   `id` int(11) NOT NULL,
   `student_id` varchar(10) NOT NULL,
-  `subject_id` varchar(10) NOT NULL
+  `subject_id` varchar(10) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student_subject`
 --
 
-INSERT INTO `student_subject` (`id`, `student_id`, `subject_id`) VALUES
-(7, 'C23-0139', 'IT303'),
-(8, 'C23-0139', 'IT101'),
-(9, 'C23-0149', 'IT303');
+INSERT INTO `student_subject` (`id`, `student_id`, `subject_id`, `status`) VALUES
+(7, 'C23-0139', 'IT303', 0),
+(8, 'C23-0139', 'IT101', 1),
+(9, 'C23-0149', 'IT303', 1);
 
 -- --------------------------------------------------------
 
@@ -276,7 +278,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `faculty_subject`
 --
 ALTER TABLE `faculty_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `grading`

@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    var table = $('#students').DataTable({
+    var table = $('#table').DataTable({
         language: {
-            search: "Search Student :  "
+            search: "Search :  "
         }
     });
 
@@ -16,24 +16,5 @@ $(document).ready(function () {
         }
 
         table.draw();
-    });
-});
-
-$(document).ready(function () {
-    $('#StudentSubject').DataTable({
-        language: {
-            search: "Search Student : "
-        }
-    });
-    $('#GradingTable').DataTable({
-        searching: false,
-        lengthChange: false,
-        paging: false,
-        info: false
-    });
-    $('#availableSubject').DataTable({
-        language: {
-            search: "Search Available Subject : "
-        }
     });
 });

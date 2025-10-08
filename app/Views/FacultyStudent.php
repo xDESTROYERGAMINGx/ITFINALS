@@ -13,7 +13,7 @@ $this->insert('Errors/Toasts');
 
     <!-- Subject Applications -->
     <div class="card-glass2">
-        <div class="select">
+        <!-- <div class="select">
             <label for="filterYear" style="color:white;">Select Year Level : </label>
             <select id="filterYear">
                 <option value="">All Levels</option>
@@ -22,10 +22,11 @@ $this->insert('Errors/Toasts');
                 <option value="3rd Year">3rd Year</option>
                 <option value="4th Year">4th Year</option>
             </select>
-        </div>
-        <div class="m-3">
+        </div> -->
+        <h5>MY STUDENTS </h5>
+        <div>
             <hr>
-            <table class="table table-glass2 table-hover" id="students">
+            <table class="table table-glass2 table-hover" id="table">
                 <thead class="mt-5">
                     <tr>
                         <th class="text-white">Student ID</th>

@@ -16,7 +16,7 @@ class FacultyController
     }
 
 
-    // login controller
+    // ====================================== LOGIN ====================================== //
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,7 +29,7 @@ class FacultyController
                 $_SESSION['faculty_id'] = $faculty['id_number'];
                 $_SESSION['name'] = $faculty['first_name'] . " " . $faculty['last_name'];
 
-                header("Location:/faculty-dashboard/$facultyId");
+                header("Location:/faculty-dashboard");
             } else {
                 echo $GLOBALS['templates']->render('login', ['error' => 'Invalid username or password']);
             }
@@ -37,56 +37,47 @@ class FacultyController
     }
 
     //dashboard controller
-    public function dashboard($facultyId)
+    public function facultyDashboard()
     {
-        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
-        $acceptedCount = $this->FacultyModel->countFacultySubjects($facultyId);
-        $pendingCount = $this->FacultyModel->countFacultySubjectsPendingApplication($facultyId);
+        $acceptedCount = $this->FacultyModel->countFacultySubjects($_SESSION['faculty_id']);
+        $pendingCount = $this->FacultyModel->countFacultySubjectsPendingApplication($_SESSION['faculty_id']);
         echo $GLOBALS['templates']->render('FacultyDashboard', [
-            'faculty' => $faculty,
             'acceptedCount' => $acceptedCount,
             'pendingCount' => $pendingCount
         ]);
     }
-    public function facultyProfile($facultyId)
+    public function facultyProfile()
     {
-        $profile = $this->FacultyModel->getFacultyProfile($facultyId);
-        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
-        echo $GLOBALS['templates']->render('facultyProfile', ['profile' => $profile, 'faculty' => $faculty]);
+        $faculty = $this->FacultyModel->getFacultyProfile($_SESSION['faculty_id']);
+        $subjects = $this->FacultyModel->getFacultySubjects($_SESSION['faculty_id']);
+        echo $GLOBALS['templates']->render('facultyProfile', ['faculty' => $faculty, 'subjects' => $subjects]);
     }
 
     //subjects controller
-    public function availableSubjects($facultyId)
+    public function availableSubjects()
     {
         $subjects = $this->FacultyModel->getAvailableSubjects();
-        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
         echo $GLOBALS['templates']->render('FacultySubjectsAvailable', [
-            'subjects' => $subjects,
-            'faculty' => $faculty
+            'subjects' => $subjects
         ]);
     }
-    public function facultySubjects($facultyId)
+    public function facultySubjects()
     {
-        $subjects = $this->FacultyModel->getFacultySubjects($facultyId);
-        $pendingSubjects = $this->FacultyModel->getFacultySubjectsPendingApplication($facultyId);
-        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
+        $subjects = $this->FacultyModel->getFacultySubjects($_SESSION['faculty_id']);
         echo $GLOBALS['templates']->render('FacultySubjects', [
-            'subjects' => $subjects,
-            'faculty' => $faculty,
-            'pendingSubjects' => $pendingSubjects
+            'subjects' => $subjects
         ]);
     }
-    public function facultySubjectApplication($facultyId, $code)
+    public function facultySubjectApplication($code)
     {
-        $this->FacultyModel->postFacultySubjectApplication($facultyId, $code);
-        header("Location: /faculty-subjectsPendingApplication/$facultyId");
+
+        $this->FacultyModel->postFacultySubjectApplication($_SESSION['faculty_id'], $code);
+        header("Location: /faculty-subject/PendingApplication");
     }
-    public function facultySubjectsPendingApplication($facultyId)
+    public function facultySubjectsPendingApplication()
     {
-        $pendingSubjects = $this->FacultyModel->getFacultySubjectsPendingApplication($facultyId);
-        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
+        $pendingSubjects = $this->FacultyModel->getFacultySubjectsPendingApplication($_SESSION['faculty_id']);
         echo $GLOBALS['templates']->render('FacultySubjectsPendingApplication', [
-            'faculty' => $faculty,
             'pendingSubjects' => $pendingSubjects
         ]);
     }
@@ -94,34 +85,32 @@ class FacultyController
 
 
     //subject grading controller
-    public function facultyGradingStudents($facultyId, $code)
+    public function facultyGradingStudents($code)
     {
-        $students = $this->FacultyModel->getFacultyGradingStudents($code, $facultyId);
+        $students = $this->FacultyModel->getFacultyGradingStudents($code, $_SESSION['faculty_id']);
+        $pendingApplications = $this->FacultyModel->getFacultySubjectsPendingApplicationById($code);
         $subject = $this->FacultyModel->getSubjectInfo($code);
-        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
 
         echo $GLOBALS['templates']->render('FacultyGrading', [
             'students' => $students,
             'subject' => $subject,
-            'faculty' => $faculty
+            'pendingStudents' => $pendingApplications
         ]);
     }
-    public function recordedStudentGrade($facultyId, $code, $studentId)
+    public function recordedStudentGrade( $code, $studentId)
     {
         $grade = $this->FacultyModel->getRecordedStudentGrade($studentId, $code) ?: [];
         $student = $this->FacultyModel->getStudentInfo($studentId);
         $subject = $this->FacultyModel->getSubjectInfo($code);
-        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
         echo $GLOBALS['templates']->render('FacultyGradingGradeStudent', [
             'grade' => $grade,
             'student' => $student,
-            'subject' => $subject,
-            'faculty' => $faculty
+            'subject' => $subject
         ]);
     }
 
     // faculty grading - ADD
-    public function add($facultyId, $code, $studentId)
+    public function add( $code, $studentId)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $prelim = $_POST['prelim'] ?: '—';
@@ -130,7 +119,8 @@ class FacultyController
 
             $this->FacultyModel->add($studentId, $code, $prelim, $midterm, $finals);
 
-            header("Location:/faculty-grading/GradeStudent/$facultyId/$code/$studentId");
+            $_SESSION['success'][] = "Grade Added Successfully!";
+            header("Location:/faculty-grading/GradeStudent/$code/$studentId");
             exit;
         } else {
             header("Location: /");
@@ -138,22 +128,7 @@ class FacultyController
         }
     }
 
-    //faculty grading - EDIT
-    public function editStudentGrade($facultyId, $code, $studentId)
-    {
-        $grade = $this->FacultyModel->getRecordedStudentGrade($studentId, $code) ?: [];
-        $student = $this->FacultyModel->getStudentInfo($studentId);
-        $subject = $this->FacultyModel->getSubjectInfo($code);
-        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
-
-        echo $GLOBALS['templates']->render('facultyGradingEditStudentGrade', [
-            'student' => $student,
-            'subject' => $subject,
-            'grade' => $grade,
-            'faculty' => $faculty
-        ]);
-    }
-    public function edit($facultyId, $code, $studentId)
+    public function edit($code, $studentId)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $prelim = $_POST['prelim'] ?? '';
@@ -161,8 +136,9 @@ class FacultyController
             $finals = $_POST['finals'] ?? '';
 
             $this->FacultyModel->edit($studentId, $code, $prelim, $midterm, $finals);
-
-            header("Location:/faculty-grading/GradeStudent/$facultyId/$code/$studentId");
+            
+            $_SESSION['success'][] = "Grade Added Successfully!";
+            header("Location:/faculty-grading/GradeStudent/$code/$studentId");
             exit;
         } else {
             header("Location: /");
@@ -171,42 +147,48 @@ class FacultyController
     }
 
     // faculty Profile controller
-    public function editFacultyProfile($facultyId)
+    public function editFacultyProfile()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
             $phoneNumber = $_POST['phoneNumber'];
-            $this->FacultyModel->editFacultyProfile($facultyId, $firstName, $lastName, $phoneNumber);
+            $this->FacultyModel->editFacultyProfile($_SESSION['faculty_id'], $firstName, $lastName, $phoneNumber);
 
-            header("Location:/faculty-profile/$facultyId");
+            header("Location:/faculty-profile");
         }
     }
 
-    public function facultyProfileChangePassword($facultyId)
+    public function facultyProfileChangePassword()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $currentPasswordInput = $_POST['currentPassword'] ?? '';
-            $newPassword          = $_POST['newPassword'] ?? '';
-            $confirmPassword      = $_POST['confirmPassword'] ?? '';
+            $newPassword = $_POST['newPassword'] ?? '';
+            $confirmPassword = $_POST['confirmPassword'] ?? '';
+            $facultyId = $_SESSION['faculty_id'];
 
             $faculty = $this->FacultyModel->getFacultyProfile($facultyId);
 
             // Verify current password first
             if (!password_verify($currentPasswordInput, $faculty['password'])) {
-                die("Current password is incorrect!");
+                $_SESSION['danger'][] = "Incorrect Password. Please try again.";
+                header("Location:/faculty-profile");
+                exit;
             }
 
             // Check if new password is provided
             if (!empty($newPassword)) {
                 if ($newPassword !== $confirmPassword) {
-                    die("Passwords do not match!");
+                    $_SESSION['danger'][] = "Password Don't Match! Please try again.";
+                    header("Location:/faculty-profile");
+                    exit;
                 }
                 $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
                 $this->FacultyModel->changePassword($facultyId, $hashedPassword);
+                $_SESSION['success'][] = "Successfully Changed Password.";
             }
 
-            header("Location:/faculty-profile/$facultyId");
+            header("Location:/faculty-profile");
             exit;
         }
     }
@@ -228,14 +210,12 @@ class FacultyController
         $result = $this->FacultyModel->getFacultyStudentApplication($facultyId);
         echo $GLOBALS['templates']->render('FacultyStudentApplication', ['results' => $result]);
     }
-     public function facultyStudentAppplicationConfirm($facultyId,$code, $studentId )
+    public function facultyStudentAppplicationConfirm($code, $studentId)
     {
-        $confirmStudent = $this->FacultyModel->setFacultyStudentApplicationConfirm($facultyId, $code, $studentId);
-        // echo $GLOBALS['templates']->render('FacultyStudentApplication', ['results' => $result]);
-        if($confirmStudent)
-        {
-            $_SESSION['success'] = "Student Application Confirmed!";
+        $confirmStudent = $this->FacultyModel->setFacultyStudentApplicationConfirm($code, $studentId);
+        if ($confirmStudent) {
+            $_SESSION['success'][] = "Student Application Confirmed!";
         }
-        header("Location:/faculty-grading/$facultyId/$code/$studentId");
+        header("Location:/faculty-student/studentApplication/$studentId");
     }
 }

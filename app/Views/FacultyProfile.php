@@ -7,85 +7,82 @@ $this->insert('Errors/Toasts');
 <!-- Navbar -->
 
 
-<!-- Main Profile Content -->
+<!-- Main faculty Content -->
 <main class="main-content p-4 mt-5">
-    <h2 class="mt-3">Faculty Dashboard</h2>
-    <p class="text-light">Overview of your subjects, applications, and notifications.</p>
+  <h2 class="mt-3">Faculty Dashboard</h2>
+  <p class="text-light">Overview of your subjects, applications, and notifications.</p>
 
   <div class=" card-glass2 p-4 mb-5">
     <div class="d-flex flex-column flex-md-row align-items-center gap-4">
-      <img src="/img/juswa.jpg" alt="Profile Photo" class="rounded-circle"
+      <img src="https://ui-avatars.com/api/?name=<?= $_SESSION['name'] ?>" alt="faculty Photo" class="rounded-circle"
         style="width: 100px; height: 100px; object-fit: cover;">
 
       <div class="flex-grow-1">
         <div class="d-flex justify-content-between align-items-start flex-wrap">
           <div>
-            <h3 class="fw-bold mb-1"><?= $profile['first_name'] ?> <?= $profile['last_name'] ?></h3>
-            <p class="text-light mb-0">Faculty ID: <?= $profile['id_number'] ?></p>
-            <p class="text-light mb-0">Email: <?= $profile['email'] ?></p>
-            <p class="text-light mb-0">Phone: <?= $profile['phone_number'] ?></p>
+            <h3 class="fw-bold mb-1"><?= $faculty['first_name'] ?> <?= $faculty['last_name'] ?></h3>
+            <p class="text-light mb-0">Faculty ID: <?= $faculty['id_number'] ?></p>
+            <p class="text-light mb-0">Email: <?= $faculty['email'] ?></p>
+            <p class="text-light mb-0">Phone: <?= $faculty['phone_number'] ?></p>
           </div>
 
           <div class="text-end">
-            <a href="#" class="btn btn-outline-primary btn-sm mb-2 text-light" data-bs-toggle="modal"
-              data-bs-target="#updateProfileModal">
+            <a href="#" class="btn btn-primary btn-sm mb-2" data-bs-toggle="modal"
+              data-bs-target="#updatefacultyModal">
               Edit Profile
             </a>
             <br>
-            <a type="button" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+            <a type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
               Change Password
             </a>
-            <!-- <a href="/faculty-profile/<?= $profile['id_number'] ?>/ChangePassword" class="btn btn-link text-decoration-none text-light">Change Password</a> -->
           </div>
         </div>
       </div>
     </div>
 
     <hr class="my-4">
-
-    <div class="row text-center">
-      <div class="col-md-6 mb-3">
-        <div class="bg-white rounded shadow-sm p-4 h-100">
-          <h6 class="text-light">Department</h6>
-          <h5 class="fw-bold">Faculty</h5>
+    <h5><i class="bi bi-journals me-1"></i> MY SUBJECTS</h5>
+    <div class="row text-center mt-4">
+      <?php foreach ($subjects as $subject): ?>
+        <div class="col-md-4 mb-3">
+          <a href="/faculty-grading/<?= $subject['code']?>">
+            <div class="rounded shadow-sm border border-secondary p-4 h-100">
+              <h5 class="fw-bold"><?= $subject['code'] ?></h5>
+              <h6 class="text-light"><?= $subject['Description'] ?></h6>
+            </div>
+          </a>
         </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <div class="bg-white rounded shadow-sm p-4 h-100">
-          <h6 class="text-light">Gender</h6>
-          <h5 class="fw-bold"><?= $profile['gender'] ?></h5>
-        </div>
-      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </main>
 
-<!-- Edit Profile Modal -->
-<div class="modal fade text-start" id="updateProfileModal" tabindex="-1" aria-labelledby="editProfileLabel"
+<!-- Edit faculty Modal -->
+<div class="modal fade text-start" id="updatefacultyModal" tabindex="-1" aria-labelledby="editfacultyLabel"
   aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content bg-primary-subtle">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editProfileLabel">Edit Profile Details</h1>
-        <a href="/faculty-profile/<?= $_SESSION['faculty_id'] ?>" class="btn-close" aria-label="Close"></a>
+        <h1 class="modal-title fs-5" id="editfacultyLabel">Edit faculty Details</h1>
+        <a href="/faculty-profile" class="btn-close" aria-label="Close"></a>
       </div>
-      <form method="POST" action="/faculty-profile/<?= $profile['id_number'] ?>/EditProfile">
+      <form method="POST" action="/faculty-profile/EditProfile">
         <div class="modal-body row">
           <div class="mb-3">
             <label>First Name</label>
-            <input type="text" class="form-control" value="<?= $profile['first_name'] ?>" name="firstName">
+            <input type="text" class="form-control" value="<?= $faculty['first_name'] ?>" name="firstName">
           </div>
           <div class="mb-3">
             <label>Last Name</label>
-            <input type="text" class="form-control" value="<?= $profile['last_name'] ?>" name="lastName">
+            <input type="text" class="form-control" value="<?= $faculty['last_name'] ?>" name="lastName">
           </div>
           <div class="mb-3">
             <label>Mobile Number</label>
-            <input type="text" class="form-control" value="<?= $profile['phone_number'] ?>" name="phoneNumber">
+            <input type="text" class="form-control" value="<?= $faculty['phone_number'] ?>" name="phoneNumber">
           </div>
         </div>
         <div class="modal-footer">
-          <a href="/faculty-profile/<?= $_SESSION['faculty_id'] ?>" class="btn btn-secondary">Close</a>
+          <a href="/faculty-profile" class="btn btn-secondary">Close</a>
           <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
       </form>
@@ -100,7 +97,7 @@ $this->insert('Errors/Toasts');
         <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="POST" action="/faculty-profile/<?= $profile['id_number'] ?>/ChangePassword">
+      <form method="POST" action="/faculty-profile/ChangePassword">
         <div class="modal-body row">
           <div class="mb-3">
             <label for="password">Enter Current Password</label>

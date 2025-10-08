@@ -19,7 +19,7 @@ $this->insert('Errors/Toasts');
         <h5><i class="bi bi-journal-text"></i> STUDENT GRADE</h5>
         <hr>
         <h6><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></h6>
-        <table class="table table-hover table2">
+        <table class="table table-hover text-center table2">
             <thead>
                 <tr>
                     <th class="text-white">Prelim</th>
@@ -37,14 +37,11 @@ $this->insert('Errors/Toasts');
             </tbody>
         </table>
         <?php if (empty($grade['prelim']) && empty($grade['midterm']) && empty($grade['finals'])): ?>
-            <!-- Show Add Grade if no grades exist -->
             <button type="button" class="btn btn-sm btn-outline-light px-3" data-bs-toggle="modal" data-bs-target="#addFormModal">
                 Add Grade
             </button>
         <?php else: ?>
-            <!-- Show Edit Grade if grades already exist -->
-
-            <button type="button" class="btn btn-sm btn-outline-light px-3" data-bs-toggle="modal" data-bs-target="#editFormModal">
+            <button type="button" class="btn btn-sm btn-warning px-3" data-bs-toggle="modal" data-bs-target="#editFormModal">
                 Edit Grade
             </button>
         <?php endif; ?>
@@ -65,7 +62,7 @@ $this->insert('Errors/Toasts');
                     <h1 class="modal-title fs-5" id="editFormLabel">Edit Student Grade</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="/faculty-grading/GradeStudent/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>/<?= $student['student_id'] ?>/edit">
+                <form method="POST" action="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>/edit">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Prelim</label>
@@ -97,7 +94,7 @@ $this->insert('Errors/Toasts');
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile Details</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="/faculty-grading/GradeStudent/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>/<?= $student['student_id'] ?>/add">
+                <form method="POST" action="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>/add">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Prelim</label>

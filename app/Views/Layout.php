@@ -65,12 +65,12 @@
 
     <!-- Sidebar (Desktop) -->
     <nav class="sidebar d-none d-lg-flex flex-column">
-        <a href="/faculty-dashboard/<?= $_SESSION['faculty_id'] ?>"><i class="bi bi-house"></i> Dashboard</a>
+        <a href="/faculty-dashboard"><i class="bi bi-house"></i> Dashboard</a>
         <a data-bs-toggle="collapse" href="#subjectsCollapse" role="button" aria-expanded="false" aria-controls="subjectsCollapse" class="d-flex justify-content-between align-items-center"><span><i class="bi bi-journals me-1"></i> Subjects </span> <i class="bi bi-chevron-down"></i></a>
         <div class="collapse ms-3" id="subjectsCollapse">
-            <a href="/faculty-subjects/<?= $_SESSION['faculty_id'] ?>"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
-            <a href="/faculty-subjectsAvailable/<?= $_SESSION['faculty_id'] ?>"><i class="bi bi-book"></i> Available Subjects</a>
-            <a href="/faculty-subjectsPendingApplication/<?= $_SESSION['faculty_id'] ?> "><i class="bi bi-clock-history"></i>Pending Subjects</a>
+            <a href="/faculty-subjects"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
+            <a href="/faculty-subjectsAvailable"><i class="bi bi-book"></i> Available Subjects</a>
+            <a href="/faculty-subject/PendingApplication"><i class="bi bi-clock-history"></i>Pending Subjects</a>
         </div>
         <a data-bs-toggle="collapse" href="#studentsCollapse" role="button" aria-expanded="false" aria-controls="studentsCollapse" class="d-flex justify-content-between align-items-center"><span><i class="bi bi-people-fill me-1"></i> Students </span> <i class="bi bi-chevron-down"></i></i></a>
         <div class="collapse ms-3" id="studentsCollapse">
@@ -80,7 +80,7 @@
         </div>
 
 
-        <a href="/faculty-profile/<?= $_SESSION['faculty_id'] ?>"><i class="bi bi-person-circle"></i> Profile</a>
+        <a href="/faculty-profile"><i class="bi bi-person-circle"></i> Profile</a>
         <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
     </nav>
 

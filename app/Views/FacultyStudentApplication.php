@@ -13,8 +13,8 @@ $this->insert('Errors/Toasts');
 
     <!-- Subject Applications -->
     <div class="card-glass2">
-        <div class="m-3 table-responsive">
-            <table class="table table-glass2 table-hover text-center" id="students">
+        <div class="table-responsive">
+            <table class="table table-glass2 table-hover text-center" id="table">
                 <thead class="mt-5">
                     <tr>
                         <th class="text-white">Student ID</th>
@@ -31,7 +31,7 @@ $this->insert('Errors/Toasts');
                         <td><?= $result['first_name'] ?> <?= $result['last_name'] ?></td>
                         <td><?= $result['code'] ?></td>
                         <td><?= $result['Description'] ?></td>
-                        <td><a href="/faculty-student/studentApplication/<?= $result['student_id']?>/<?= $result['code']?>/confirmApplication" class="btn btn-warning btn-sm me-2">Confirm</a> <a href="" class="btn btn-danger btn-sm ms-2">Reject</a></td>
+                        <td><a href="/faculty-student/studentApplication/<?= $result['code']?>/<?= $result['student_id']?>/confirm" class="btn btn-warning btn-sm me-2">Confirm</a> <a href="" class="btn btn-danger btn-sm ms-2">Reject</a></td>
 
                         </tr>
 

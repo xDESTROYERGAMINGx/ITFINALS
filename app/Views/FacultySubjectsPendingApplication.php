@@ -17,7 +17,7 @@ $this->insert('Errors/Toasts');
     <div class="card-glass2">
         <h5><i class="bi bi-hourglass"></i> Pending Applications</h5>
         <hr>
-        <table class="table table2" id="availableSubject">
+        <table class="table table2 text-center" id="table">
             <thead>
                 <tr>
                     <th class="text-white">Code</th>
@@ -37,7 +37,7 @@ $this->insert('Errors/Toasts');
         </table>
     </div>
     <div class="return mt-4">
-        <a href="/faculty-subjects/<?= $_SESSION['faculty_id']?> "><i class="bi bi-person-lines-fill"></i> View Subjects</a>
+        <a href="/faculty-subjects"><i class="bi bi-person-lines-fill"></i> View Subjects</a>
     </div>
 </main>
 

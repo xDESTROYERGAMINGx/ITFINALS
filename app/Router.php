@@ -16,34 +16,31 @@ class Router
         Router::add('/login', fn() => (new FacultyController())->login(), 'POST');
 
         // ========================= FACULTY DASHBORAD ROUTES ========================= //
-        Router::add('/faculty-dashboard/{facultyId}', fn($data) => (new FacultyController())->dashboard($data['facultyId']));
-        Router::add('/faculty-subjectsAvailable/{facultyId}', fn($data) => (new FacultyController())->availableSubjects($data['facultyId']));
-        Router::add('/faculty-subjects/{facultyId}', fn($data) => (new FacultyController())->facultySubjects($data['facultyId']));
-        Router::add('/faculty-profile/{facultyId}', fn($data) => (new FacultyController())->facultyProfile($data['facultyId']));
+        Router::add('/faculty-dashboard', fn() => (new FacultyController())->facultyDashboard());
+        Router::add('/faculty-subjectsAvailable', fn() => (new FacultyController())->availableSubjects());
+        Router::add('/faculty-subjects', fn() => (new FacultyController())->facultySubjects());
+        Router::add('/faculty-profile', fn() => (new FacultyController())->facultyProfile());
 
         // ========================= FACULTY PROFILE ROUTES ========================= //
-        Router::add('/faculty-profile/{facultyId}/EditProfile', fn($data) => (new FacultyController())->editFacultyProfile($data['facultyId']));
-        Router::add('/faculty-profile/{facultyId}/ChangePassword', fn($data) => (new FacultyController())->facultyProfileChangePassword($data['facultyId']));
+        Router::add('/faculty-profile/EditProfile', fn() => (new FacultyController())->editFacultyProfile());
+        Router::add('/faculty-profile/ChangePassword', fn() => (new FacultyController())->facultyProfileChangePassword());
 
 
         // ========================= SUBJECT APPLICATION ROUTES ========================= //
-        Router::add('/faculty-subjectApplication/{facultyId}/{code}', fn($data) => (new FacultyController())->facultySubjectApplication($data['facultyId'], $data['code']));
-        Router::add('/faculty-subjectsPendingApplication/{facultyId}', fn($data) => (new FacultyController())->facultySubjectsPendingApplication($data['facultyId']));
+        Router::add('/faculty-subjectApplication/{code}', fn($data) => (new FacultyController())->facultySubjectApplication($data['code']));
+        Router::add('/faculty-subject/PendingApplication', fn() => (new FacultyController())->facultySubjectsPendingApplication());
 
         // ========================= FACULTY GRADING ROUTES ========================= //
-        Router::add('/faculty-grading/{facultyId}/{code}', fn($data) => (new FacultyController())->facultyGradingStudents($data['facultyId'], $data['code']));
-        Router::add('/faculty-grading/GradeStudent/{facultyId}/{code}/{studentId}', fn($data) => (new FacultyController())->recordedStudentGrade(
-            $data['facultyId'],
+        Router::add('/faculty-grading/{code}', fn($data) => (new FacultyController())->facultyGradingStudents($data['code']));
+        Router::add('/faculty-grading/GradeStudent/{code}/{studentId}', fn($data) => (new FacultyController())->recordedStudentGrade(
             $data['code'],
             $data['studentId']
         ), 'GET');
-        Router::add('/faculty-grading/GradeStudent/{facultyId}/{code}/{studentId}/edit', fn($data) => (new FacultyController())->edit(
-            $data['facultyId'],
+        Router::add('/faculty-grading/GradeStudent/{code}/{studentId}/edit', fn($data) => (new FacultyController())->edit(
             $data['code'],
             $data['studentId']
         ), 'POST');
-        Router::add('/faculty-grading/GradeStudent/{facultyId}/{code}/{studentId}/add', fn($data) => (new FacultyController())->add(
-            $data['facultyId'],
+        Router::add('/faculty-grading/GradeStudent/{code}/{studentId}/add', fn($data) => (new FacultyController())->add(
             $data['code'],
             $data['studentId']
         ), 'POST');
@@ -52,7 +49,7 @@ class Router
         Router::add('/faculty-students/{facultyId}', fn($data) => (new FacultyController())->facultyStudents($data['facultyId']));
         Router::add('/faculty-student/studentInformation/{studentId}', fn($data) => (new FacultyController())->facultyStudentInformation($data['studentId']));
         Router::add('/faculty-student/studentApplication/{studentId}', fn($data) => (new FacultyController())->facultyStudentAppplication($data['studentId']));
-        Router::add('/faculty-student/studentApplication/{facultyId}/{code}/{studentId}/confirm', fn($data) => (new FacultyController())->facultyStudentAppplicationConfirm($data['facultyId'],$data['code'], $data['studentId']));
+        Router::add('/faculty-student/studentApplication/{code}/{studentId}/confirm', fn($data) => (new FacultyController())->facultyStudentAppplicationConfirm($data['code'], $data['studentId']));
 
         Router::run();
     }

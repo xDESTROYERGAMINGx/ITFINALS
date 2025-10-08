@@ -300,7 +300,7 @@ label {
 /* ================================ DATA TABLES ============================== */
 
 /* Table header */
-#students thead th {
+#table thead th {
     background-color: #0d2a4e;
     color: #fff;
     text-align: center;
@@ -312,7 +312,7 @@ label {
 }
 
 /* Table rows */
-#students tbody tr:hover {
+#table tbody tr:hover {
     background-color: rgba(13, 42, 78, 0.1);
     cursor: pointer;
 }
@@ -380,19 +380,14 @@ label {
     box-shadow: 0 0 5px rgba(79, 163, 255, 0.6);
 }
 
-.select {
-    margin-left: 15px;
-}
 
-select {
+/* select {
     background: #0d2a4e;
-    /* dropdown background */
     color: #fff;
-    /* text color */
     padding: 5px 12px;
     border-radius: 8px;
     border: 1px solid #848383ff;
-}
+} */
 
 
 /* TABLE DESIGN */

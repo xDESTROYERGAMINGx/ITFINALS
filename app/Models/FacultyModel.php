@@ -138,6 +138,17 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getFacultySubjectsPendingApplicationById($code)
+    {
+        $stmt = $this->db->prepare("SELECT st.*
+        FROM student_subject ss 
+        JOIN student st ON ss.student_id = st.student_id
+        WHERE ss.subject_id = :subject_id AND status = 0
+        ");
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     //subject grading model
     public function getFacultyGradingStudents($code)
@@ -145,7 +156,7 @@ class FacultyModel
         $stmt = $this->db->prepare("SELECT st.*
         FROM student st
         JOIN student_subject ss ON st.student_id = ss.student_id
-        WHERE ss.subject_id = :subject_code
+        WHERE ss.subject_id = :subject_code AND status = 1
         ");
         $stmt->bindParam(':subject_code', $code, PDO::PARAM_STR);
         $stmt->execute();
@@ -233,14 +244,11 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function setFacultyStudentApplicationConfirm($facultyId, $code, $studentId)
+    public function setFacultyStudentApplicationConfirm($code, $studentId)
     {
-        $stmt = $this->db->prepare("UPDATE student_subject SET status = 1 WHERE student_id = :student_id AND subject_id = :subject_id AND faculty_id = :faculty_id");
+        $stmt = $this->db->prepare("UPDATE student_subject SET status = 1 WHERE student_id = :student_id AND subject_id = :subject_id");
         $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
-        $stmt->bindParam(':faculty_id', $facultyId, PDO::PARAM_STR);
         return $stmt->execute();
     }
-
 }
-                                  

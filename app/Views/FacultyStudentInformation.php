@@ -13,7 +13,7 @@ $this->insert('Errors/Toasts');
     <p class="text-light">Overview of your subjects, applications, and notifications.</p>
     <div class="card-glass2 p-4 mb-5">
         <div class="d-flex flex-column flex-md-row align-items-center gap-4">
-            <img src="/img/juswa.jpg" alt="Profile Photo" class="rounded-circle"
+            <img src="https://ui-avatars.com/api/?name=<?= $student['first_name'] ?> <?= $student['last_name'] ?>"src="/img/juswa.jpg" alt="Profile Photo" class="rounded-circle"
                 style="width: 100px; height: 100px; object-fit: cover;">
 
             <div class="flex-grow-1">
@@ -33,7 +33,7 @@ $this->insert('Errors/Toasts');
             <h5 class="text-white mb-3"><i class="bi bi-journals"></i> SUBJECTS</h5>
             <?php foreach ($result as $result): ?>
                 <div class="col-md-6 mb-3 text-center">
-                    <div class="rounded border shadow-sm p-4">
+                    <div class="rounded border border-secondary shadow-sm p-4">
                         <h5 class="fw-bold"><?= $result['code'] ?></h5>
                         <h6 class="text-light"><?= $result['Description'] ?></h6>
                         <hr>
