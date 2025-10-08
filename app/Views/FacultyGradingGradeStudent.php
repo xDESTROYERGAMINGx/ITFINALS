@@ -65,7 +65,7 @@ $this->insert('Errors/Toasts');
                     <h1 class="modal-title fs-5" id="editFormLabel">Edit Student Grade</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="/faculty-grading/GradeStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>/edit">
+                <form method="POST" action="/faculty-grading/GradeStudent/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>/<?= $student['student_id'] ?>/edit">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Prelim</label>

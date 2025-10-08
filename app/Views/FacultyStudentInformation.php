@@ -9,9 +9,9 @@ $this->insert('Errors/Toasts');
 
 <!-- Main Profile Content -->
 <main class="main-content p-4 mt-5">
-    <h2>Student Information</h2>
+    <h2 class="mt-4">Student Information</h2>
     <p class="text-light">Overview of your subjects, applications, and notifications.</p>
-    <div class="container card-glass2 p-4 mb-5">
+    <div class="card-glass2 p-4 mb-5">
         <div class="d-flex flex-column flex-md-row align-items-center gap-4">
             <img src="/img/juswa.jpg" alt="Profile Photo" class="rounded-circle"
                 style="width: 100px; height: 100px; object-fit: cover;">

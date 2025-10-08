@@ -223,4 +223,9 @@ class FacultyController
         $result = $this->FacultyModel->getFacultyStudentInformationSubject($studentId);
         echo $GLOBALS['templates']->render('FacultyStudentInformation', ['student' => $student, 'result' => $result]);
     }
+    public function facultyStudentAppplication($facultyId)
+    {
+        $result = $this->FacultyModel->getFacultyStudentApplication($facultyId);
+        echo $GLOBALS['templates']->render('FacultyStudentApplication', ['results' => $result]);
+    }
 }

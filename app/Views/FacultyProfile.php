@@ -9,9 +9,10 @@ $this->insert('Errors/Toasts');
 
 <!-- Main Profile Content -->
 <main class="main-content p-4 mt-5">
-  <h2>Faculty Dashboard</h2>
-  <p class="text-light">Overview of your subjects, applications, and notifications.</p>
-  <div class="container card-glass2 p-4 mb-5">
+    <h2 class="mt-3">Faculty Dashboard</h2>
+    <p class="text-light">Overview of your subjects, applications, and notifications.</p>
+
+  <div class=" card-glass2 p-4 mb-5">
     <div class="d-flex flex-column flex-md-row align-items-center gap-4">
       <img src="/img/juswa.jpg" alt="Profile Photo" class="rounded-circle"
         style="width: 100px; height: 100px; object-fit: cover;">
@@ -66,7 +67,7 @@ $this->insert('Errors/Toasts');
     <div class="modal-content bg-primary-subtle">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="editProfileLabel">Edit Profile Details</h1>
-        <a href="/faculty-profile/<?= $faculty['user_id'] ?>" class="btn-close" aria-label="Close"></a>
+        <a href="/faculty-profile/<?= $_SESSION['faculty_id'] ?>" class="btn-close" aria-label="Close"></a>
       </div>
       <form method="POST" action="/faculty-profile/<?= $profile['id_number'] ?>/EditProfile">
         <div class="modal-body row">
@@ -84,7 +85,7 @@ $this->insert('Errors/Toasts');
           </div>
         </div>
         <div class="modal-footer">
-          <a href="/faculty-profile/<?= $faculty['user_id'] ?>" class="btn btn-secondary">Close</a>
+          <a href="/faculty-profile/<?= $_SESSION['faculty_id'] ?>" class="btn btn-secondary">Close</a>
           <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
       </form>

@@ -24,7 +24,7 @@ class Router
         // ========================= FACULTY PROFILE ROUTES ========================= //
         Router::add('/faculty-profile/{facultyId}/EditProfile', fn($data) => (new FacultyController())->editFacultyProfile($data['facultyId']));
         Router::add('/faculty-profile/{facultyId}/ChangePassword', fn($data) => (new FacultyController())->facultyProfileChangePassword($data['facultyId']));
-        
+
 
         // ========================= SUBJECT APPLICATION ROUTES ========================= //
         Router::add('/faculty-subjectApplication/{facultyId}/{code}', fn($data) => (new FacultyController())->facultySubjectApplication($data['facultyId'], $data['code']));
@@ -51,6 +51,7 @@ class Router
         // ========================= FACULTY STUDENT ROUTES ========================= //
         Router::add('/faculty-students/{facultyId}', fn($data) => (new FacultyController())->facultyStudents($data['facultyId']));
         Router::add('/faculty-student/studentInformation/{studentId}', fn($data) => (new FacultyController())->facultyStudentInformation($data['studentId']));
+        Router::add('/faculty-student/studentApplication/{studentId}', fn($data) => (new FacultyController())->facultyStudentAppplication($data['studentId']));
 
         Router::run();
     }

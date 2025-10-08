@@ -15,7 +15,8 @@ $this->insert('Errors/Toasts');
   <!-- My Subjects (List Style) -->
   <div class="card-glass2 mb-4">
     <h5><i class="bi bi-journal-text"></i> My Subjects</h5>
-    <table class="table table-glass2 table-hover" id="students">
+    <hr>
+    <table class="table table-glass2 table-hover table2">
       <thead>
         <tr>
           <th class="text-white">Code</th>
@@ -25,11 +26,11 @@ $this->insert('Errors/Toasts');
         </tr>
       </thead>
       <?php foreach ($subjects as $subject): ?>
-        <tbody>
+        <tbody class="text-center">
           <td class="text-white"><?= htmlspecialchars($subject['code']) ?></td>
           <td class="text-white"><?= htmlspecialchars($subject['Description']) ?></td>
           <td class="text-white"><?= htmlspecialchars($subject['Units']) ?></td>
-          <td><a href="/faculty-grading/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>" class="btn btn-sm btn-outline-light px-3">View</a></td>
+          <td><a href="/faculty-grading/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>" class="text-decoration-underline">View</a></td>
         </tbody>
       <?php endforeach; ?>
     </table>

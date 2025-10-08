@@ -221,5 +221,18 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getFacultyStudentApplication($facultyId)
+    {
+        $stmt = $this->db->prepare("SELECT st.*, s.* 
+        FROM faculty_subject fs 
+        JOIN subject s ON fs.subject_id = s.code
+        JOIN student_subject ss ON s.code = ss.subject_id AND ss.status = 0
+        JOIN student st ON ss.student_id = st.student_id
+        WHERE fs.faculty_id = :faculty_id");
+        $stmt->bindParam('faculty_id', $facultyId, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
+                                  

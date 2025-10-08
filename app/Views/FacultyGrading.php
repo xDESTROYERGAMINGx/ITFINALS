@@ -16,7 +16,7 @@ $this->insert('Errors/Toasts');
     <div class="card-glass2 mb-4">
         <h5><i class="bi bi-journal-text"></i> STUDENTS</h5>
         <hr>
-        <table class="table table-hover table-glass2" id="StudentSubject">
+        <table class="table table-hover table2 text-center">
             <thead>
                 <tr>
                     <th class="text-white">Student ID</th>
@@ -30,7 +30,7 @@ $this->insert('Errors/Toasts');
                     <td class="text-white"><?= htmlspecialchars($student['student_id']) ?></td>
                     <td class="text-white"><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></td>
                     <td class="text-white"><?= htmlspecialchars($student['year_level']) ?></td>
-                    <td class="text-center"><a href="/faculty-grading/GradeStudent/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>/<?= $student['student_id'] ?>" class="text-decoration-underline">
+                    <td class="text-center"><a href="/faculty-grading/GradeStudent/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>/<?= $student['student_id'] ?>" class=" btn btn-warning btn-sm">
                             Input Student Grade 
                         </a>
                     </td>
