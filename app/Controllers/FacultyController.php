@@ -14,22 +14,22 @@ class FacultyController
         $db = new DBConnection();
         $this->FacultyModel = new FacultyModel($db);
     }
-    
+
 
     // login controller
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'] ?? '';
+            $facultyId = $_POST['facultyId'] ?? '';
             $password = $_POST['password'] ?? '';
 
-            $faculty = $this->FacultyModel->login($username, $password); // only call once
+            $faculty = $this->FacultyModel->getFacultyProfile($facultyId);
 
-            if ($faculty) {
-                $_SESSION['faculty_id'] = $faculty['user_id'];
-                $_SESSION['name'] = $faculty['name'];
+            if ($faculty && password_verify($password, $faculty['password'])) {
+                $_SESSION['faculty_id'] = $faculty['id_number'];
+                $_SESSION['name'] = $faculty['first_name'] . " " . $faculty['last_name'];
 
-                header("Location:/faculty-dashboard/" . urlencode($faculty['user_id']));
+                header("Location:/faculty-dashboard/$facultyId");
             } else {
                 echo $GLOBALS['templates']->render('login', ['error' => 'Invalid username or password']);
             }
@@ -121,24 +121,12 @@ class FacultyController
     }
 
     // faculty grading - ADD
-    public function addStudentGrade($facultyId, $code, $studentId)
-    {
-        $student = $this->FacultyModel->getStudentInfo($studentId);
-        $subject = $this->FacultyModel->getSubjectInfo($code);
-        $faculty = $this->FacultyModel->getFacultyInfo($facultyId);
-
-        echo $GLOBALS['templates']->render('facultyGradingAddStudentGrade', [
-            'student' => $student,
-            'subject' => $subject,
-            'faculty' => $faculty
-        ]);
-    }
     public function add($facultyId, $code, $studentId)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $prelim = $_POST['prelim'] ?? '';
-            $midterm = $_POST['midterm'] ?? '';
-            $finals = $_POST['finals'] ?? '';
+            $prelim = $_POST['prelim'] ?: '—';
+            $midterm = $_POST['midterm'] ?: '—';
+            $finals = $_POST['finals'] ?: '—';
 
             $this->FacultyModel->add($studentId, $code, $prelim, $midterm, $finals);
 
@@ -197,6 +185,42 @@ class FacultyController
 
     public function facultyProfileChangePassword($facultyId)
     {
-        echo $GLOBALS['templates']->render('FacultyProfileChangePassword');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $currentPasswordInput = $_POST['currentPassword'] ?? '';
+            $newPassword          = $_POST['newPassword'] ?? '';
+            $confirmPassword      = $_POST['confirmPassword'] ?? '';
+
+            $faculty = $this->FacultyModel->getFacultyProfile($facultyId);
+
+            // Verify current password first
+            if (!password_verify($currentPasswordInput, $faculty['password'])) {
+                die("Current password is incorrect!");
+            }
+
+            // Check if new password is provided
+            if (!empty($newPassword)) {
+                if ($newPassword !== $confirmPassword) {
+                    die("Passwords do not match!");
+                }
+                $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+                $this->FacultyModel->changePassword($facultyId, $hashedPassword);
+            }
+
+            header("Location:/faculty-profile/$facultyId");
+            exit;
+        }
+    }
+
+    // ========================= FACULTY STUDENTS CONTROLLER ========================= //
+    public function facultyStudents($facultyId)
+    {
+        $result = $this->FacultyModel->getFacultyStudents($facultyId);
+        echo $GLOBALS['templates']->render('FacultyStudent', ['result' => $result]);
+    }
+    public function facultyStudentInformation($studentId)
+    {
+        $student = $this->FacultyModel->getFacultyStudentInformation($studentId);
+        $result = $this->FacultyModel->getFacultyStudentInformationSubject($studentId);
+        echo $GLOBALS['templates']->render('FacultyStudentInformation', ['student' => $student, 'result' => $result]);
     }
 }

@@ -11,26 +11,26 @@ class Router
 
     public static function init()
     {
-        // ========================= LOGIN ROUTES =========================
+        // ========================= LOGIN ROUTES =========================//
         Router::add('/', fn() => Router::render('pilotLogin'));
         Router::add('/login', fn() => (new FacultyController())->login(), 'POST');
 
-        // ========================= FACULTY DASHBORAD ROUTES =========================
+        // ========================= FACULTY DASHBORAD ROUTES ========================= //
         Router::add('/faculty-dashboard/{facultyId}', fn($data) => (new FacultyController())->dashboard($data['facultyId']));
         Router::add('/faculty-subjectsAvailable/{facultyId}', fn($data) => (new FacultyController())->availableSubjects($data['facultyId']));
         Router::add('/faculty-subjects/{facultyId}', fn($data) => (new FacultyController())->facultySubjects($data['facultyId']));
         Router::add('/faculty-profile/{facultyId}', fn($data) => (new FacultyController())->facultyProfile($data['facultyId']));
 
-        // ========================= FACULTY PROFILE ROUTES =========================
+        // ========================= FACULTY PROFILE ROUTES ========================= //
         Router::add('/faculty-profile/{facultyId}/EditProfile', fn($data) => (new FacultyController())->editFacultyProfile($data['facultyId']));
-        Router::add('faculty-profile/{facultyId}/ChangePassword/eme', fn($data) => (new FacultyController())->facultyProfileChangePassword($data['facultyId']));
+        Router::add('/faculty-profile/{facultyId}/ChangePassword', fn($data) => (new FacultyController())->facultyProfileChangePassword($data['facultyId']));
         
 
-        //subject application
+        // ========================= SUBJECT APPLICATION ROUTES ========================= //
         Router::add('/faculty-subjectApplication/{facultyId}/{code}', fn($data) => (new FacultyController())->facultySubjectApplication($data['facultyId'], $data['code']));
         Router::add('/faculty-subjectsPendingApplication/{facultyId}', fn($data) => (new FacultyController())->facultySubjectsPendingApplication($data['facultyId']));
 
-        //Grading Section
+        // ========================= FACULTY GRADING ROUTES ========================= //
         Router::add('/faculty-grading/{facultyId}/{code}', fn($data) => (new FacultyController())->facultyGradingStudents($data['facultyId'], $data['code']));
         Router::add('/faculty-grading/GradeStudent/{facultyId}/{code}/{studentId}', fn($data) => (new FacultyController())->recordedStudentGrade(
             $data['facultyId'],
@@ -48,6 +48,9 @@ class Router
             $data['studentId']
         ), 'POST');
 
+        // ========================= FACULTY STUDENT ROUTES ========================= //
+        Router::add('/faculty-students/{facultyId}', fn($data) => (new FacultyController())->facultyStudents($data['facultyId']));
+        Router::add('/faculty-student/studentInformation/{studentId}', fn($data) => (new FacultyController())->facultyStudentInformation($data['studentId']));
 
         Router::run();
     }

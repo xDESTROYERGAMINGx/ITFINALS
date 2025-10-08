@@ -17,8 +17,8 @@ class FacultyModel
     //Faculty Information Model
     public function getFacultyInfo($faculty_id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE user_id = :user_id");
-        $stmt->bindParam(':user_id', $faculty_id, PDO::PARAM_STR);
+        $stmt = $this->db->prepare("SELECT * FROM faculty WHERE id_number = :id_number");
+        $stmt->bindParam(':id_number', $faculty_id, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -44,13 +44,13 @@ class FacultyModel
         $stmt->bindParam(':password', $password, PDO::PARAM_STR);
         $stmt->bindParam(':id_number', $facultyId, PDO::PARAM_STR);
         return $stmt->execute();
-    }   
+    }
 
     //Student Information Model
-    public function getStudentInfo($studenId)
+    public function getStudentInfo($studentId)
     {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE user_id = :user_id");
-        $stmt->bindValue(':user_id', $studenId, PDO::PARAM_STR);
+        $stmt = $this->db->prepare("SELECT * FROM student WHERE student_id = :student_id");
+        $stmt->bindValue(':student_id', $studentId, PDO::PARAM_STR);
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC); // single row
@@ -64,16 +64,6 @@ class FacultyModel
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC); // single row
-    }
-
-    // Login models
-    public function login($username, $password)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     //dashboard models
@@ -152,9 +142,9 @@ class FacultyModel
     //subject grading model
     public function getFacultyGradingStudents($code)
     {
-        $stmt = $this->db->prepare("SELECT u.*
-        FROM users u
-        JOIN student_subject ss ON u.user_id = ss.student_id
+        $stmt = $this->db->prepare("SELECT st.*
+        FROM student st
+        JOIN student_subject ss ON st.student_id = ss.student_id
         WHERE ss.subject_id = :subject_code
         ");
         $stmt->bindParam(':subject_code', $code, PDO::PARAM_STR);
@@ -193,4 +183,43 @@ class FacultyModel
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         return $stmt->execute();
     }
+
+    // ========================= FACULTY STUDENTS MODEL ========================= //
+    public function getFacultyStudents($facultyId)
+    {
+        $stmt = $this->db->prepare("SELECT DISTINCT
+                st.student_id,
+                st.first_name AS student_firstname,
+                st.last_name AS student_lastname,
+                st.year_level
+            FROM faculty_subject fs
+            JOIN subject s ON fs.subject_id = s.code
+            JOIN student_subject ss ON s.code = ss.subject_id
+            JOIN student st ON ss.student_id = st.student_id
+            WHERE fs.faculty_id = :faculty_id;
+        ");
+        $stmt->bindParam(':faculty_id', $facultyId, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getFacultyStudentInformation($studentId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM student WHERE student_id = :student_id");
+        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getFacultyStudentInformationSubject($studentId)
+    {
+        $stmt = $this->db->prepare("SELECT s.*, g.*
+            FROM student_subject ss
+            JOIN subject s ON ss.subject_id = s.code
+            JOIN grading g ON ss.subject_id = g.subject_id AND ss.student_id = g.student_id
+            WHERE ss.student_id = :student_id
+        ");
+        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

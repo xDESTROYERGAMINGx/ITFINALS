@@ -23,7 +23,6 @@ $this->insert('Errors/Toasts');
             <p class="text-light mb-0">Faculty ID: <?= $profile['id_number'] ?></p>
             <p class="text-light mb-0">Email: <?= $profile['email'] ?></p>
             <p class="text-light mb-0">Phone: <?= $profile['phone_number'] ?></p>
-            <p class="text-light mb-0">Pass: <?= $profile['password'] ?></p>
           </div>
 
           <div class="text-end">
@@ -32,7 +31,10 @@ $this->insert('Errors/Toasts');
               Edit Profile
             </a>
             <br>
-            <a href="/faculty-profile/<?= $profile['id_number'] ?>/ChangePassword" class="btn btn-link text-decoration-none text-light">Change Password</a>
+            <a type="button" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+              Change Password
+            </a>
+            <!-- <a href="/faculty-profile/<?= $profile['id_number'] ?>/ChangePassword" class="btn btn-link text-decoration-none text-light">Change Password</a> -->
           </div>
         </div>
       </div>
@@ -84,6 +86,38 @@ $this->insert('Errors/Toasts');
         <div class="modal-footer">
           <a href="/faculty-profile/<?= $faculty['user_id'] ?>" class="btn btn-secondary">Close</a>
           <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade text-start" id="changePasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-primary-subtle">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="/faculty-profile/<?= $profile['id_number'] ?>/ChangePassword">
+        <div class="modal-body row">
+          <div class="mb-3">
+            <label for="password">Enter Current Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter new password" name="currentPassword">
+          </div>
+          <hr>
+          <div class="mb-3">
+            <label for="password">New Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter new password" name="newPassword">
+          </div>
+          <div class="mb-3">
+            <label for="confirmPassword">Retype New Password</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password" name="confirmPassword">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
         </div>
       </form>
     </div>

@@ -1,3 +1,5 @@
+let table = new DataTable('#myTable');
+
 window.onload = function () {
     var toasts = document.querySelectorAll('.toast');
     toasts.forEach(function (toast) {
@@ -5,3 +7,4 @@ window.onload = function () {
         toastInstance.show();
     });
 };
+

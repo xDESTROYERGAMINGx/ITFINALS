@@ -18,8 +18,8 @@ $this->insert('Errors/Toasts');
     <div class="card-glass2 mb-4">
         <h5><i class="bi bi-journal-text"></i> STUDENT GRADE</h5>
         <hr>
-        <h6><?= htmlspecialchars($student['name']) ?></h6>  
-        <table class="table table-hover table-glass2 table-bordered">
+        <h6><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></h6>
+        <table class="table table-hover table2">
             <thead>
                 <tr>
                     <th class="text-white">Prelim</th>
@@ -28,9 +28,12 @@ $this->insert('Errors/Toasts');
                 </tr>
             </thead>
             <tbody>
-                <td class="text-white"><?= htmlspecialchars($grade['prelim'] ?: '—') ?></td>
-                <td class="text-white"><?= htmlspecialchars($grade['midterm'] ?: '—') ?></td>
-                <td class="text-white"><?= htmlspecialchars($grade['finals'] ?: '—') ?></td>
+                <tr>
+                    <td class="text-white"><?= htmlspecialchars($grade['prelim'] ?? '—') ?></td>
+                    <td class="text-white"><?= htmlspecialchars($grade['midterm'] ?? '—') ?></td>
+                    <td class="text-white"><?= htmlspecialchars($grade['finals'] ?? '—') ?></td>
+                </tr>
+
             </tbody>
         </table>
         <?php if (empty($grade['prelim']) && empty($grade['midterm']) && empty($grade['finals'])): ?>
@@ -40,7 +43,7 @@ $this->insert('Errors/Toasts');
             </button>
         <?php else: ?>
             <!-- Show Edit Grade if grades already exist -->
-            
+
             <button type="button" class="btn btn-sm btn-outline-light px-3" data-bs-toggle="modal" data-bs-target="#editFormModal">
                 Edit Grade
             </button>
@@ -50,7 +53,7 @@ $this->insert('Errors/Toasts');
 
     </div>
     <div class="return">
-        <a href="/faculty-grading/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>"><i class="bi bi-backspace-fill"></i> Return to Previous</a>
+        <a href="/faculty-grading/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>"><i class="bi bi-backspace-fill"></i> Return to Previous</a>
     </div>
 
 
@@ -60,7 +63,7 @@ $this->insert('Errors/Toasts');
             <div class="modal-content bg-success-subtle">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="editFormLabel">Edit Student Grade</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>    
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST" action="/faculty-grading/GradeStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>/edit">
                     <div class="modal-body">
@@ -94,7 +97,7 @@ $this->insert('Errors/Toasts');
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile Details</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="/faculty-grading/GradeStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>/add">
+                <form method="POST" action="/faculty-grading/GradeStudent/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>/<?= $student['student_id'] ?>/add">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Prelim</label>

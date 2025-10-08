@@ -105,7 +105,7 @@
     <form method="POST" action="/login">
       <div class="mb-3">
         <label for="username" class="form-label">Username:</label>
-        <input type="text" class="form-control" id="username" name="username" required>
+        <input type="text" class="form-control" id="username" name="facultyId" required>
       </div>
 
       <div class="mb-3">

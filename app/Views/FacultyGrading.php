@@ -15,20 +15,23 @@ $this->insert('Errors/Toasts');
     <!-- My Subjects (List Style) -->
     <div class="card-glass2 mb-4">
         <h5><i class="bi bi-journal-text"></i> STUDENTS</h5>
-        <table class="table table-hover table-glass2 table-bordered">
+        <hr>
+        <table class="table table-hover table-glass2" id="StudentSubject">
             <thead>
                 <tr>
                     <th class="text-white">Student ID</th>
                     <th class="text-white">Name</th>
+                    <th class="text-white">Year Level</th>
                     <th class="text-white">Action</th>
                 </tr>
             </thead>
             <?php foreach ($students as $student): ?>
                 <tbody>
-                    <td class="text-white"><?= htmlspecialchars($student['user_id']) ?></td>
-                    <td class="text-white"><?= htmlspecialchars($student['name']) ?></td>
-                    <td><a href="/faculty-grading/GradeStudent/<?= $faculty['user_id'] ?>/<?= $subject['code'] ?>/<?= $student['user_id'] ?>" class="btn btn-sm btn-outline-light px-3">
-                            View Grade
+                    <td class="text-white"><?= htmlspecialchars($student['student_id']) ?></td>
+                    <td class="text-white"><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></td>
+                    <td class="text-white"><?= htmlspecialchars($student['year_level']) ?></td>
+                    <td class="text-center"><a href="/faculty-grading/GradeStudent/<?= $_SESSION['faculty_id'] ?>/<?= $subject['code'] ?>/<?= $student['student_id'] ?>" class="text-decoration-underline">
+                            Input Student Grade 
                         </a>
                     </td>
                 </tbody>

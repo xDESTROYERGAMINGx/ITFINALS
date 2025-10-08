@@ -81,12 +81,13 @@ body::before {
     z-index: 1;
 }
 
-.profile-pic, .logo {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
+.profile-pic,
+.logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
 /* Responsive Adjustments */
 @media (max-width: 991.98px) {
@@ -295,3 +296,124 @@ label {
     text-transform: uppercase;
     margin-bottom: 20px;
 }
+
+/* ================================ DATA TABLES ============================== */
+
+/* Table header */
+#students thead th {
+    background-color: #0d2a4e;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.table tbody td {
+    border: 1px solid rgba(13, 42, 78, 0.4) !important;
+}
+
+/* Table rows */
+#students tbody tr:hover {
+    background-color: rgba(13, 42, 78, 0.1);
+    cursor: pointer;
+}
+#StudentSubject tbody tr:hover {
+    background-color: rgba(13, 42, 78, 0.1);
+}
+
+/* Search box */
+.dataTables_filter input {
+    border-radius: 20px;
+    padding: 6px 12px;
+    border: 1px solid #0d2a4e;
+    outline: none;
+    color: #fff !important;
+    margin: 0 0 15px 15px;
+}
+
+.dataTables_filter label {
+    color: white;
+}
+
+/* Pagination */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #0d2a4e !important;
+    color: #fff !important;
+}
+
+/* Style the wrapper text ("Show _MENU_ entries") */
+.dataTables_length label {
+    color: #fff;
+    /* text color */
+    font-weight: 500;
+}
+
+/* Style the dropdown */
+.dataTables_length select {
+    background-color: #0d2a4e;
+    /* dark blue background */
+    color: #fff;
+    /* white text */
+    border: 1px solid #3a4a6a;
+    /* border color */
+    border-radius: 6px;
+    padding: 6px 12px;
+    /* margin-left: 6px; */
+    cursor: pointer;
+}
+
+/* On hover */
+.dataTables_length select:hover {
+    background-color: #163a6b;
+}
+
+/* On focus */
+.dataTables_length select:focus {
+    outline: none;
+    border-color: #4fa3ff;
+    box-shadow: 0 0 5px rgba(79, 163, 255, 0.6);
+}
+
+.select {
+    margin-left: 15px;
+}
+
+select {
+    background: #0d2a4e;
+    /* dropdown background */
+    color: #fff;
+    /* text color */
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1px solid #848383ff;
+}
+
+
+/* TABLE DESIGN */
+.table2 thead th {
+    background-color: #0d2a4e;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.table2 tbody td {
+    border: 1px solid rgba(13, 42, 78, 0.4) !important;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #e0f0ff !important;
+}
+
+/* Table rows */
+.table2 tbody tr:hover {
+    background-color: rgba(13, 42, 78, 0.1);
+    /* cursor: pointer; */
+}
+    
