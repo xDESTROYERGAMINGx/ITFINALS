@@ -9,11 +9,24 @@ $(document).ready(function () {
             search: "Search :  "
         }
     });
-    $('#subjects').DataTable({
+    $('#facultySubject').DataTable({
         language: {
             search: "Search :  "
         }
     });
 
 
+
 });
+$(document).ready(function() {
+  var table = $('#table3').DataTable({
+    language: { search: "Search :  " }
+  });
+
+  $('#filterYear').on('change', function() {
+    var val = $(this).val();                 // e.g. "1st Year" or ""
+    // simple column search (regex=false, smart=true)
+    table.column(2).search(val, false, true).draw();
+  });
+});
+

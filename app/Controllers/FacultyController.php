@@ -42,7 +42,7 @@ class FacultyController
         $acceptedCount = $this->FacultyModel->countFacultySubjects($_SESSION['faculty_id']);
         $pendingCount = $this->FacultyModel->countFacultySubjectsPendingApplication($_SESSION['faculty_id']);
         $studentPending = $this->FacultyModel->countFacultyStudentPendingApplication($_SESSION['faculty_id']);
-        echo $GLOBALS['templates']->render('FacultyDashboard', [
+        echo $GLOBALS['templates']->render('Faculty/FacultyDashboard', [
             'acceptedCount' => $acceptedCount,
             'pendingCount' => $pendingCount,
             'studentPending' => $studentPending
@@ -52,21 +52,21 @@ class FacultyController
     {
         $faculty = $this->FacultyModel->getFacultyProfile($_SESSION['faculty_id']);
         $subjects = $this->FacultyModel->getFacultySubjects($_SESSION['faculty_id']);
-        echo $GLOBALS['templates']->render('facultyProfile', ['faculty' => $faculty, 'subjects' => $subjects]);
+        echo $GLOBALS['templates']->render('Faculty/facultyProfile', ['faculty' => $faculty, 'subjects' => $subjects]);
     }
 
     //subjects controller
     public function availableSubjects()
     {
         $subjects = $this->FacultyModel->getAvailableSubjects();
-        echo $GLOBALS['templates']->render('FacultySubjectsAvailable', [
+        echo $GLOBALS['templates']->render('Faculty/FacultySubjectsAvailable', [
             'subjects' => $subjects
         ]);
     }
     public function facultySubjects()
     {
         $subjects = $this->FacultyModel->getFacultySubjects($_SESSION['faculty_id']);
-        echo $GLOBALS['templates']->render('FacultySubjects', [
+        echo $GLOBALS['templates']->render('Faculty/FacultySubjects', [
             'subjects' => $subjects
         ]);
     }
@@ -79,7 +79,7 @@ class FacultyController
     public function facultySubjectsPendingApplication()
     {
         $pendingSubjects = $this->FacultyModel->getFacultySubjectsPendingApplication($_SESSION['faculty_id']);
-        echo $GLOBALS['templates']->render('FacultySubjectsPendingApplication', [
+        echo $GLOBALS['templates']->render('Faculty/FacultySubjectsPendingApplication', [
             'pendingSubjects' => $pendingSubjects
         ]);
     }
@@ -93,7 +93,7 @@ class FacultyController
         $pendingApplications = $this->FacultyModel->getFacultySubjectsPendingApplicationById($code);
         $subject = $this->FacultyModel->getSubjectInfo($code);
 
-        echo $GLOBALS['templates']->render('FacultyGrading', [
+        echo $GLOBALS['templates']->render('Faculty/FacultyGrading', [
             'students' => $students,
             'subject' => $subject,
             'pendingStudents' => $pendingApplications
@@ -104,7 +104,7 @@ class FacultyController
         $grade = $this->FacultyModel->getRecordedStudentGrade($studentId, $code) ?: [];
         $student = $this->FacultyModel->getStudentInfo($studentId);
         $subject = $this->FacultyModel->getSubjectInfo($code);
-        echo $GLOBALS['templates']->render('FacultyGradingGradeStudent', [
+        echo $GLOBALS['templates']->render('Faculty/FacultyGradingGradeStudent', [
             'grade' => $grade,
             'student' => $student,
             'subject' => $subject
@@ -199,18 +199,18 @@ class FacultyController
     public function facultyStudents()
     {
         $result = $this->FacultyModel->getFacultyStudents($_SESSION['faculty_id']);
-        echo $GLOBALS['templates']->render('FacultyStudent', ['result' => $result]);
+        echo $GLOBALS['templates']->render('Faculty/FacultyStudent', ['result' => $result]);
     }
     public function facultyStudentInformation($studentId)
     {
         $student = $this->FacultyModel->getFacultyStudentInformation($studentId);
         $result = $this->FacultyModel->getFacultyStudentInformationSubject($studentId);
-        echo $GLOBALS['templates']->render('FacultyStudentInformation', ['student' => $student, 'result' => $result]);
+        echo $GLOBALS['templates']->render('Faculty/FacultyStudentInformation', ['student' => $student, 'result' => $result]);
     }
     public function facultyStudentAppplication()
     {
         $result = $this->FacultyModel->getFacultyStudentApplication($_SESSION['faculty_id']);
-        echo $GLOBALS['templates']->render('FacultyStudentApplication', ['results' => $result]);
+        echo $GLOBALS['templates']->render('Faculty/FacultyStudentApplication', ['results' => $result]);
     }
     public function facultyStudentAppplicationConfirm($code, $studentId)
     {

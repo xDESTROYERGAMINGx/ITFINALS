@@ -1,5 +1,5 @@
 <?php
-$this->layout('Layout', ['mainContent' => $this->fetch('Layout')]);
+$this->layout('Faculty/Layout', ['mainContent' => $this->fetch('Faculty/Layout')]);
 $this->start('mainContent');
 $this->insert('Errors/Toasts');
 ?>
@@ -13,20 +13,21 @@ $this->insert('Errors/Toasts');
 
     <!-- Subject Applications -->
     <div class="card-glass2">
-        <!-- <div class="select">
-            <label for="filterYear" style="color:white;">Select Year Level : </label>
-            <select id="filterYear">
-                <option value="">All Levels</option>
-                <option value="1st Year">1st Year</option>
-                <option value="2nd Year">2nd Year</option>
-                <option value="3rd Year">3rd Year</option>
-                <option value="4th Year">4th Year</option>
-            </select>
-        </div> -->
+
         <h5>MY STUDENTS </h5>
         <div>
             <hr>
-            <table class="table table-glass2 table-hover text-center" id="table">
+            <div class="select">
+                <label for="filterYear" style="color:white;">Select Year Level : </label>
+                <select id="filterYear">
+                    <option value="">All Levels</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                </select>
+            </div>
+            <table class="table table-glass2 table-hover table2 text-center" id="table3">
                 <thead class="mt-5">
                     <tr>
                         <th class="text-white">Student ID</th>

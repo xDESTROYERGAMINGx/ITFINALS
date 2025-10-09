@@ -1,5 +1,5 @@
 <?php
-$this->layout('Layout', ['mainContent' => $this->fetch('Layout')]);
+$this->layout('Faculty/Layout', ['mainContent' => $this->fetch('Faculty/Layout')]);
 $this->start('mainContent');
 $this->insert('Errors/Toasts');
 ?>
@@ -26,14 +26,16 @@ $this->insert('Errors/Toasts');
                     <th class="text-white">Status</th>
                 </tr>
             </thead>
-            <?php foreach ($pendingSubjects as $subject): ?>
-                <tbody>
-                    <td class="text-white"><?= htmlspecialchars($subject['code'])?></td>
-                    <td class="text-white"><?= htmlspecialchars($subject['Description']) ?></td>
-                    <td class="text-white"><?= htmlspecialchars($subject['Units']) ?></td>
-                    <td>Waiting Admin Confirmation...</td>
-                </tbody>
-            <?php endforeach; ?>
+            <tbody>
+                <?php foreach ($pendingSubjects as $subject): ?>
+                    <tr>
+                        <td class="text-white"><?= htmlspecialchars($subject['code']) ?></td>
+                        <td class="text-white"><?= htmlspecialchars($subject['Description']) ?></td>
+                        <td class="text-white"><?= htmlspecialchars($subject['Units']) ?></td>
+                        <td>Waiting Admin Confirmation...</td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
         </table>
     </div>
     <div class="return mt-4">

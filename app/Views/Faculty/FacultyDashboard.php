@@ -1,5 +1,5 @@
 <?php
-$this->layout('Layout', ['mainContent' => $this->fetch('Layout')]);
+$this->layout('Faculty/Layout', ['mainContent' => $this->fetch('Faculty/Layout')]);
 $this->start('mainContent');
 $this->insert('Errors/Toasts');
 ?>
@@ -41,6 +41,7 @@ $this->insert('Errors/Toasts');
                 </div>
             </div>
         </a>
+    <a href="/test">trial card</a>
     </div>
 
     <div class="card-glass">

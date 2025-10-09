@@ -1,5 +1,5 @@
 <?php
-$this->layout('Layout', ['mainContent' => $this->fetch('Layout')]);
+$this->layout('Faculty/Layout', ['mainContent' => $this->fetch('Faculty/Layout')]);
 $this->start('mainContent');
 $this->insert('Errors/Toasts');
 ?>
@@ -18,7 +18,7 @@ $this->insert('Errors/Toasts');
   <div class="card-glass2 mb-4">
     <h5><i class="bi bi-journal-text"></i> Available Subjects</h5>
     <hr>
-    <table class="table table-hover text-center table2" id="table" >
+    <table class="table table-hover text-center table2" id="table">
       <thead>
         <tr>
           <th class="text-white">Code</th>
@@ -27,15 +27,17 @@ $this->insert('Errors/Toasts');
           <th class="text-white">Action</th>
         </tr>
       </thead>
-      <?php foreach ($subjects as $subject): ?>
-        <tbody>
-          <td class="text-white"><?= htmlspecialchars($subject['code']) ?></td>
-          <td class="text-white"><?= htmlspecialchars($subject['Description']) ?></td>
-          <td class="text-white"><?= htmlspecialchars($subject['Units']) ?></td>
-          <td><a href="/faculty-subjectApplication/<?= $subject['code'] ?>" class="btn btn-warning btn-sm">Apply</a></td>
-        </tbody>
-      <?php endforeach; ?>
+      <tbody>
+        <?php foreach ($subjects as $subject): ?>
+          <tr>
+            <td class="text-white"><?= htmlspecialchars($subject['code']) ?></td>
+            <td class="text-white"><?= htmlspecialchars($subject['Description']) ?></td>
+            <td class="text-white"><?= htmlspecialchars($subject['Units']) ?></td>
+            <td><a href="/faculty-subjectApplication/<?= $subject['code'] ?>" class="btn btn-warning btn-sm">Apply</a></td>
+          </tr>
+        <?php endforeach; ?>
     </table>
+    </tbody>
   </div>
 
   </div>

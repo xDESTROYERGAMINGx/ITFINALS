@@ -1,5 +1,5 @@
 <?php
-$this->layout('Layout', ['mainContent' => $this->fetch('Layout')]);
+$this->layout('Faculty/Layout', ['mainContent' => $this->fetch('Faculty/Layout')]);
 $this->start('mainContent');
 $this->insert('Errors/Toasts');
 ?>

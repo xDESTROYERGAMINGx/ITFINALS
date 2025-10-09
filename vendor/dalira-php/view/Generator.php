@@ -9,7 +9,7 @@ $viewName = ucfirst($argv[1]);
 
 $viewContent = <<<PHP
 <?php 
-\$this->layout('FacultyLayout', ['mainContent' => \$this->fetch('FacultyLayout')]);
+\$this->layout('Faculty/Layout', ['mainContent' => \$this->fetch('Faculty/Layout')]);
 \$this->start('mainContent');
 \$this->insert('Errors/Toasts');
 ?>

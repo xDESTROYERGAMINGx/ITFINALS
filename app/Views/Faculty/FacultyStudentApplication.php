@@ -1,5 +1,5 @@
 <?php
-$this->layout('Layout', ['mainContent' => $this->fetch('Layout')]);
+$this->layout('Faculty/Layout', ['mainContent' => $this->fetch('Faculty/Layout')]);
 $this->start('mainContent');
 $this->insert('Errors/Toasts');
 ?>
@@ -25,16 +25,14 @@ $this->insert('Errors/Toasts');
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($results as $result):?>
+                    <?php foreach ($results as $result): ?>
                         <tr>
-                        <td><?= $result['student_id'] ?></td>
-                        <td><?= $result['first_name'] ?> <?= $result['last_name'] ?></td>
-                        <td><?= $result['code'] ?></td>
-                        <td><?= $result['Description'] ?></td>
-                        <td><a href="/faculty-student/studentApplication/<?= $result['code']?>/<?= $result['student_id']?>/confirm" class="btn btn-warning btn-sm me-2">Confirm</a> <a href="" class="btn btn-danger btn-sm ms-2">Reject</a></td>
-
+                            <td><?= $result['student_id'] ?></td>
+                            <td><?= $result['first_name'] ?> <?= $result['last_name'] ?></td>
+                            <td><?= $result['code'] ?></td>
+                            <td><?= $result['Description'] ?></td>
+                            <td><a href="/faculty-student/studentApplication/<?= $result['code'] ?>/<?= $result['student_id'] ?>/confirm" class="btn btn-warning btn-sm me-2">Confirm</a> <a href="" class="btn btn-danger btn-sm ms-2">Reject</a></td>
                         </tr>
-
                     <?php endforeach; ?>
                 </tbody>
             </table>
