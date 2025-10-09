@@ -101,16 +101,16 @@ $this->insert('Errors/Toasts');
         <div class="modal-body row">
           <div class="mb-3">
             <label for="password">Enter Current Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter new password" name="currentPassword">
+            <input type="password" required="oh" class="form-control" id="password" placeholder="Enter new password" name="currentPassword">
           </div>
           <hr>
           <div class="mb-3">
             <label for="password">New Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter new password" name="newPassword">
+            <input type="password" required="naa daw" class="form-control" id="password" placeholder="Enter new password" name="newPassword">
           </div>
           <div class="mb-3">
             <label for="confirmPassword">Retype New Password</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password" name="confirmPassword">
+            <input type="password" required="oh" class="form-control" id="confirmPassword" placeholder="Confirm new password" name="confirmPassword">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

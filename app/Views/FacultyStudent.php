@@ -26,7 +26,7 @@ $this->insert('Errors/Toasts');
         <h5>MY STUDENTS </h5>
         <div>
             <hr>
-            <table class="table table-glass2 table-hover" id="table">
+            <table class="table table-glass2 table-hover text-center" id="table">
                 <thead class="mt-5">
                     <tr>
                         <th class="text-white">Student ID</th>

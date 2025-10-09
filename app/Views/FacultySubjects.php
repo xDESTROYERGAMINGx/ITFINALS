@@ -16,7 +16,7 @@ $this->insert('Errors/Toasts');
   <div class="card-glass2 mb-4">
     <h5><i class="bi bi-journal-text"></i> My Subjects</h5>
     <hr>
-    <table class="table table-glass2 table-hover table2" id="table">
+    <table class="table table-glass2 table-hover table2" id="subjects">
       <thead>
         <tr>
           <th class="text-white">Code</th>

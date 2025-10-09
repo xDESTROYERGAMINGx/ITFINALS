@@ -22,9 +22,9 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-blur fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="https://www.facebook.com/CKCITProgram/">
                 <img src="/img/logo.png" alt="logo" class="logo">
-                <span class="d-none d-md-block">CKC information Technology</span>
+                <span class="d-none d-md-block">CKC Information Technology</span>
             </a>
 
             <!-- Mobile Sidebar Toggle -->
@@ -55,7 +55,7 @@
                     </ul>
                 </div>
 
-                <a href="/faculty-profile/<?= $_SESSION['faculty_id'] ?>">
+                <a href="/faculty-profile">
                     <img src="https://ui-avatars.com/api/?name=<?= $_SESSION['name'] ?>" class="profile-pic rounded-circle" alt="Prof. Atis"
                         style="width: 40px; height: 40px; object-fit: cover;" />
                 </a>
@@ -81,7 +81,7 @@
 
 
         <a href="/faculty-profile"><i class="bi bi-person-circle"></i> Profile</a>
-        <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        <a href="/"><i class="bi bi-box-arrow-right"></i> Logout</a>
     </nav>
 
     <!-- Offcanvas Sidebar (Mobile) -->
@@ -91,15 +91,15 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
-            <a href="/faculty-dashboard/<?= $_SESSION['faculty_id'] ?>" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Dashboard</a>
-            <a href="/faculty-subjects/<?= $_SESSION['faculty_id'] ?>" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-book"></i> My Subject</a>
-            <a href="/faculty-subjectsAvailable/<?= $_SESSION['faculty_id'] ?>" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-lines-fill"></i>Available Subjects</a>
-            <a href="/faculty-subjectsPendingApplication/<?= $_SESSION['faculty_id'] ?> " class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-clock-history"></i>Pending Subjects</a>
-            <a href="/faculty-students/<?= $_SESSION['faculty_id'] ?>" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-lines-fill"></i> My Students</a>
-            <a href="/faculty-student/studentApplication/<?= $_SESSION['faculty_id'] ?>" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-file-person-fill"></i> Student Applications</a>
-            <a href="/faculty-profile/<?= $_SESSION['faculty_id'] ?>" class="active px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-circle"></i>
+            <a href="/faculty-dashboard" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Dashboard</a>
+            <a href="/faculty-subjects" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-book"></i> My Subject</a>
+            <a href="/faculty-subjectsAvailable" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-lines-fill"></i>Available Subjects</a>
+            <a href="/faculty-subject/PendingApplication" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-clock-history"></i>Pending Subjects</a>
+            <a href="/faculty-students" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-lines-fill"></i> My Students</a>
+            <a href="/faculty-student/studentApplication" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-file-person-fill"></i> Student Applications</a>
+            <a href="/faculty-profile" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-circle"></i>
                 Profile</a>
-            <a href="#" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-box-arrow-right"></i> Logout</a>
+            <a href="/" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-box-arrow-right"></i> Logout</a>
         </div>
     </div>
 

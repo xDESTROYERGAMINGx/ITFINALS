@@ -218,6 +218,6 @@ class FacultyController
         if ($confirmStudent) {
             $_SESSION['success'][] = "Student Application Confirmed!";
         }
-        header("Location:/faculty-student/studentApplication/$studentId");
+        header("Location:/faculty-grading/$code");  
     }
 }
