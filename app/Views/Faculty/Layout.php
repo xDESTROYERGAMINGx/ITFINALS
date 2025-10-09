@@ -121,6 +121,8 @@
 
     <script src="<?= assets("js/Toasts.js") ?>"></script>
 
+    <script src="<?= assets("js/functions.js") ?>"></script>
+
 
 
 

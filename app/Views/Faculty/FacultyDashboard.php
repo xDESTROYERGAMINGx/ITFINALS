@@ -41,7 +41,6 @@ $this->insert('Errors/Toasts');
                 </div>
             </div>
         </a>
-    <a href="/test">trial card</a>
     </div>
 
     <div class="card-glass">

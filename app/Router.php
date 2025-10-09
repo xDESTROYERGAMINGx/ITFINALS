@@ -40,10 +40,11 @@ class Router
             $data['code'],
             $data['studentId']
         ), 'POST');
-        Router::add('/faculty-grading/GradeStudent/{code}/{studentId}/add', fn($data) => (new FacultyController())->add(
+
+        Router::add('/faculty-grading/GradeStudent/{code}/{studentId}/publish', fn($data) => (new FacultyController())->publish(
             $data['code'],
             $data['studentId']
-        ), 'POST');
+        ));
 
         // ========================= FACULTY STUDENT ROUTES ========================= //
         Router::add('/faculty-students', fn() => (new FacultyController())->facultyStudents());

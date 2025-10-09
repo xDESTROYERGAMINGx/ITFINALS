@@ -183,26 +183,20 @@ class FacultyModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    //subject grading model - ADD
-    public function add($studentId, $code, $prelimGrade, $midtermGrade, $finalsGrade)
+    //subject grading model - EDIT GRADE
+    public function edit($code, $studentId, $gradingTerm, $grade)
     {
-        $stmt = $this->db->prepare("INSERT INTO grading (subject_id, student_id, prelim, midterm, finals) VALUES (:subject_id, :student_id, :prelim, :midterm, :finals)");
-        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        $stmt = $this->db->prepare("UPDATE grading SET $gradingTerm = :grade WHERE student_id = :student_id AND subject_id = :subject_id");
+        $stmt->bindParam(':grade', $grade, PDO::PARAM_STR);
         $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
-        $stmt->bindParam(':prelim', $prelimGrade, PDO::PARAM_STR);
-        $stmt->bindParam(':midterm', $midtermGrade, PDO::PARAM_STR);
-        $stmt->bindParam(':finals', $finalsGrade, PDO::PARAM_STR);
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         return $stmt->execute();
     }
 
-    //subject grading model - EDIT
-    public function edit($id, $code, $prelim, $midterm, $finals)
+    public function publish($code, $studentId)
     {
-        $stmt = $this->db->prepare("UPDATE grading SET prelim = :prelim, midterm = :midterm, finals = :finals WHERE student_id = :student_id AND subject_id = :subject_id");
-        $stmt->bindParam(':prelim', $prelim, PDO::PARAM_STR);
-        $stmt->bindParam(':midterm', $midterm, PDO::PARAM_STR);
-        $stmt->bindParam(':finals', $finals, PDO::PARAM_STR);
-        $stmt->bindParam(':student_id', $id, PDO::PARAM_STR);
+        $stmt = $this->db->prepare("UPDATE grading SET status = 1 WHERE student_id = :student_id AND subject_id = :subject_id");
+        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         return $stmt->execute();
     }
@@ -263,13 +257,12 @@ class FacultyModel
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         $confirmStudent = $stmt->execute();
 
-        $stmt = $this->db->prepare("INSERT INTO grading (subject_id, student_id, prelim, midterm, finals) VALUES (:subject_id, :student_id, '-','-','-')");
+        $stmt = $this->db->prepare("INSERT INTO grading (subject_id, student_id) VALUES (:subject_id, :student_id)");
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
         $addToGradingTable = $stmt->execute();
 
         return $confirmStudent && $addToGradingTable;
-
     }
     public function setFacultyStudentApplicationReject($code, $studentId)
     {

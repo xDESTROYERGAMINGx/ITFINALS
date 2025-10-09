@@ -15,10 +15,12 @@ $(document).ready(function () {
         }
     });
     $('#grades').DataTable({
-        language: {
-            searching: false
-        }
+        searching: false,   // hides search box
+        paging: false,      // disables pagination
+        info: false,        // hides "Showing 1 of N entries"
+        lengthChange: false // hides entries per page dropdown
     });
+
 
 
 });

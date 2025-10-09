@@ -99,7 +99,7 @@ class FacultyController
             'pendingStudents' => $pendingApplications
         ]);
     }
-    public function recordedStudentGrade( $code, $studentId)
+    public function recordedStudentGrade($code, $studentId)
     {
         $grade = $this->FacultyModel->getRecordedStudentGrade($studentId, $code) ?: [];
         $student = $this->FacultyModel->getStudentInfo($studentId);
@@ -111,42 +111,31 @@ class FacultyController
         ]);
     }
 
-    // faculty grading - ADD
-    public function add( $code, $studentId)
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $prelim = $_POST['prelim'] ?: '—';
-            $midterm = $_POST['midterm'] ?: '—';
-            $finals = $_POST['finals'] ?: '—';
-
-            $this->FacultyModel->add($studentId, $code, $prelim, $midterm, $finals);
-
-            $_SESSION['success'][] = "Grade Added Successfully!";
-            header("Location:/faculty-grading/GradeStudent/$code/$studentId");
-            exit;
-        } else {
-            header("Location: /");
-            exit;
-        }
-    }
-
     public function edit($code, $studentId)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $prelim = $_POST['prelim'] ?? '';
-            $midterm = $_POST['midterm'] ?? '';
-            $finals = $_POST['finals'] ?? '';
+            $gradingTerm = $_POST['term'];
+            $grade = $_POST['grade'];
 
-            $this->FacultyModel->edit($studentId, $code, $prelim, $midterm, $finals);
-            
+            // Security: validate input
+            $validTerms = ['prelim', 'midterm', 'finals'];
+            if (!in_array($gradingTerm, $validTerms, true)) {
+                die("Invalid grading period");
+            }
+
+            $this->FacultyModel->edit($code, $studentId, $gradingTerm, $grade);
             $_SESSION['success'][] = "Grade Added Successfully!";
             header("Location:/faculty-grading/GradeStudent/$code/$studentId");
             exit;
-        } else {
-            header("Location: /");
-            exit;
         }
     }
+    public function publish($code, $studentId)
+    {
+        $this->FacultyModel->publish($code, $studentId);
+        $_SESSION['success'][] = "Grades Published!";
+        header("Location:/faculty-grading/GradeStudent/$code/$studentId");
+    }
+
 
     // faculty Profile controller
     public function editFacultyProfile()
@@ -218,12 +207,12 @@ class FacultyController
         if ($confirmStudent) {
             $_SESSION['success'][] = "Student Application Confirmed!";
         }
-        header("Location:/faculty-grading/$code");  
+        header("Location:/faculty-grading/$code");
     }
     public function facultyStudentAppplicationReject($code, $studentId)
     {
         $rejectApplication = $this->FacultyModel->setFacultyStudentApplicationReject($code, $studentId);
-        if($rejectApplication){
+        if ($rejectApplication) {
             $_SESSION['danger'][] = "Student Application Rejected!";
         }
         header("Location:/faculty-student/studentApplication");
