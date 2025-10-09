@@ -220,4 +220,12 @@ class FacultyController
         }
         header("Location:/faculty-grading/$code");  
     }
+    public function facultyStudentAppplicationReject($code, $studentId)
+    {
+        $rejectApplication = $this->FacultyModel->setFacultyStudentApplicationReject($code, $studentId);
+        if($rejectApplication){
+            $_SESSION['danger'][] = "Student Application Rejected!";
+        }
+        header("Location:/faculty-student/studentApplication");
+    }
 }

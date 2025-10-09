@@ -9,24 +9,28 @@ $(document).ready(function () {
             search: "Search :  "
         }
     });
-    $('#facultySubject').DataTable({
+    $('#pendingTable').DataTable({
         language: {
             search: "Search :  "
         }
     });
-
+    $('#grades').DataTable({
+        language: {
+            searching: false
+        }
+    });
 
 
 });
-$(document).ready(function() {
-  var table = $('#table3').DataTable({
-    language: { search: "Search :  " }
-  });
+$(document).ready(function () {
+    var table = $('#table3').DataTable({
+        language: { search: "Search :  " }
+    });
 
-  $('#filterYear').on('change', function() {
-    var val = $(this).val();                 // e.g. "1st Year" or ""
-    // simple column search (regex=false, smart=true)
-    table.column(2).search(val, false, true).draw();
-  });
+    $('#filterYear').on('change', function () {
+        var val = $(this).val();                 // e.g. "1st Year" or ""
+        // simple column search (regex=false, smart=true)
+        table.column(2).search(val, false, true).draw();
+    });
 });
 

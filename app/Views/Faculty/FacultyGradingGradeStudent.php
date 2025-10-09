@@ -19,19 +19,19 @@ $this->insert('Errors/Toasts');
         <h5><i class="bi bi-journal-text"></i> STUDENT GRADE</h5>
         <hr>
         <h6><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></h6>
-        <table class="table table-hover text-center table2">
+        <table class="table table-glass2 text-center" id="grades">
             <thead>
                 <tr>
-                    <th class="text-white">Prelim</th>
-                    <th class="text-white">Midterm</th>
-                    <th class="text-white">Finals</th>
+                    <th>Prelim</th>
+                    <th>Midterm</th>
+                    <th>Finals</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="text-white"><?= htmlspecialchars($grade['prelim'] ?? '—') ?></td>
-                    <td class="text-white"><?= htmlspecialchars($grade['midterm'] ?? '—') ?></td>
-                    <td class="text-white"><?= htmlspecialchars($grade['finals'] ?? '—') ?></td>
+                    <td><?= htmlspecialchars($grade['prelim'] ?: '—') ?></td>
+                    <td><?= htmlspecialchars($grade['midterm'] ?: '—') ?></td>
+                    <td><?= htmlspecialchars($grade['finals'] ?: '—') ?></td>
                 </tr>
 
             </tbody>
@@ -42,7 +42,7 @@ $this->insert('Errors/Toasts');
             </button>
         <?php else: ?>
             <button type="button" class="btn btn-sm btn-warning px-3" data-bs-toggle="modal" data-bs-target="#editFormModal">
-                Edit Grade
+                Add Grade
             </button>
         <?php endif; ?>
 
@@ -79,7 +79,7 @@ $this->insert('Errors/Toasts');
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Edit Grade</button>
+                        <button type="submit" class="btn btn-success">Add Grade</button>
                     </div>
                 </form>
             </div>

@@ -261,6 +261,21 @@ class FacultyModel
         $stmt = $this->db->prepare("UPDATE student_subject SET status = 1 WHERE student_id = :student_id AND subject_id = :subject_id");
         $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        $confirmStudent = $stmt->execute();
+
+        $stmt = $this->db->prepare("INSERT INTO grading (subject_id, student_id, prelim, midterm, finals) VALUES (:subject_id, :student_id, '-','-','-')");
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
+        $addToGradingTable = $stmt->execute();
+
+        return $confirmStudent && $addToGradingTable;
+
+    }
+    public function setFacultyStudentApplicationReject($code, $studentId)
+    {
+        $stmt = $this->db->prepare("DELETE FROM student_subject WHERE subject_id = :subject_id AND student_id = :student_id");
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
         return $stmt->execute();
     }
 }

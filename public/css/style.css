@@ -306,18 +306,31 @@ label {
     text-align: center;
     font-weight: bold;
 }
+#grades thead th {
+    background-color: #0d2a4e;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+#pendingTable thead th {
+    background-color: #0d2a4e;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
 
 .table tbody td {
     border: 1px solid rgba(13, 42, 78, 0.4) !important;
 }
 
 /* Table rows */
-#table tbody tr:hover {
+#grades tbody tr:hover {
     background-color: rgba(13, 42, 78, 0.1);
     cursor: pointer;
 }
-#StudentSubject tbody tr:hover {
+#table tbody tr:hover {
     background-color: rgba(13, 42, 78, 0.1);
+    cursor: pointer;
 }
 
 /* Search box */
@@ -396,7 +409,6 @@ label {
     border: 1px solid rgba(13, 42, 78, 0.4) !important;
     background-color: #0d2a4e;
     color: #fff;
-    text-align: center;
     font-weight: bold;
 }
 

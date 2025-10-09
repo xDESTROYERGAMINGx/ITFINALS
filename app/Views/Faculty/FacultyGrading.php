@@ -16,7 +16,7 @@ $this->insert('Errors/Toasts');
     <div class="card-glass2 mb-4">
         <h5><i class="bi bi-journal-text"></i> STUDENTS</h5>
         <hr>
-        <table class="table table-hover text-center table2" id="grading">
+        <table class="table table-glass2 text-center" id="table">
             <thead>
                 <tr>
                     <th class="text-white">Student ID</th>
@@ -25,17 +25,19 @@ $this->insert('Errors/Toasts');
                     <th class="text-white">Action</th>
                 </tr>
             </thead>
-            <?php foreach ($students as $student): ?>
-                <tbody>
-                    <td class="text-white"><?= htmlspecialchars($student['student_id']) ?></td>
-                    <td class="text-white"><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></td>
-                    <td class="text-white"><?= htmlspecialchars($student['year_level']) ?></td>
-                    <td class="text-center"><a href="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>" class=" btn btn-warning btn-sm">
-                            Input Student Grade
-                        </a>
-                    </td>
-                </tbody>
-            <?php endforeach; ?>
+            <tbody>
+                <?php foreach ($students as $student): ?>
+                    <tr>
+                        <td class="text-white"><?= htmlspecialchars($student['student_id']) ?></td>
+                        <td class="text-white"><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></td>
+                        <td class="text-white"><?= htmlspecialchars($student['year_level']) ?></td>
+                        <td class="text-center"><a href="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>" class=" btn btn-warning btn-sm">
+                                Input Student Grade
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
         </table>
     </div>
 
@@ -45,7 +47,7 @@ $this->insert('Errors/Toasts');
                 Student Applications</span> <i class="bi bi-chevron-down text-end"></i></h5>
         <div class="collapse" id="pending">
             <hr>
-            <table class="table table-hover text-center table2" id="student">
+            <table class="table table-glass2 table-hover text-center" id="pendingTable">
                 <thead>
                     <tr>
                         <th class="text-white">Student ID</th>
@@ -59,7 +61,7 @@ $this->insert('Errors/Toasts');
                         <td class="text-white"><?= htmlspecialchars($student['student_id']) ?></td>
                         <td class="text-white"><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></td>
                         <td class="text-white"><?= htmlspecialchars($student['year_level']) ?></td>
-                        <td class="text-center"><a href="/faculty-student/studentApplication/<?= $result['code']?>/<?= $result['student_id']?> class=" btn btn-warning btn-sm">
+                        <td class="text-center"><a href="/faculty-student/studentApplication/<?= $result['code'] ?>/<?= $result['student_id'] ?>" class=" btn btn-warning btn-sm">
                                 Confirm
                             </a>
                         </td>
