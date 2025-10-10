@@ -12,7 +12,7 @@ class Router
     public static function init()
     {
         // ========================= LOGIN ROUTES =========================//
-        Router::add('/', fn() => Router::render('pilotLogin'));
+        Router::add('/', fn() => Router::render('Faculty/pilotLogin'));
         Router::add('/login', fn() => (new FacultyController())->login(), 'POST');
 
         // ========================= FACULTY DASHBORAD ROUTES ========================= //
@@ -53,6 +53,7 @@ class Router
         Router::add('/faculty-student/studentApplication/{code}/{studentId}/confirm', fn($data) => (new FacultyController())->facultyStudentAppplicationConfirm($data['code'], $data['studentId']));
         Router::add('/faculty-student/studentApplication/{code}/{studentId}/reject', fn($data) => (new FacultyController())->facultyStudentAppplicationReject($data['code'], $data['studentId']));
 
+        Router::add('/logout', fn() => (new FacultyController())->logout());
         Router::run();
     }
 

@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION['faculty_id'])) {
+    header("Location: /");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +13,7 @@
     <meta name="description" content="<?= htmlspecialchars($_ENV['APP_DESCRIPTION'] ?? '') ?>">
     <meta name="keywords" content="<?= htmlspecialchars($_ENV['APP_KEYWORDS'] ?? '') ?>">
     <meta name="author" content="<?= htmlspecialchars($_ENV['APP_AUTHOR'] ?? '') ?>">
+
 
     <link rel="shortcut icon" href="<?= htmlspecialchars($_ENV['APP_ICON'] ?? '') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
@@ -64,25 +71,31 @@
     </nav>
 
     <!-- Sidebar (Desktop) -->
-    <nav class="sidebar d-none d-lg-flex flex-column">
-        <a href="/faculty-dashboard"><i class="bi bi-house"></i> Dashboard</a>
-        <a data-bs-toggle="collapse" href="#subjectsCollapse" role="button" aria-expanded="false" aria-controls="subjectsCollapse" class="d-flex justify-content-between align-items-center"><span><i class="bi bi-journals me-1"></i> Subjects </span> <i class="bi bi-chevron-down"></i></a>
-        <div class="collapse ms-3" id="subjectsCollapse">
-            <a href="/faculty-subjects"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
-            <a href="/faculty-subjectsAvailable"><i class="bi bi-book"></i> Available Subjects</a>
-            <a href="/faculty-subject/PendingApplication"><i class="bi bi-clock-history"></i>Pending Subjects</a>
+    <nav class="sidebar d-none d-lg-flex flex-column justify-content-between" style="min-height: 100vh;">
+        <div>
+            <a href="/faculty-dashboard"><i class="bi bi-house"></i> Dashboard</a>
+            <a data-bs-toggle="collapse" href="#subjectsCollapse" role="button" aria-expanded="false" aria-controls="subjectsCollapse" class="d-flex justify-content-between align-items-center"><span><i class="bi bi-journals me-1"></i> Subjects </span> <i class="bi bi-chevron-down"></i></a>
+            <div class="collapse ms-3" id="subjectsCollapse">
+                <a href="/faculty-subjects"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
+                <a href="/faculty-subjectsAvailable"><i class="bi bi-book"></i> Available Subjects</a>
+                <a href="/faculty-subject/PendingApplication"><i class="bi bi-clock-history"></i>Pending Subjects</a>
+            </div>
+            <a data-bs-toggle="collapse" href="#studentsCollapse" role="button" aria-expanded="false" aria-controls="studentsCollapse" class="d-flex justify-content-between align-items-center"><span><i class="bi bi-people-fill me-1"></i> Students </span> <i class="bi bi-chevron-down"></i></a>
+            <div class="collapse ms-3" id="studentsCollapse">
+                <a href="/faculty-students"><i class="bi bi-person-lines-fill"></i> My Students</a>
+                <a href="/faculty-student/studentApplication"><i class="bi bi-file-person-fill"></i> Student Applications</a>
+            </div>
+            <a href="/faculty-profile"><i class="bi bi-person-circle"></i> Profile</a>
+            <a href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
         </div>
-        <a data-bs-toggle="collapse" href="#studentsCollapse" role="button" aria-expanded="false" aria-controls="studentsCollapse" class="d-flex justify-content-between align-items-center"><span><i class="bi bi-people-fill me-1"></i> Students </span> <i class="bi bi-chevron-down"></i></i></a>
-        <div class="collapse ms-3" id="studentsCollapse">
-            <a href="/faculty-students"><i class="bi bi-person-lines-fill"></i> My Students</a>
-            <a href="/faculty-student/studentApplication"><i class="bi bi-file-person-fill"></i> Student Applications</a>
 
+        <div class=" pb-2 mb-5">
+            <a href="<?= htmlspecialchars($_SERVER['HTTP_REFERER'] ?? 'dashboard.php') ?>" class="btn rounded-0 w-100">
+                ← Back
+            </a>
         </div>
-
-
-        <a href="/faculty-profile"><i class="bi bi-person-circle"></i> Profile</a>
-        <a href="/"><i class="bi bi-box-arrow-right"></i> Logout</a>
     </nav>
+
 
     <!-- Offcanvas Sidebar (Mobile) -->
     <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="mobileSidebar">
@@ -122,6 +135,8 @@
     <script src="<?= assets("js/Toasts.js") ?>"></script>
 
     <script src="<?= assets("js/functions.js") ?>"></script>
+
+
 
 
 

@@ -42,10 +42,12 @@ class FacultyController
         $acceptedCount = $this->FacultyModel->countFacultySubjects($_SESSION['faculty_id']);
         $pendingCount = $this->FacultyModel->countFacultySubjectsPendingApplication($_SESSION['faculty_id']);
         $studentPending = $this->FacultyModel->countFacultyStudentPendingApplication($_SESSION['faculty_id']);
+        $subjects = $this->FacultyModel->getFacultySubjects($_SESSION['faculty_id']);
         echo $GLOBALS['templates']->render('Faculty/FacultyDashboard', [
             'acceptedCount' => $acceptedCount,
             'pendingCount' => $pendingCount,
-            'studentPending' => $studentPending
+            'studentPending' => $studentPending,
+            'subjects' => $subjects
         ]);
     }
     public function facultyProfile()
@@ -216,5 +218,19 @@ class FacultyController
             $_SESSION['danger'][] = "Student Application Rejected!";
         }
         header("Location:/faculty-student/studentApplication");
+    }
+
+    public function logout()
+    {
+        session_unset();        // remove all session variables
+        session_destroy();      // destroy the session itself
+
+        // Optional: clear session cookie
+        if (ini_get("session.use_cookies")) {
+            setcookie(session_name(), '', time() - 42000, '/');
+        }
+
+        header("Location:/"); // redirect (optional)
+        exit;
     }
 }

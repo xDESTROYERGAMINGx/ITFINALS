@@ -121,10 +121,12 @@ class FacultyModel
     //faculty subjects model
     public function getFacultySubjects($faculty_id)
     {
-        $stmt = $this->db->prepare("SELECT s.*, fs.faculty_id
+        $stmt = $this->db->prepare("SELECT s.*, COUNT(ss.student_id) AS student_count
         FROM subject s
         JOIN faculty_subject fs ON s.code = fs.subject_id
-        WHERE fs.faculty_id = :faculty_id AND fs.status = 1;
+        LEFT JOIN student_subject ss ON fs.subject_id = ss.subject_id
+        WHERE fs.faculty_id = :faculty_id AND fs.status = 1
+        GROUP BY s.code
         ");
         $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
         $stmt->execute();
@@ -165,10 +167,11 @@ class FacultyModel
     //subject grading model
     public function getFacultyGradingStudents($code)
     {
-        $stmt = $this->db->prepare("SELECT st.*
+        $stmt = $this->db->prepare("SELECT st.*, g.status
         FROM student st
         JOIN student_subject ss ON st.student_id = ss.student_id
-        WHERE ss.subject_id = :subject_code AND status = 1
+        JOIN grading g ON ss.student_id = g.student_id AND ss.subject_id = g.subject_id
+        WHERE ss.subject_id = :subject_code AND ss.status = 1
         ");
         $stmt->bindParam(':subject_code', $code, PDO::PARAM_STR);
         $stmt->execute();

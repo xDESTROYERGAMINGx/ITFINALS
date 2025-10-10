@@ -70,7 +70,7 @@ $this->insert('Errors/Toasts');
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Select Grading Term</label>
-                            <select name="term" class="form-select">
+                            <select name="term" class="form-select" required>
                                 <option value="" disabled selected>-- --</option>
                                 <?php if (empty($grade['prelim'])): ?>
                                     <option value="prelim">Prelim</option>
@@ -85,7 +85,7 @@ $this->insert('Errors/Toasts');
                         </div>
                         <div class="my-3">
                             <label class="form-label">Enter Grade</label>
-                            <input type="text" name="grade" class="form-control" value="<?= htmlspecialchars($grade['finals']) ?? ' ' ?>">
+                            <input type="text" name="grade" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -109,7 +109,7 @@ $this->insert('Errors/Toasts');
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Select Grading Term</label>
-                            <select name="term" class="form-select">
+                            <select name="term" class="form-select" required>
                                 <option value="" disabled selected>-- --</option>
                                 <?php if (!empty($grade['prelim'])): ?>
                                     <option value="prelim">Prelim</option>
@@ -117,14 +117,14 @@ $this->insert('Errors/Toasts');
                                 <?php if (!empty($grade['midterm'])): ?>
                                     <option value="midterm">Midterm</option>
                                 <?php endif; ?>
-                                <?php if (!empty($grade['final'])): ?>
-                                    <option value="final">Final</option>
+                                <?php if (!empty($grade['finals'])): ?>
+                                    <option value="finals">Finals</option>
                                 <?php endif; ?>
                             </select>
                         </div>
                         <div class="my-3">
                             <label class="form-label">Enter Grade</label>
-                            <input type="text" name="grade" class="form-control" value="<?= htmlspecialchars($grade['finals']) ?? ' ' ?>">
+                            <input type="text" name="grade" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">

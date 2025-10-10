@@ -67,7 +67,7 @@ $this->insert('Errors/Toasts');
 
 <!-- Edit faculty Modal -->
 <div class="modal fade text-start" id="updatefacultyModal" tabindex="-1" aria-labelledby="editfacultyLabel"
-  aria-hidden="true">
+  aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content bg-primary-subtle">
       <div class="modal-header">
@@ -99,33 +99,39 @@ $this->insert('Errors/Toasts');
 </div>
 
 <div class="modal fade text-start" id="changePasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+  aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content bg-primary-subtle">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <a href="/faculty-profile" class="btn-close" aria-label="Close"></a>
       </div>
       <form method="POST" action="/faculty-profile/ChangePassword">
         <div class="modal-body row">
           <div class="mb-3">
             <label for="password">Enter Current Password</label>
-            <input type="password" required="oh" class="form-control" id="password" placeholder="Enter new password"
+            <input type="password" required="oh" class="form-control" id="currentPassword" placeholder="Enter current password"
               name="currentPassword">
+            <i class="bi bi-eye-fill position-absolute text-end current"
+              style="top: 17%; right: 40px; transform: translateY(-50%); cursor: pointer;" toggle = "#currentPassword"></i>
           </div>
           <hr>
           <div class="mb-3">
             <label for="password">New Password</label>
-            <input type="password" required="naa daw" class="form-control" id="password"
+            <input type="password" required class="form-control" id="newPassword"
               placeholder="Enter new password" name="newPassword">
+            <i class="bi bi-eye-fill position-absolute text-end new"
+              style="top: 44%; right: 40px; transform: translateY(-50%); cursor: pointer;"></i>
           </div>
           <div class="mb-3">
             <label for="confirmPassword">Retype New Password</label>
             <input type="password" required="oh" class="form-control" id="confirmPassword"
               placeholder="Confirm new password" name="confirmPassword">
+            <i class="bi bi-eye-fill position-absolute text-end conn"
+              style="top: 66%; right: 40px; transform: translateY(-50%); cursor: pointer;"></i>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <a class="btn btn-secondary" href="/faculty-profile">Close</a>
             <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </div>
@@ -133,6 +139,18 @@ $this->insert('Errors/Toasts');
     </div>
   </div>
 </div>
+<script>
+    document.querySelectorAll('.current').forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const input = document.querySelector(this.getAttribute('toggle'));
+            const isPassword = input.getAttribute('type') === 'password';
 
+            input.setAttribute('type', isPassword ? 'text' : 'password');
+            
+            this.classList.toggle('bi-eye-slash-fill');
+            this.classList.toggle('bi-eye-fill');
+        });
+    });
+</script>
 
 <?php $this->stop(); ?>

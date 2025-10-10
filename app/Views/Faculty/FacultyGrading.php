@@ -31,10 +31,20 @@ $this->insert('Errors/Toasts');
                         <td class="text-white"><?= htmlspecialchars($student['student_id']) ?></td>
                         <td class="text-white"><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></td>
                         <td class="text-white"><?= htmlspecialchars($student['year_level']) ?></td>
-                        <td class="text-center"><a href="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>" class=" btn btn-warning btn-sm">
-                                Input Student Grade
-                            </a>
+
+                        <td class="text-center">
+                            <?php if (empty($student)): ?>
+                                <a href="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>" class=" btn btn-warning btn-sm">
+                                    Input Student Grade
+                                </a>
+                            <?php else: ?>
+                                <button class=" btn btn-secondary btn-sm" disabled>
+                                    Grades Published
+                                </button>
+                            <?php endif; ?>
                         </td>
+
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
