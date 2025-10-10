@@ -13,39 +13,47 @@ $this->insert('Errors/Toasts');
   <p class="text-light">Overview of your subjects, applications, and notifications.</p>
 
   <div class=" card-glass2 p-4 mb-5">
-    <div class="d-flex flex-column flex-md-row align-items-center gap-4">
-      <img src="https://ui-avatars.com/api/?name=<?= $_SESSION['name'] ?>" alt="faculty Photo" class="rounded-circle"
-        style="width: 100px; height: 100px; object-fit: cover;">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Profile Image -->
+        <div class="col-md-2 text-center mb-3 mb-md-0">
+          <img src="https://ui-avatars.com/api/?name=<?= $_SESSION['name'] ?>" alt="Faculty Photo"
+            class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+        </div>
 
-      <div class="flex-grow-1">
-        <div class="d-flex justify-content-between align-items-start flex-wrap">
-          <div>
-            <h3 class="fw-bold mb-1"><?= $faculty['first_name'] ?> <?= $faculty['last_name'] ?></h3>
-            <p class="text-light mb-0">Faculty ID: <?= $faculty['id_number'] ?></p>
-            <p class="text-light mb-0">Email: <?= $faculty['email'] ?></p>
-            <p class="text-light mb-0">Phone: <?= $faculty['phone_number'] ?></p>
-          </div>
+        <!-- Info + Buttons -->
+        <div class="col-md-10">
+          <div class="row">
+            <!-- Info -->
+            <div class="col-12 col-lg-8">
+              <h3 class="fw-bold mb-2"><?= $faculty['first_name'] ?> <?= $faculty['last_name'] ?></h3>
+              <p class="text-light mb-1">Faculty ID: <?= $faculty['id_number'] ?></p>
+              <p class="text-light mb-1">Email: <?= $faculty['email'] ?></p>
+              <p class="text-light mb-3">Phone: <?= $faculty['phone_number'] ?></p>
+            </div>
 
-          <div class="text-end">
-            <a href="#" class="btn btn-primary btn-sm mb-2" data-bs-toggle="modal"
-              data-bs-target="#updatefacultyModal">
-              Edit Profile
-            </a>
-            <br>
-            <a type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
-              Change Password
-            </a>
+            <!-- Buttons -->
+            <div
+              class="col-12 col-lg-4 d-flex flex-wrap justify-content-start justify-content-lg-end align-items-start gap-2">
+              <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updatefacultyModal">
+                Edit Profile
+              </a>
+              <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                Change Password
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
 
     <hr class="my-4">
     <h5><i class="bi bi-journals me-1"></i> MY SUBJECTS</h5>
     <div class="row text-center mt-4">
       <?php foreach ($subjects as $subject): ?>
         <div class="col-md-4 mb-3">
-          <a href="/faculty-grading/<?= $subject['code']?>">
+          <a href="/faculty-grading/<?= $subject['code'] ?>">
             <div class="rounded shadow-sm border border-secondary p-4 h-100">
               <h5 class="fw-bold"><?= $subject['code'] ?></h5>
               <h6 class="text-light"><?= $subject['Description'] ?></h6>
@@ -90,7 +98,8 @@ $this->insert('Errors/Toasts');
   </div>
 </div>
 
-<div class="modal fade text-start" id="changePasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-start" id="changePasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content bg-primary-subtle">
       <div class="modal-header">
@@ -101,16 +110,19 @@ $this->insert('Errors/Toasts');
         <div class="modal-body row">
           <div class="mb-3">
             <label for="password">Enter Current Password</label>
-            <input type="password" required="oh" class="form-control" id="password" placeholder="Enter new password" name="currentPassword">
+            <input type="password" required="oh" class="form-control" id="password" placeholder="Enter new password"
+              name="currentPassword">
           </div>
           <hr>
           <div class="mb-3">
             <label for="password">New Password</label>
-            <input type="password" required="naa daw" class="form-control" id="password" placeholder="Enter new password" name="newPassword">
+            <input type="password" required="naa daw" class="form-control" id="password"
+              placeholder="Enter new password" name="newPassword">
           </div>
           <div class="mb-3">
             <label for="confirmPassword">Retype New Password</label>
-            <input type="password" required="oh" class="form-control" id="confirmPassword" placeholder="Confirm new password" name="confirmPassword">
+            <input type="password" required="oh" class="form-control" id="confirmPassword"
+              placeholder="Confirm new password" name="confirmPassword">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

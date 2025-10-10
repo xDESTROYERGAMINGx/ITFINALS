@@ -44,9 +44,25 @@ $this->insert('Errors/Toasts');
     </div>
 
     <div class="card-glass">
-        <h5>Recent Activity</h5>
-        <ul class="list-group list-group-flush activity-list mt-3" id="activityList"></ul>
+        <h5><i class="bi bi-journals me-1"></i> MY SUBJECTS</h5>
+        <hr class="my-4">
+        <div class="row text-center mt-4">
+                <?php $subjects = $subjects ?? []; ?>
+                <?php foreach ($subjects as $subject): ?>
+                <div class="col-md-4 mb-3">
+                    <a href="/faculty-dashboard/<?= $subject['code'] ?>">
+                        <div class="rounded shadow-sm border border-secondary p-4 h-100">
+                            <h5 class="fw-bold"><?= $subject['code'] ?></h5>
+                            <h6 class="text-light"><?= $subject['Description'] ?></h6>
+                            <h5>total of students</h5>
+                            <h5>96</h5>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
+
 </main>
 
 <?php
