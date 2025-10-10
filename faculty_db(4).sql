@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2025 at 03:36 PM
+-- Generation Time: Oct 10, 2025 at 01:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -105,16 +105,17 @@ CREATE TABLE `grading` (
   `student_id` varchar(10) NOT NULL,
   `prelim` varchar(10) DEFAULT NULL,
   `midterm` varchar(10) DEFAULT NULL,
-  `finals` varchar(10) DEFAULT NULL
+  `finals` varchar(10) DEFAULT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `grading`
 --
 
-INSERT INTO `grading` (`id`, `subject_id`, `student_id`, `prelim`, `midterm`, `finals`) VALUES
-(15, 'IT101', 'C23-0139', '90', '92', '—'),
-(16, 'IT303', 'C23-0139', '94', '—', '—');
+INSERT INTO `grading` (`id`, `subject_id`, `student_id`, `prelim`, `midterm`, `finals`, `status`) VALUES
+(18, 'IT101', 'C23-0139', '90', '90', '94', 1),
+(22, 'IT101', 'C23-0149', '94', '90', '90', 1);
 
 -- --------------------------------------------------------
 
@@ -155,9 +156,8 @@ CREATE TABLE `student_subject` (
 --
 
 INSERT INTO `student_subject` (`id`, `student_id`, `subject_id`, `status`) VALUES
-(7, 'C23-0139', 'IT303', 0),
 (8, 'C23-0139', 'IT101', 1),
-(9, 'C23-0149', 'IT303', 1);
+(10, 'C23-0149', 'IT101', 1);
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,6 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `name`, `role`, `username`, `password`) VALUES
 ('C23-0033', 'Joshua Atis', 'faculty', 'jAtis', 'j123'),
-('C23-0126', 'George Aim Acodili', 'student', 'geo', '123'),
 ('C23-0131', 'Elizabeth Rebonza', 'student', '', ''),
 ('C23-0139', 'Cris Martin Tirariray', 'student', '', ''),
 ('C23-0149', 'Hannah Jansien Caday', 'faculty', 'hannah', '123');
@@ -284,13 +283,13 @@ ALTER TABLE `faculty_subject`
 -- AUTO_INCREMENT for table `grading`
 --
 ALTER TABLE `grading`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `student_subject`
 --
 ALTER TABLE `student_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
