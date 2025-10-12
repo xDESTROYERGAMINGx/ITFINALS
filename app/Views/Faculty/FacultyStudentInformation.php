@@ -20,7 +20,7 @@ $this->insert('Errors/Toasts');
                 <div class="d-flex justify-content-between align-items-start flex-wrap">
                     <div>
                         <h3 class="fw-bold mb-1"><?= $student['first_name'] ?> <?= $student['last_name'] ?></h3>
-                        <p class="text-light mb-0">Faculty ID: <?= $student['student_id'] ?></p>
+                        <p class="text-light mb-0">Student ID: <?= $student['id_number'] ?></p>
                         <p class="text-light mb-0">Year Level: <?= $student['year_level'] ?></p>
                     </div>
                 </div>
@@ -34,8 +34,8 @@ $this->insert('Errors/Toasts');
             <?php foreach ($result as $result): ?>
                 <div class="col-md-6 mb-3 text-center">
                     <div class="rounded border border-secondary shadow-sm p-4">
-                        <h5 class="fw-bold"><?= $result['code'] ?></h5>
-                        <h6 class="text-light"><?= $result['Description'] ?></h6>
+                        <h5 class="fw-bold"><?= $result['subject_code'] ?></h5>
+                        <h6 class="text-light"><?= $result['subject_name'] ?></h6>
                         <hr>
                         <table class="table table2">
                             <thead>

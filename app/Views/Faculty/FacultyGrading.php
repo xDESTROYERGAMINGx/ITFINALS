@@ -9,8 +9,8 @@ $this->insert('Errors/Toasts');
 <!-- Main Content -->
 <main class="main-content">
     <div class=" mb-4">
-        <h1 class="h2"><?= htmlspecialchars($subject['code']) ?></h1>
-        <p class="text-light"><?= htmlspecialchars($subject['Description']) ?></p>
+        <h1 class="h2"><?= htmlspecialchars($subject['subject_code']) ?></h1>
+        <p class="text-light"><?= htmlspecialchars($subject['subject_name']) ?></p>
     </div>
     <!-- My Subjects (List Style) -->
     <div class="card-glass2 mb-4">
@@ -33,8 +33,8 @@ $this->insert('Errors/Toasts');
                         <td class="text-white"><?= htmlspecialchars($student['year_level']) ?></td>
 
                         <td class="text-center">
-                            <?php if (empty($student)): ?>
-                                <a href="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>" class=" btn btn-warning btn-sm">
+                            <?php if (empty($student['status'])): ?>
+                                <a href="/faculty-grading/GradeStudent/<?= $subject['subject_id'] ?>/<?= $student['student_id'] ?>" class=" btn btn-warning btn-sm">
                                     Input Student Grade
                                 </a>
                             <?php else: ?>

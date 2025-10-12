@@ -38,7 +38,7 @@ $this->insert('Errors/Toasts');
                 <tbody>
                     <?php foreach ($result as $result): ?>
                         <tr>
-                            <td class="text-white"><a href="/faculty-student/studentInformation/<?= $result['student_id'] ?>" class="d-block"><?= $result['student_id'] ?> </a></td>
+                            <td class="text-white"><a href="/faculty-student/studentInformation/<?= $result['student_id'] ?>" class="d-block"><?= $result['id_number'] ?> </a></td>
                             <td class="text-white"><a href="/faculty-student/studentInformation/<?= $result['student_id'] ?>" class="d-block"><?= $result['student_lastname'] ?>, <?= $result['student_firstname'] ?> </a> </td>
                             <td class="text-white"><a href="/faculty-student/studentInformation/<?= $result['student_id'] ?>" class="d-block"><?= $result['year_level'] ?> </a></td>
                         </tr>

@@ -10,8 +10,8 @@ $this->insert('Errors/Toasts');
 <!-- Main Content -->
 <main class="main-content">
     <div class="mb-4">
-        <h1 class="h2"><?= htmlspecialchars($subject['code']) ?></h1>
-        <p class="text-light"><?= htmlspecialchars($subject['Description']) ?></p>
+        <h1 class="h2"><?= htmlspecialchars($subject['subject_code']) ?></h1>
+        <p class="text-light"><?= htmlspecialchars($subject['subject_name']) ?></p>
     </div>
 
     <!-- My Subjects (List Style) -->
@@ -53,20 +53,17 @@ $this->insert('Errors/Toasts');
 
 
     </div>
-    <div class="return">
-        <a href="/faculty-grading/<?= $subject['code'] ?>"><i class="bi bi-backspace-fill"></i> Return to Previous</a>
-    </div>
 
 
-    <!-- edit form modal -->
-    <div class="modal fade" id="addFormModal" tabindex="-1" aria-labelledby="addFormLabel" aria-hidden="true">
+    <!-- add grade form modal -->
+    <div class="modal fade" id="addFormModal" tabindex="-1" aria-labelledby="addFormLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content bg-success-subtle">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="addFormLabel">Add Student Grade</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>/edit">
+                <form method="POST" action="/faculty-grading/GradeStudent/<?= $subject['subject_id'] ?>/<?= $student['student_id'] ?>/edit">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Select Grading Term</label>
@@ -98,16 +95,17 @@ $this->insert('Errors/Toasts');
     </div>
 
 
-    <div class="modal fade" id="editFormModal" tabindex="-1" aria-labelledby="editFormLabel" aria-hidden="true">
+    <div class="modal fade" id="editFormModal" tabindex="-1" aria-labelledby="editFormLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content bg-success-subtle">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="editFormLabel">Add Student Grade</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>/edit">
+                <form method="POST" action="/faculty-grading/GradeStudent/<?= $subject['subject_id'] ?>/<?= $student['student_id'] ?>/edit">
                     <div class="modal-body">
                         <div class="mb-3">
+                            <input type="hidden" name="edit" id="" value="edit">
                             <label class="form-label">Select Grading Term</label>
                             <select name="term" class="form-select" required>
                                 <option value="" disabled selected>-- --</option>

@@ -23,6 +23,8 @@ $this->insert('Errors/Toasts');
         <tr>
           <th class="text-white">Code</th>
           <th class="text-white">Title</th>
+          <th class="text-white">Year Level</th>
+          <th class="text-white">Semester</th>
           <th class="text-white">Units</th>
           <th class="text-white">Action</th>
         </tr>
@@ -30,10 +32,12 @@ $this->insert('Errors/Toasts');
       <tbody>
         <?php foreach ($subjects as $subject): ?>
           <tr>
-            <td class="text-white"><?= htmlspecialchars($subject['code']) ?></td>
-            <td class="text-white"><?= htmlspecialchars($subject['Description']) ?></td>
-            <td class="text-white"><?= htmlspecialchars($subject['Units']) ?></td>
-            <td><a href="/faculty-subjectApplication/<?= $subject['code'] ?>" class="btn btn-warning btn-sm">Apply</a></td>
+            <td class="text-white"><?= htmlspecialchars($subject['subject_code']) ?></td>
+            <td class="text-white"><?= htmlspecialchars($subject['subject_name']) ?></td> 
+            <td class="text-white"><?= htmlspecialchars($subject['year_level']) ?></td>
+            <td class="text-white"><?= htmlspecialchars($subject['semester']) ?></td>
+            <td class="text-white"><?= htmlspecialchars($subject['credit_units']) ?></td>
+            <td><a href="/faculty-subjectApplication/<?= htmlspecialchars($subject['subject_id'] )?>" class="btn btn-warning btn-sm">Apply</a></td>
           </tr>
         <?php endforeach; ?>
     </table>

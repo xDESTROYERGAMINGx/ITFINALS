@@ -3,7 +3,10 @@
 namespace app;
 
 use app\Controllers\FacultyController;
-use app\Models\FacultyModel;
+use app\Controllers\AddFacultyController;
+use app\Controllers\LoginController;
+use app\Controllers\AddSubjectController;
+use app\Controllers\SubjectVerificationController;
 
 class Router
 {
@@ -12,7 +15,8 @@ class Router
     public static function init()
     {
         // ========================= LOGIN ROUTES =========================//
-        Router::add('/', fn() => Router::render('Faculty/pilotLogin'));
+        Router::add('/', fn() => Router::render('Admin/LoginView'));
+        Router::add('/faculty', fn() => Router::render('Faculty/PilotLogin'));
         Router::add('/login', fn() => (new FacultyController())->login(), 'POST');
 
         // ========================= FACULTY DASHBORAD ROUTES ========================= //
@@ -54,6 +58,61 @@ class Router
         Router::add('/faculty-student/studentApplication/{code}/{studentId}/reject', fn($data) => (new FacultyController())->facultyStudentAppplicationReject($data['code'], $data['studentId']));
 
         Router::add('/logout', fn() => (new FacultyController())->logout());
+
+
+
+        // admin
+
+
+        // Router::add('/', fn() => (new LoginController())->showLogin());
+        Router::add('/LoginView', fn() => (new LoginController())->authenticate(), 'POST'); // login form submit
+
+        // Add Faculty routes
+        Router::add('/AddFacultyView', fn() => Router::render('Admin/AddFacultyView')); // show add faculty page
+        Router::add('/AddFacultySubmit', fn() => (new AddFacultyController())->addFaculty(), 'POST'); // handle POST submit
+
+
+
+        Router::add('/DashboardView', fn() => Router::render('Admin/DashboardView')); // show dashboard page
+        Router::add('/DashboardView', fn() => (new AddFacultyController())->getcount()); // show dashboard page
+
+
+
+        // Router::add('/AddSubjectView', fn() => (new AddSubjectController())->showSubjectForm());
+        Router::add('/AddSubjectView', fn() => Router::render('Admin/AddSubjectView'));
+        Router::add('/AddSubjectSubmit', fn() => (new AddSubjectController())->addSubject(), 'POST');
+        Router::add('/ViewFaculty', fn() => (new AddFacultyController())->readfaculty());
+
+
+        Router::add('/SubjectVerificationView', fn() => (new SubjectVerificationController())->showPage());
+        Router::add('/subject-verification/action', fn() => (new SubjectVerificationController())->handleAction(), 'POST');
+        Router::add('/subject-verification/submit', fn() => (new SubjectVerificationController())->submitForVerification(), 'POST');
+
+
+
+
+
+        // Show Subject form
+        Router::add('/ViewSubjects', fn() => (new AddSubjectController())->readSubject());
+        Router::add('/ViewSubjects/UpdateSubjectView/{id}', fn($data) => (new AddSubjectController())->showSubjectForm($data['id']), 'GET');
+        Router::add('/ViewSubjects/UpdateSubjectView/{id}/Update', fn($data) => (new AddSubjectController())->updateSubject($data['id']), 'POST');
+
+
+
+
+        // Show update form (GET)
+        // Show the update form (GET)
+        Router::add(
+            '/ViewFaculty/UpdateFaculty/{faculty}',
+            fn($data) => (new AddFacultyController())->showUpdateForm($data['faculty']),
+            'GET'
+        );
+        // Handle the form submit (POST)
+        Router::add(
+            '/ViewFaculty/UpdateFaculty/{faculty}/Update',
+            fn($data) => (new AddFacultyController())->updateFaculty($data['faculty']),
+            'POST'
+        );
         Router::run();
     }
 

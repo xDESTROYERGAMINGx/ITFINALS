@@ -29,9 +29,9 @@ $this->insert('Errors/Toasts');
                         <tr>
                             <td><?= $result['student_id'] ?></td>
                             <td><?= $result['first_name'] ?> <?= $result['last_name'] ?></td>
-                            <td><?= $result['code'] ?></td>
-                            <td><?= $result['Description'] ?></td>
-                            <td><a href="/faculty-student/studentApplication/<?= $result['code'] ?>/<?= $result['student_id'] ?>/confirm" class="btn btn-warning btn-sm me-2">Confirm</a> <a href="/faculty-student/studentApplication/<?= $result['code']?>/<?= $result['student_id']?>/reject" class="btn btn-danger btn-sm ms-2">Reject</a></td>
+                            <td><?= $result['subject_code'] ?></td>
+                            <td><?= $result['subject_name'] ?></td>
+                            <td><a href="/faculty-student/studentApplication/<?= $result['subject_id'] ?>/<?= $result['student_id'] ?>/confirm" class="btn btn-warning btn-sm me-2">Confirm</a> <a href="/faculty-student/studentApplication/<?= $result['subject_id']?>/<?= $result['student_id']?>/reject" class="btn btn-danger btn-sm ms-2">Reject</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

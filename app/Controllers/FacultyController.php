@@ -26,7 +26,7 @@ class FacultyController
             $faculty = $this->FacultyModel->getFacultyProfile($facultyId);
 
             if ($faculty && password_verify($password, $faculty['password'])) {
-                $_SESSION['faculty_id'] = $faculty['id_number'];
+                $_SESSION['faculty_id'] = $faculty['faculty_id'];
                 $_SESSION['name'] = $faculty['first_name'] . " " . $faculty['last_name'];
 
                 header("Location:/faculty-dashboard");
@@ -118,6 +118,7 @@ class FacultyController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $gradingTerm = $_POST['term'];
             $grade = $_POST['grade'];
+            $edit = $_POST['edit'] ?? ' ';
 
             // Security: validate input
             $validTerms = ['prelim', 'midterm', 'finals'];
@@ -126,7 +127,13 @@ class FacultyController
             }
 
             $this->FacultyModel->edit($code, $studentId, $gradingTerm, $grade);
-            $_SESSION['success'][] = "Grade Added Successfully!";
+            if (!empty($edit)) {
+
+                $_SESSION['success'][] = "Grade Edited Successfully!";
+            } else {
+
+                $_SESSION['success'][] = "Grade Added Successfully!";
+            }
             header("Location:/faculty-grading/GradeStudent/$code/$studentId");
             exit;
         }

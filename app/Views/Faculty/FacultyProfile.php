@@ -53,10 +53,10 @@ $this->insert('Errors/Toasts');
     <div class="row text-center mt-4">
       <?php foreach ($subjects as $subject): ?>
         <div class="col-md-4 mb-3">
-          <a href="/faculty-grading/<?= $subject['code'] ?>">
+          <a href="/faculty-grading/<?= $subject['subject_id'] ?>">
             <div class="rounded shadow-sm border border-secondary p-4 h-100">
-              <h5 class="fw-bold"><?= $subject['code'] ?></h5>
-              <h6 class="text-light"><?= $subject['Description'] ?></h6>
+              <h5 class="fw-bold"><?= $subject['subject_code'] ?></h5>
+              <h6 class="text-light"><?= $subject['subject_name'] ?></h6>
             </div>
           </a>
         </div>
