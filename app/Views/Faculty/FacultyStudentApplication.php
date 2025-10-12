@@ -13,6 +13,8 @@ $this->insert('Errors/Toasts');
 
     <!-- Subject Applications -->
     <div class="card-glass2">
+        <h1 class="h4">Pending Student Application</h1>
+        <hr>
         <div class="table-responsive">
             <table class="table table-glass2 table-hover text-center" id="table">
                 <thead class="mt-5">

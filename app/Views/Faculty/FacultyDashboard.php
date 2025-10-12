@@ -18,7 +18,7 @@ $this->insert('Errors/Toasts');
                 <i class="bi bi-journal-text metric-icon"></i>
                 <div>
                     <div class="card-title">My Subjects</div>
-                    <div class="card-value"><?= $acceptedCount ?: '—' ?></div>
+                    <div class="card-value"><?= $acceptedCount ?: '0' ?></div>
                 </div>
             </div>
         </a>
@@ -27,7 +27,7 @@ $this->insert('Errors/Toasts');
                 <i class="bi bi-clock-history metric-icon"></i>
                 <div>
                     <div class="card-title">Pending Subject Applications</div>
-                    <div class="card-value"><?= $pendingCount ?: '—' ?></div>
+                    <div class="card-value"><?= $pendingCount ?: '0' ?></div>
                 </div>
             </div>
         </a>
@@ -37,7 +37,7 @@ $this->insert('Errors/Toasts');
                 <i class="bi bi-bell metric-icon"></i>
                 <div>
                     <div class="card-title">Pending Student Applications</div>
-                    <div class="card-value"><?= $studentPending ?: '—' ?></div>
+                    <div class="card-value"><?= $studentPending ?: '0' ?></div>
                 </div>
             </div>
         </a>
@@ -54,7 +54,7 @@ $this->insert('Errors/Toasts');
                             <h5 class="fw-bold"><?= $subject['subject_code'] ?></h5>
                             <h6 class="text-light"><?= $subject['subject_name'] ?></h6>
                             <hr>
-                            <h5><?= $subject['student_count'] ?: '—' ?></h5>
+                            <h5><?= $subject['student_count'] ?: '0' ?> Students</h5>
                         </a>
                     </div>
 
