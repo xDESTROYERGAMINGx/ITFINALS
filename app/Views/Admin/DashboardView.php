@@ -40,10 +40,10 @@ $this->insert('Errors/Toasts');
         <!-- Card 1 - Instructors -->
         <div class="col-md-5 col-lg-4">
           <a href="/ViewFaculty" class="text-decoration-none">
-            <div class="card-glass hover-card">
+            <div class="card-glass hover-card text-center ">
               <i class="bi bi-person-badge metric-icon"></i>
               <div>
-              <p>Total Faculty: <?= $totalFaculty ?></p>
+              <p>Total Faculty: <?= $facultyCount ?></p>
                 <div class="card-value"></div>
               </div>
             </div>
@@ -56,7 +56,7 @@ $this->insert('Errors/Toasts');
             <div class="card-glass hover-card">
               <i class="bi bi-journal-text metric-icon"></i>
               <div>
-                <p>Total Subjects: <?= $totalSubjects ?></p>
+                <p>Total Subjects: <?= $subjectsCount ?></p>
                 <div class="card-value"></div>
               </div>
             </div>

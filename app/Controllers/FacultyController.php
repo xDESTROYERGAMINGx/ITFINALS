@@ -23,7 +23,7 @@ class FacultyController
             $facultyId = $_POST['facultyId'] ?? '';
             $password = $_POST['password'] ?? '';
 
-            $faculty = $this->FacultyModel->getFacultyProfile($facultyId);
+            $faculty = $this->FacultyModel->getFacultyLogin($facultyId);
 
             if ($faculty && password_verify($password, $faculty['password'])) {
                 $_SESSION['faculty_id'] = $faculty['faculty_id'];
@@ -104,7 +104,7 @@ class FacultyController
     public function recordedStudentGrade($code, $studentId)
     {
         $grade = $this->FacultyModel->getRecordedStudentGrade($studentId, $code) ?: [];
-        $student = $this->FacultyModel->getStudentInfo($studentId);
+        $student = $this->FacultyModel->getFacultyStudentInformation($studentId);
         $subject = $this->FacultyModel->getSubjectInfo($code);
         echo $GLOBALS['templates']->render('Faculty/FacultyGradingGradeStudent', [
             'grade' => $grade,
@@ -128,10 +128,8 @@ class FacultyController
 
             $this->FacultyModel->edit($code, $studentId, $gradingTerm, $grade);
             if (!empty($edit)) {
-
                 $_SESSION['success'][] = "Grade Edited Successfully!";
             } else {
-
                 $_SESSION['success'][] = "Grade Added Successfully!";
             }
             header("Location:/faculty-grading/GradeStudent/$code/$studentId");

@@ -14,7 +14,57 @@ class FacultyModel
         $this->db = $db->getConnection();
     }
 
-    //Faculty Information Model
+    // for pilot login
+    public function getFacultyLogin($facultyId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM faculty WHERE id_number = :id_number");
+        $stmt->bindParam(':id_number', $facultyId, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // ======================================================== DASHBOARD MODEL ================================================== //
+
+    // get total number of faculty subjects
+    public function countFacultySubjects($faculty_id)
+    {
+        $stmt = $this->db->prepare("
+        SELECT COUNT(*) AS subject_count
+        FROM subject_allocations
+        WHERE faculty_id = :faculty_id AND status = 'Approved'
+    ");
+        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)['subject_count'];
+    }
+
+    // get total number of faculty pending subject application 
+    public function countFacultySubjectsPendingApplication($faculty_id)
+    {
+        $stmt = $this->db->prepare("
+        SELECT COUNT(*) AS subject_count
+        FROM subject_allocations
+        WHERE faculty_id = :faculty_id AND status = 'Pending'
+    ");
+        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)['subject_count'];
+    }
+
+    // get total number of pending student application
+    public function countFacultyStudentPendingApplication($faculty_id)
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(*) AS subject_count
+        FROM student_subject ss
+        JOIN subject_allocations sa ON ss.subject_id = sa.subject_id
+        WHERE sa.faculty_id = :faculty_id AND ss.status = 0
+    ");
+        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)['subject_count'];
+    }
+
+    // ======================================================== FACULTY MODEL ================================================== //
     public function getFacultyProfile($facultyId)
     {
         $stmt = $this->db->prepare("SELECT * FROM faculty WHERE faculty_id = :id_number");
@@ -35,167 +85,13 @@ class FacultyModel
     {
         $stmt = $this->db->prepare("UPDATE faculty SET password = :password WHERE faculty_id =:faculty_id");
         $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-        $stmt->bindParam(':id_number', $facultyId, PDO::PARAM_STR);
-        return $stmt->execute();
-    }
-
-    //Student Information Model
-    public function getStudentInfo($studentId)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM student WHERE student_id = :student_id");
-        $stmt->bindValue(':student_id', $studentId, PDO::PARAM_STR);
-        $stmt->execute();
-
-        return $stmt->fetch(PDO::FETCH_ASSOC); // single row
-    }
-
-    //Subject Information Model
-    public function getSubjectInfo($code)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM subject WHERE subject_id = :code");
-        $stmt->bindValue(':code', $code, PDO::PARAM_STR);
-        $stmt->execute();
-
-        return $stmt->fetch(PDO::FETCH_ASSOC); // single row
-    }
-
-    //dashboard models
-    public function countFacultySubjects($faculty_id)
-    {
-        $stmt = $this->db->prepare("
-        SELECT COUNT(*) AS subject_count
-        FROM subject_allocations
-        WHERE faculty_id = :faculty_id AND status = 'Approved'
-    ");
-        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['subject_count'];
-    }
-    public function countFacultySubjectsPendingApplication($faculty_id)
-    {
-        $stmt = $this->db->prepare("
-        SELECT COUNT(*) AS subject_count
-        FROM subject_allocations
-        WHERE faculty_id = :faculty_id AND status = 'Pending'
-    ");
-        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['subject_count'];
-    }
-    public function countFacultyStudentPendingApplication($faculty_id)
-    {
-        $stmt = $this->db->prepare("SELECT COUNT(*) AS subject_count
-        FROM student_subject ss
-        JOIN subject_allocations sa ON ss.subject_id = sa.subject_id
-        WHERE sa.faculty_id = :faculty_id AND ss.status = 0
-    ");
-        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['subject_count'];
-    }
-
-
-    //available subjects model
-    public function getAvailableSubjects()
-    {
-        $stmt = $this->db->prepare("
-        SELECT *
-        FROM subject s
-        WHERE s.subject_id NOT IN (
-            SELECT sa.subject_id
-            FROM subject_allocations sa 
-        )
-    ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    //faculty subjects model
-    public function getFacultySubjects($faculty_id)
-    {
-        $stmt = $this->db->prepare("SELECT s.*, COUNT(ss.student_id) AS student_count
-        FROM subject s
-        JOIN subject_allocations sa ON s.subject_id = sa.subject_id
-        LEFT JOIN student_subject ss ON sa.subject_id = ss.subject_id
-        WHERE sa.faculty_id = :faculty_id AND sa.status = 'Approved'
-        GROUP BY s.subject_id
-
-        ");
-        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function postFacultySubjectApplication($facultyId, $code)
-    {
-        $stmt = $this->db->prepare("INSERT INTO subject_allocations(faculty_id, subject_id, status) VALUES(:faculty_id, :subject_id, 'Pending')");
         $stmt->bindParam(':faculty_id', $facultyId, PDO::PARAM_STR);
-        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
-        return $stmt->execute();
-    }
-    public function getFacultySubjectsPendingApplication($faculty_id)
-    {
-        $stmt = $this->db->prepare("SELECT s.*, sa.faculty_id
-        FROM subject s
-        JOIN subject_allocations sa ON s.subject_id = sa.subject_id
-        WHERE sa.faculty_id = :faculty_id AND sa.status = 'Pending';
-        ");
-        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getFacultySubjectsPendingApplicationById($code)
-    {
-        $stmt = $this->db->prepare("SELECT st.*
-        FROM student_subject ss 
-        JOIN student st ON ss.student_id = st.student_id
-        WHERE ss.subject_id = :subject_id AND status = 0
-        ");
-        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    //subject grading model
-    public function getFacultyGradingStudents($code)
-    {
-        $stmt = $this->db->prepare("SELECT st.*, g.status
-        FROM student st
-        JOIN student_subject ss ON st.student_id = ss.student_id
-        JOIN grading g ON ss.student_id = g.student_id AND ss.subject_id = g.subject_id
-        WHERE ss.subject_id = :subject_code AND ss.status = 1
-        ");
-        $stmt->bindParam(':subject_code', $code, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getRecordedStudentGrade($student_id, $subject_id)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM Grading WHERE student_id = :student_id AND subject_id = :subject_id");
-        $stmt->bindParam(':student_id', $student_id, PDO::PARAM_STR);
-        $stmt->bindParam(':subject_id', $subject_id, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    //subject grading model - EDIT GRADE
-    public function edit($code, $studentId, $gradingTerm, $grade)
-    {
-        $stmt = $this->db->prepare("UPDATE grading SET $gradingTerm = :grade WHERE student_id = :student_id AND subject_id = :subject_id");
-        $stmt->bindParam(':grade', $grade, PDO::PARAM_STR);
-        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
-        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         return $stmt->execute();
     }
 
-    public function publish($code, $studentId)
-    {
-        $stmt = $this->db->prepare("UPDATE grading SET status = 1 WHERE student_id = :student_id AND subject_id = :subject_id");
-        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
-        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
-        return $stmt->execute();
-    }
+    // ======================================================== STUDENT MODEL ================================================== //
 
-    // ========================= FACULTY STUDENTS MODEL ========================= //
+    // get students by faculty id
     public function getFacultyStudents($facultyId)
     {
         $stmt = $this->db->prepare("SELECT DISTINCT
@@ -214,6 +110,8 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // get student information
     public function getFacultyStudentInformation($studentId)
     {
         $stmt = $this->db->prepare("SELECT * FROM student WHERE student_id = :student_id");
@@ -221,6 +119,8 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    // get student information - subjects with grades
     public function getFacultyStudentInformationSubject($studentId)
     {
         $stmt = $this->db->prepare("SELECT s.*, g.*
@@ -233,6 +133,8 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // get students subject application
     public function getFacultyStudentApplication($facultyId)
     {
         $stmt = $this->db->prepare("SELECT st.*, s.* 
@@ -245,6 +147,8 @@ class FacultyModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // set student subject application to 1
     public function setFacultyStudentApplicationConfirm($code, $studentId)
     {
         $stmt = $this->db->prepare("UPDATE student_subject SET status = 1 WHERE student_id = :student_id AND subject_id = :subject_id");
@@ -259,11 +163,138 @@ class FacultyModel
 
         return $confirmStudent && $addToGradingTable;
     }
+
+    // remove student application from table
     public function setFacultyStudentApplicationReject($code, $studentId)
     {
         $stmt = $this->db->prepare("DELETE FROM student_subject WHERE subject_id = :subject_id AND student_id = :student_id");
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+
+    // ======================================================== SUBJECT MODEL ================================================== //
+
+    //get subject information by faculty ID
+    public function getSubjectInfo($code)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM subject WHERE subject_id = :code");
+        $stmt->bindValue(':code', $code, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC); // single row
+    }
+
+    //get available subjects
+    public function getAvailableSubjects()
+    {
+        $stmt = $this->db->prepare("
+        SELECT *
+        FROM subject s
+        WHERE s.subject_id NOT IN (
+            SELECT sa.subject_id
+            FROM subject_allocations sa 
+        )
+    ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // get faculty subjects
+    public function getFacultySubjects($faculty_id)
+    {
+        $stmt = $this->db->prepare("SELECT s.*, COUNT(ss.student_id) AS student_count
+        FROM subject s
+        JOIN subject_allocations sa ON s.subject_id = sa.subject_id
+        LEFT JOIN student_subject ss ON sa.subject_id = ss.subject_id
+        WHERE sa.faculty_id = :faculty_id AND sa.status = 'Approved'
+        GROUP BY s.subject_id
+
+        ");
+        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // ======================================================== FACULTY SUBJECT APPLICATION MODEL ================================================== //
+
+    // faculty subject application
+    public function postFacultySubjectApplication($facultyId, $code)
+    {
+        $stmt = $this->db->prepare("INSERT INTO subject_allocations(faculty_id, subject_id, status) VALUES(:faculty_id, :subject_id, 'Pending')");
+        $stmt->bindParam(':faculty_id', $facultyId, PDO::PARAM_STR);
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+
+    // get pending (not approved) faculty subject application
+    public function getFacultySubjectsPendingApplication($faculty_id)
+    {
+        $stmt = $this->db->prepare("SELECT s.*, sa.faculty_id
+        FROM subject s
+        JOIN subject_allocations sa ON s.subject_id = sa.subject_id
+        WHERE sa.faculty_id = :faculty_id AND sa.status = 'Pending';
+        ");
+        $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // get pending faculty subject application by subject code
+    public function getFacultySubjectsPendingApplicationById($code)
+    {
+        $stmt = $this->db->prepare("SELECT st.*
+        FROM student_subject ss 
+        JOIN student st ON ss.student_id = st.student_id
+        WHERE ss.subject_id = :subject_id AND status = 0
+        ");
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // ======================================================== STUDENT GRADING MODEL ================================================== //
+
+    //get to grade students by subject code 
+    public function getFacultyGradingStudents($code)
+    {
+        $stmt = $this->db->prepare("SELECT st.*, g.status
+        FROM student st
+        JOIN student_subject ss ON st.student_id = ss.student_id
+        JOIN grading g ON ss.student_id = g.student_id AND ss.subject_id = g.subject_id
+        WHERE ss.subject_id = :subject_code AND ss.status = 1
+        ");
+        $stmt->bindParam(':subject_code', $code, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // get recorded student grade 
+    public function getRecordedStudentGrade($student_id, $subject_id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM Grading WHERE student_id = :student_id AND subject_id = :subject_id");
+        $stmt->bindParam(':student_id', $student_id, PDO::PARAM_STR);
+        $stmt->bindParam(':subject_id', $subject_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // subject grading model - EDIT/ADD GRADE
+    public function edit($code, $studentId, $gradingTerm, $grade)
+    {
+        $stmt = $this->db->prepare("UPDATE grading SET $gradingTerm = :grade WHERE student_id = :student_id AND subject_id = :subject_id");
+        $stmt->bindParam(':grade', $grade, PDO::PARAM_STR);
+        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+
+    // publish student grade - set status to 1
+    public function publish($code, $studentId)
+    {
+        $stmt = $this->db->prepare("UPDATE grading SET status = 1 WHERE student_id = :student_id AND subject_id = :subject_id");
+        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         return $stmt->execute();
     }
 }

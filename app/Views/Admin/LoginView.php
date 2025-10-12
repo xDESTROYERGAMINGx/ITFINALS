@@ -12,7 +12,7 @@
     <h2>Admin Login</h2>
     
     <!-- The form should point to the controller route -->
-    <form action="/DashboardView" method="POST">
+    <form action="/login" method="POST">
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br><br>
 
