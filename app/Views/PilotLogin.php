@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>CKC Information Technology</title>
   <link rel="icon" href="/img/logo.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Bootstrap CSS & Icons -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Bootstrap CSS & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-
   <style>
     /* ========================= GLOBAL STYLES ========================= */
     body {
@@ -78,6 +76,7 @@
         height: 32px;
         width: 32px;
       }
+
       .brand-text {
         font-size: 0.9rem;
         display: inline-block;
@@ -258,18 +257,10 @@
     }
   </style>
 </head>
-<body>
 
-  <!-- ========================= NAVBAR ========================= -->
+<body> <!-- ========================= NAVBAR ========================= -->
   <nav class="navbar navbar-expand-lg navbar-blur fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="/img/logo.png" alt="CKC IT Logo">
-        <span class="brand-text">CKC Information Technology</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon text-light"><i class="bi bi-list"></i></span>
-      </button>
+    <div class="container"> <a class="navbar-brand" href="#"> <img src="/img/logo.png" alt="CKC IT Logo"> <span class="brand-text">CKC Information Technology</span> </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"> <span class="navbar-toggler-icon text-light"><i class="bi bi-list"></i></span> </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
@@ -281,35 +272,27 @@
         </ul>
       </div>
     </div>
-  </nav>
-
-  <!-- ========================= HERO SECTION ========================= -->
+  </nav> <!-- ========================= HERO SECTION ========================= -->
   <section id="home" class="d-flex align-items-center">
     <div class="container">
       <div class="hero-text">
         <h1>Empowering Future Innovators in Information Technology</h1>
-        <p>Ready to elevate your skills and career in IT? Join CKC Information Technology — where innovation meets purpose and excellence is powered by values.</p>
-        <a href="#about" class="btn btn-hero mt-3">Get Started</a>
+        <p>Ready to elevate your skills and career in IT? Join CKC Information Technology — where innovation meets purpose and excellence is powered by values.</p> <a href="#about" class="btn btn-hero mt-3">Get Started</a>
       </div>
     </div>
-  </section>
-
-  <!-- ========================= ABOUT SECTION ========================= -->
+  </section> <!-- ========================= ABOUT SECTION ========================= -->
   <section id="about" class="container py-5">
     <h2 class="section-title">About the IT Program</h2>
     <div class="about-box">
       <p><strong>About the Program:</strong> The IT program includes the study of the utilization of both hardware and software technologies involving planning, installing, customizing, operating, managing and administering, and maintaining information technology infrastructure that provides computing solutions to address the needs of an organization.</p>
-
       <h5>Program Goal</h5>
       <p>Information Technology Program aims to become skilled in Information Technology with their knowledge on the development, implementation, and management of information systems in a wide variety of contexts.</p>
-
       <h5>Program Objectives</h5>
       <ul>
         <li>Demonstrate competence in implementing IT solutions responsive to community needs, imbued with Ignacian Marian values.</li>
         <li>Apply responsibly and effectively the concepts of software development and network management.</li>
         <li>Exercise critical-thinking, communication, and problem-solving skills.</li>
       </ul>
-
       <h5>Career Opportunities</h5>
       <ul>
         <li>Web and Applications Developer</li>
@@ -319,109 +302,88 @@
         <li>Software Engineer</li>
       </ul>
     </div>
-  </section>
-
-  <!-- ========================= EVENTS SECTION ========================= -->
+  </section> <!-- ========================= EVENTS SECTION ========================= -->
   <section id="events" class="container py-5">
     <h2 class="section-title">IT Program Events</h2>
     <div class="row g-4">
       <div class="col-md-4 col-sm-6">
-        <div class="card-glass">
-          <img src="/img/event1.jpg" alt="Event 1">
+        <div class="card-glass"> <img src="/img/event1.jpg" alt="Event 1">
           <div>
             <h5>BSIT Team Building 2025</h5>
             <p>Uniting IT students through collaboration and leadership.</p>
-          </div>
-          <a href="https://www.facebook.com/share/p/19uKFk9z6W/" target="_blank" class="btn btn-login mt-2">View on Facebook</a>
+          </div> <a href="https://www.facebook.com/share/p/19uKFk9z6W/" target="_blank" class="btn btn-login mt-2">View on Facebook</a>
         </div>
       </div>
-
       <div class="col-md-4 col-sm-6">
-        <div class="card-glass">
-          <img src="/img/event2.jpg" alt="Event 2">
+        <div class="card-glass"> <img src="/img/event2.jpg" alt="Event 2">
           <div>
             <h5>Tech Seminar 2025</h5>
             <p>Exploring the latest in innovation, coding, and AI trends.</p>
-          </div>
-          <a href="https://www.facebook.com/share/p/14RmfuXJwuD/" target="_blank" class="btn btn-login mt-2">View on Facebook</a>
+          </div> <a href="https://www.facebook.com/share/p/14RmfuXJwuD/" target="_blank" class="btn btn-login mt-2">View on Facebook</a>
         </div>
       </div>
-
       <div class="col-md-4 col-sm-6">
-        <div class="card-glass">
-          <img src="/img/event3.jpg" alt="Event 3">
+        <div class="card-glass"> <img src="/img/event3.jpg" alt="Event 3">
           <div>
             <h5>Hackathon Challenge</h5>
             <p>Showcasing creativity and problem-solving through technology.</p>
-          </div>
-          <a href="https://www.facebook.com/share/p/17bksLYw2C/" target="_blank" class="btn btn-login mt-2">View on Facebook</a>
+          </div> <a href="https://www.facebook.com/share/p/17bksLYw2C/" target="_blank" class="btn btn-login mt-2">View on Facebook</a>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ========================= FACULTY ========================= -->
+  </section> <!-- ========================= FACULTY ========================= -->
   <section id="faculty" class="container py-5">
     <h2 class="section-title">IT Faculty</h2>
     <div class="row g-4">
       <div class="col-md-3 col-sm-6">
-        <div class="teacher-card">
-          <img src="/img/faculty1.jpg" alt="Faculty 1">
+        <div class="teacher-card"> <img src="/img/faculty1.jpg" alt="Faculty 1">
           <h5>Dr. Carlito T. Cabasag, Ph.D. TM.</h5>
           <p>IT Program Coordinator</p>
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="teacher-card">
-          <img src="/img/faculty/f1.jpg" alt="Faculty 2">
+        <div class="teacher-card"> <img src="/img/faculty/f1.jpg" alt="Faculty 2">
           <h5>Adrian Pol Peligrino</h5>
           <p>IT Instructor</p>
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="teacher-card">
-          <img src="/img/faculty3.jpg" alt="Faculty 3">
+        <div class="teacher-card"> <img src="/img/faculty3.jpg" alt="Faculty 3">
           <h5>Ms. Maria Lyn Saludes</h5>
           <p>IT Instructor</p>
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="teacher-card">
-          <img src="/img/faculty4.jpg" alt="Faculty 4">
+        <div class="teacher-card"> <img src="/img/faculty4.jpg" alt="Faculty 4">
           <h5>Mr. Raymond P. Guillermo</h5>
           <p>Hardware Head</p>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ========================= OFFICERS ========================= -->
+  </section> <!-- ========================= OFFICERS ========================= -->
   <section id="officers" class="container py-5">
     <h2 class="section-title">IT Program Officers</h2>
     <div class="row g-4 justify-content-center">
       <div class="col-md-3 col-sm-6">
-        <div class="teacher-card">
-          <img src="/img/officers/gov.jpg" alt="Officer 1">
+        <div class="teacher-card"> <img src="/img/officers/gov.jpg" alt="Officer 1">
           <h5>Calvin Joshua Kiunasala</h5>
           <p>Governor</p>
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="teacher-card">
-          <img src="/img/officers/vgov.jpg" alt="Officer 2">
+        <div class="teacher-card"> <img src="/img/officers/vgov.jpg" alt="Officer 2">
           <h5>John Rey Escabarte</h5>
           <p>Vice Governor</p>
         </div>
       </div>
     </div>
-  </section>
-
+  </section> <!-- ========================= LOGIN MODAL ========================= -->
   <!-- ========================= LOGIN MODAL ========================= -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content p-3">
         <div class="modal-header">
-          <h5 class="modal-title">Faculty Login</h5>
+          <h5 class="modal-title">Login</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
@@ -434,8 +396,88 @@
               <label class="form-label">Password</label>
               <input type="password" class="form-control" name="password" required>
             </div>
-            <div class="d-grid">
+            <div class="d-grid mb-3">
               <button type="submit" class="btn btn-login">Login</button>
+            </div>
+          </form>
+
+          <!-- 🔗 Register Link -->
+          <div class="text-center mt-2">
+            <small>Don't have an account?
+              <a href="#" class="text-info" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">
+                Register Here
+              </a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================= REGISTER MODAL ========================= -->
+  <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Student Registration</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="/register">
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" name="fullName" placeholder="Enter full name" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">School ID</label>
+              <input type="text" class="form-control" name="schoolId" placeholder="Enter school ID" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Year Level</label>
+              <select class="form-select" name="yearLevel" required>
+                <option value="" disabled selected>Select year level</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <div class="input-group">
+                <input type="email" class="form-control" name="email" placeholder="Enter email" required>
+                <button class="btn btn-outline-info" type="button" id="sendCodeBtn">Send Code</button>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Enter OTP Code</label>
+              <input type="text" class="form-control" name="otpCode" placeholder="Enter 6-digit code" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Enter password" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm password" required>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-login">Register</button>
+            </div>
+
+            <div class="text-center mt-3">
+              <small>Already have an account?
+                <a href="#" class="text-info" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
+                  Login Here
+                </a>
+              </small>
             </div>
           </form>
         </div>
@@ -443,11 +485,15 @@
     </div>
   </div>
 
-  <footer>
-    © 2025 Christ the King College Gingoog – Information Technology Department
-  </footer>
+  <!-- ========================= OPTIONAL JS FOR SEND CODE ========================= -->
+  <script>
+    document.getElementById("sendCodeBtn").addEventListener("click", function() {
+      alert("An OTP code has been sent to your email!");
+    });
+  </script>
 
-  <!-- Bootstrap JS -->
+  <footer> © 2025 Christ the King College Gingoog – Information Technology Department </footer> <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

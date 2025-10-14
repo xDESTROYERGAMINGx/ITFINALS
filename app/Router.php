@@ -13,7 +13,7 @@ class Router
     public static function init()
     {
         // ============================================== LOGIN ROUTES ==============================================//
-        Router::add('/', fn() => Router::render('Admin/LoginView'));
+        Router::add('/', fn() => Router::render('PilotLogin'));
         Router::add('/faculty', fn() => Router::render('Faculty/PilotLogin'));
         Router::add('/login', fn() => (new FacultyController())->login(), 'POST');
 

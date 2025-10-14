@@ -15,7 +15,7 @@ $this->insert('Errors/Toasts');
                 <button class="btn btn-success text-dark fw-bold" data-bs-toggle="modal" data-bs-target="#exportModal">
                     <i class="bi bi-file-earmark-excel-fill"></i> Export to Excel
                 </button>
-            <?php endif; ?>
+            <?php endif; ?> 
         </div>
     </div>
 
