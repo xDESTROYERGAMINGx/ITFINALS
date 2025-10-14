@@ -4,30 +4,34 @@ $this->start('mainContent');
 $this->insert('Errors/Toasts');
 ?>
 
-
-
 <!-- Main Content -->
 <main class="main-content">
   <h2>Student Dashboard</h2>
   <p class="text-light">Overview of your Enrolled Subjects, Grades, and Notifications.</p>
 
   <div class="row g-4 mb-4">
-    <a href="/manageaccount" class="col-md-4">
+    <a href="/mysubjects" class="col-md-4">
       <div class="card-glass">
-        <i class="bi bi-person-circle metric-icon"></i>
+        <i class="bi bi-book metric-icon"></i> <!-- Changed icon -->
         <div>
-          <div class="card-title">Enrolled Subjects</div>
-          <div class="card-value" id="countManage">—</div>
+          <div class="card-title">My Subjects</div>
+          <div class="card-value" id="countSubjects">
+            <?= isset($subjectCount) ? htmlspecialchars($subjectCount) : '—' ?>
+          </div>
         </div>
       </div>
     </a>
 
-    <a href="/joinclass" class="col-md-4">
+    <a href="/joinClassView" class="col-md-4">
       <div class="card-glass">
-        <i class="bi bi-plus-circle metric-icon"></i>
+        <i class="bi bi-journal-bookmark-fill metric-icon"></i>
         <div>
           <div class="card-title">Pending Applications</div>
-          <div class="card-value" id="countJoin">—</div>
+
+          <!-- ✅ UPDATED: Dynamically show real count from controller -->
+          <div class="card-value" id="countPending">
+            <?= isset($pendingCount) ? htmlspecialchars($pendingCount) : '—' ?>
+          </div>
         </div>
       </div>
     </a>
@@ -37,7 +41,9 @@ $this->insert('Errors/Toasts');
         <i class="bi bi-journal-check metric-icon"></i>
         <div>
           <div class="card-title">View Grades</div>
-          <div class="card-value"><span id="countGrades">—</span></div>
+          <div class="card-value">
+            <span id="countGrades">—</span>
+          </div>
         </div>
       </div>
     </a>
@@ -50,8 +56,6 @@ $this->insert('Errors/Toasts');
 </main>
 
 <!-- Bootstrap Bundle -->
-
-
 
 <?php
 $this->stop();

@@ -2,9 +2,8 @@
 $this->layout('Student/Layout', ['mainContent' => $this->fetch('Student/Layout')]);
 $this->start('mainContent');
 $this->insert('Errors/Toasts');
-
-
 ?>
+
 <!-- Main Content -->
 <main class="main-content">
     <h2 class="mb-3">Join Class</h2>
@@ -29,8 +28,11 @@ $this->insert('Errors/Toasts');
             </div>
         <?php endforeach; ?>
     </div>
+
     <div class="row g-4 mb-5">
-        <h5>Pending Application</h5>
+        <!-- ✅ Added dynamic count display -->
+        <h5>Pending Application (<?= isset($pending) ? count($pending) : 0 ?>)</h5>
+
         <?php if (!empty($pending)): ?>
             <?php foreach ($pending as $p): ?>
                 <div class="col-md-4 col-sm-6">
@@ -49,7 +51,6 @@ $this->insert('Errors/Toasts');
             <?php endforeach; ?>
         <?php else: ?>
             <div class="alert alert-info mt-2">You don't have any pending applications...</div>
-
         <?php endif; ?>
     </div>
 </main>

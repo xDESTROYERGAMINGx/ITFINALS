@@ -48,6 +48,7 @@ class StudentController
         $pendingClass = $this->StudentModel->getPendingClass($_SESSION['student_id']);
         echo $GLOBALS['templates']->render('Student/JoinClass', ['subject' => $subjects, 'pending' => $pendingClass]);
     }
+
     public function joinClass($subjectCode)
     {
         $joinClass = $this->StudentModel->submitJoinClass($subjectCode, $_SESSION['student_id']);
@@ -73,11 +74,13 @@ class StudentController
         $grades = $this->StudentModel->getAllGrades($_SESSION['student_id']);
         echo $GLOBALS['templates']->render('Student/ViewGrade', ['grades' => $grades]);
     }
+
     public function getSubjectGrades($subjectCode)
     {
         $grades = $this->StudentModel->getGradeById($_SESSION['student_id'], $subjectCode);
         echo $GLOBALS['templates']->render('Student/ViewSubjectGrade', ['grade' => $grades]);
     }
+
     public function getGradeSummary()
     {
         $grades = $this->StudentModel->getAllGrades($_SESSION['student_id']);
@@ -91,4 +94,66 @@ class StudentController
         $student = $this->StudentModel->studentInfo($_SESSION['student_id']);
         echo $GLOBALS['templates']->render('Student/ManageAccount', ['student' => $student]);
     }
+
+    // ================================================ STUDENT PENDING APPLICATIONS CONTROLLER ================================================ //
+    public function getPendingApplicationCount()
+    {
+        $studentId = $_SESSION['student_id'];
+        $db = new DBConnection();
+        $conn = $db->getConnection();
+
+        $stmt = $conn->prepare("
+            SELECT COUNT(*) AS total 
+            FROM student_subject 
+            WHERE student_id = :student_id AND status = 'pending'
+        ");
+        $stmt->bindParam(':student_id', $studentId, \PDO::PARAM_STR);
+        $stmt->execute();
+
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $count = $row ? $row['total'] : 0;
+
+        return $count;
+    }
+
+    
+   
+    // ================================================ STUDENT DASHBOARD CONTROLLER ================================================ //
+    public function studentDashboard()
+    {
+        $pendingCount = $this->getPendingApplicationCount();
+        $subjectCount = $this->getSubjectCount();
+
+        echo $GLOBALS['templates']->render('Student/StudentDashboard', [
+        'pendingCount' => $pendingCount,
+        'subjectCount' => $subjectCount
+        ]);
+    }
+
+
+
+    // ================================================ STUDENT SUBJECT COUNT CONTROLLER ================================================ //
+    public function getSubjectCount()
+    {
+        $studentId = $_SESSION['student_id'];
+        $db = new DBConnection();
+        $conn = $db->getConnection();
+
+        $stmt = $conn->prepare("
+        SELECT COUNT(*) AS total 
+        FROM student_subject 
+        WHERE student_id = :student_id AND status = 'approved'
+        ");
+        $stmt->bindParam(':student_id', $studentId, \PDO::PARAM_STR);
+        $stmt->execute();
+
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $count = $row ? $row['total'] : 0;
+
+        return $count;
+    }
+
+
+
 }
+

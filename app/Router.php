@@ -88,7 +88,7 @@ class Router
         // ============================================ STUDENT PAGE =============================================== //
         Router::add('/student', fn() => Router::render('Student/Login'));
         Router::add('/login-student', fn() => (new StudentController())->login());
-        Router::add('/student-dashboard', fn() => Router::render('Student/StudentDashboard'));
+        Router::add('/student-dashboard', fn() => (new StudentController())->studentDashboard());
         Router::add('/joinClassView', fn() => (new StudentController())->availableClass());
         Router::add('/joinClass/{subjectCode}', fn($data) => (new StudentController())->joinClass($data['subjectCode']));
         Router::add('/mysubjects', fn() => (new StudentController())->getStudentSubjects());
