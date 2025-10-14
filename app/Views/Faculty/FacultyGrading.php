@@ -28,7 +28,7 @@ $this->insert('Errors/Toasts');
             <tbody>
                 <?php foreach ($students as $student): ?>
                     <tr>
-                        <td class="text-white"><?= htmlspecialchars($student['student_id']) ?></td>
+                        <td class="text-white"><?= htmlspecialchars($student['id_number']) ?></td>
                         <td class="text-white"><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></td>
                         <td class="text-white"><?= htmlspecialchars($student['year_level']) ?></td>
 
@@ -68,7 +68,7 @@ $this->insert('Errors/Toasts');
                 </thead>
                 <?php foreach ($pendingStudents as $student): ?>
                     <tbody>
-                        <td class="text-white"><?= htmlspecialchars($student['student_id']) ?></td>
+                        <td class="text-white"><?= htmlspecialchars($student['id_number ']) ?></td>
                         <td class="text-white"><?= htmlspecialchars($student['first_name']) ?> <?= htmlspecialchars($student['last_name']) ?></td>
                         <td class="text-white"><?= htmlspecialchars($student['year_level']) ?></td>
                         <td class="text-center"><a href="/faculty-student/studentApplication/<?= $result['code'] ?>/<?= $result['student_id'] ?>" class=" btn btn-warning btn-sm">

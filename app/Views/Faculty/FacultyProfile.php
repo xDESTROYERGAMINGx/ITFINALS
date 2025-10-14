@@ -112,23 +112,25 @@ $this->insert('Errors/Toasts');
             <label for="password">Enter Current Password</label>
             <input type="password" required="oh" class="form-control" id="currentPassword" placeholder="Enter current password"
               name="currentPassword">
-            <i class="bi bi-eye-fill position-absolute text-end current"
-              style="top: 17%; right: 40px; transform: translateY(-50%); cursor: pointer;" toggle = "#currentPassword"></i>
           </div>
           <hr>
           <div class="mb-3">
             <label for="password">New Password</label>
             <input type="password" required class="form-control" id="newPassword"
               placeholder="Enter new password" name="newPassword">
-            <i class="bi bi-eye-fill position-absolute text-end new"
-              style="top: 44%; right: 40px; transform: translateY(-50%); cursor: pointer;"></i>
           </div>
           <div class="mb-3">
             <label for="confirmPassword">Retype New Password</label>
             <input type="password" required="oh" class="form-control" id="confirmPassword"
               placeholder="Confirm new password" name="confirmPassword">
-            <i class="bi bi-eye-fill position-absolute text-end conn"
-              style="top: 66%; right: 40px; transform: translateY(-50%); cursor: pointer;"></i>
+          </div>
+          <div class="col-12 mt-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="showPasswords">
+              <label class="form-check-label text-black" for="showPasswords">
+                Show password
+              </label>
+            </div>
           </div>
           <div class="modal-footer">
             <a class="btn btn-secondary" href="/faculty-profile">Close</a>
@@ -139,18 +141,5 @@ $this->insert('Errors/Toasts');
     </div>
   </div>
 </div>
-<script>
-    document.querySelectorAll('.current').forEach(toggle => {
-        toggle.addEventListener('click', function() {
-            const input = document.querySelector(this.getAttribute('toggle'));
-            const isPassword = input.getAttribute('type') === 'password';
-
-            input.setAttribute('type', isPassword ? 'text' : 'password');
-            
-            this.classList.toggle('bi-eye-slash-fill');
-            this.classList.toggle('bi-eye-fill');
-        });
-    });
-</script>
 
 <?php $this->stop(); ?>

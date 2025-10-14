@@ -1,12 +1,11 @@
-// document.getElementById('publishBtn').addEventListener('click', function () {
-//         const editBtn = document.getElementById('editBtn');
-//         if (editBtn) {
-//             editBtn.remove(); // removes the Edit button
-//         }
+document.getElementById('showPasswords').addEventListener('change', function() {
+    const fields = [
+      document.getElementById('currentPassword'),
+      document.getElementById('newPassword'),
+      document.getElementById('confirmPassword')
+    ];
 
-//         // Change Publish button to muted state
-//         this.classList.remove('btn-success');
-//         this.classList.add('btn-secondary');
-//         this.disabled = true;
-//         this.textContent = "Published";
-//     });
+    fields.forEach(field => {
+      field.type = this.checked ? 'text' : 'password';
+    });
+  });

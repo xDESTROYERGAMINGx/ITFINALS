@@ -27,7 +27,6 @@ class Router
         Router::add('/faculty-profile/EditProfile', fn() => (new FacultyController())->editFacultyProfile());
         Router::add('/faculty-profile/ChangePassword', fn() => (new FacultyController())->facultyProfileChangePassword());
 
-
         // ============================================== SUBJECT APPLICATION ROUTES ============================================== //
         Router::add('/faculty-subjectApplication/{code}', fn($data) => (new FacultyController())->facultySubjectApplication($data['code']));
         Router::add('/faculty-subject/PendingApplication', fn() => (new FacultyController())->facultySubjectsPendingApplication());
@@ -44,6 +43,12 @@ class Router
         Router::add('/faculty-student/studentApplication', fn() => (new FacultyController())->facultyStudentAppplication());
         Router::add('/faculty-student/studentApplication/{code}/{studentId}/confirm', fn($data) => (new FacultyController())->facultyStudentAppplicationConfirm($data['code'], $data['studentId']));
         Router::add('/faculty-student/studentApplication/{code}/{studentId}/reject', fn($data) => (new FacultyController())->facultyStudentAppplicationReject($data['code'], $data['studentId']));
+
+
+        Router::add('/faculty-gradeSummary', fn() => (new FacultyController())->facultyGradeSummary());
+        Router::add('/faculty-gradeSummary/{code}', fn($data) => (new FacultyController())->facultyViewGradeSummary($data['code']));
+        
+
 
         // ============================================== LOGOUT ROUTE ============================================== //
         Router::add('/logout', fn() => (new FacultyController())->logout());
@@ -76,6 +81,8 @@ class Router
         Router::add('/SubjectVerificationView', fn() => (new AdminController())->showPage());
         Router::add('/subject-verification/action', fn() => (new AdminController())->handleAction(), 'POST');
         Router::add('/subject-verification/submit', fn() => (new AdminController())->submitForVerification(), 'POST');
+
+
 
 
         // ============================================ STUDENT PAGE =============================================== //

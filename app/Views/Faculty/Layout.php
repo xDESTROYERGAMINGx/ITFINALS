@@ -85,6 +85,7 @@ if (!isset($_SESSION['faculty_id'])) {
                 <a href="/faculty-students"><i class="bi bi-person-lines-fill"></i> My Students</a>
                 <a href="/faculty-student/studentApplication"><i class="bi bi-file-person-fill"></i> Student Applications</a>
             </div>
+            <a href="/faculty-gradeSummary"><i class="bi bi-journal"></i> Grade Summary</a>
             <a href="/faculty-profile"><i class="bi bi-person-circle"></i> Profile</a>
             <a href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
         </div>
@@ -110,6 +111,7 @@ if (!isset($_SESSION['faculty_id'])) {
             <a href="/faculty-subject/PendingApplication" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-clock-history"></i>Pending Subjects</a>
             <a href="/faculty-students" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-lines-fill"></i> My Students</a>
             <a href="/faculty-student/studentApplication" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-file-person-fill"></i> Student Applications</a>
+            <a href="/faculty-gradeSummary" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-journal"></i>  Grade Summary</a>
             <a href="/faculty-profile" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-circle"></i>
                 Profile</a>
             <a href="/" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-box-arrow-right"></i> Logout</a>

@@ -239,4 +239,17 @@ class FacultyController
         header("Location:/"); // redirect (optional)
         exit;
     }
+
+    public function facultyGradeSummary()
+    {
+        $subjects = $this->FacultyModel->getFacultySubjects($_SESSION['faculty_id']);
+        echo $GLOBALS['templates']->render('Faculty/FacultyGradeSummary', ['subject' => $subjects]);
+    }
+
+     public function facultyViewGradeSummary($code)
+    {
+        $grade = $this->FacultyModel->getGradeSummary($code);
+        $subject = $this->FacultyModel->getSubjectInfo($code);
+        echo $GLOBALS['templates']->render('Faculty/FacultyViewGradeSummary', ['subject' => $subject, 'result' => $grade]);
+    }
 }

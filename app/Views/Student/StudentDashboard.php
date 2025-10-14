@@ -16,7 +16,7 @@ $this->insert('Errors/Toasts');
       <div class="card-glass">
         <i class="bi bi-person-circle metric-icon"></i>
         <div>
-          <div class="card-title">Manage Account</div>
+          <div class="card-title">Enrolled Subjects</div>
           <div class="card-value" id="countManage">—</div>
         </div>
       </div>
@@ -26,7 +26,7 @@ $this->insert('Errors/Toasts');
       <div class="card-glass">
         <i class="bi bi-plus-circle metric-icon"></i>
         <div>
-          <div class="card-title">Join Class</div>
+          <div class="card-title">Pending Applications</div>
           <div class="card-value" id="countJoin">—</div>
         </div>
       </div>

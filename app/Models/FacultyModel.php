@@ -31,7 +31,7 @@ class FacultyModel
         $stmt = $this->db->prepare("
         SELECT COUNT(*) AS subject_count
         FROM subject_allocations
-        WHERE faculty_id = :faculty_id AND status = 'Approved'
+        WHERE faculty_id = :faculty_id AND status = 'approved'
     ");
         $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
         $stmt->execute();
@@ -44,7 +44,7 @@ class FacultyModel
         $stmt = $this->db->prepare("
         SELECT COUNT(*) AS subject_count
         FROM subject_allocations
-        WHERE faculty_id = :faculty_id AND status = 'Pending'
+        WHERE faculty_id = :faculty_id AND status = 'pending'
     ");
         $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
         $stmt->execute();
@@ -220,12 +220,13 @@ class FacultyModel
     // get faculty subjects
     public function getFacultySubjects($faculty_id)
     {
-        $stmt = $this->db->prepare("SELECT s.*, COUNT(ss.student_id) AS student_count
+        $stmt = $this->db->prepare("SELECT s.*, COUNT(CASE WHEN ss.status = 'approved' THEN ss.student_id END) AS student_count
         FROM subject s
         JOIN subject_allocations sa ON s.subject_id = sa.subject_id
         LEFT JOIN student_subject ss ON sa.subject_id = ss.subject_id
-        WHERE sa.faculty_id = :faculty_id AND sa.status = 'Approved'
-        GROUP BY s.subject_id
+        WHERE sa.faculty_id = :faculty_id
+        GROUP BY s.subject_id;
+
 
         ");
         $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
@@ -314,4 +315,18 @@ class FacultyModel
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         return $stmt->execute();
     }
+
+    public function getGradeSummary($code)
+    {
+        $stmt = $this->db->prepare("SELECT g.*, st.id_number, CONCAT(st.first_name,' ',st.last_name) as student_name, st.year_level
+        FROM grading g
+        JOIN student st ON g.student_id = st.student_id
+        WHERE g.subject_id = :subject_id
+        ");
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
+        $stmt->execute();   
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    
 }
