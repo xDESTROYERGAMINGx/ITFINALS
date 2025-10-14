@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2025 at 02:25 PM
+-- Generation Time: Oct 14, 2025 at 08:54 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -88,7 +88,28 @@ CREATE TABLE `grading` (
 --
 
 INSERT INTO `grading` (`id`, `subject_id`, `student_id`, `prelim`, `midterm`, `finals`, `status`) VALUES
-(24, 1, 1, '90', '91', NULL, 0);
+(25, 4, 2, '90', '90', '91', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reject_archive`
+--
+
+CREATE TABLE `reject_archive` (
+  `id` int(11) NOT NULL,
+  `id_number` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `origin` varchar(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reject_archive`
+--
+
+INSERT INTO `reject_archive` (`id`, `id_number`, `subject_id`, `origin`, `created_at`) VALUES
+(1, 2, 3, 'student', '2025-10-14 05:24:49');
 
 -- --------------------------------------------------------
 
@@ -101,16 +122,20 @@ CREATE TABLE `student` (
   `id_number` varchar(20) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `year_level` varchar(20) NOT NULL
+  `gender` varchar(20) NOT NULL,
+  `year_level` varchar(20) NOT NULL,
+  `mobile_number` varchar(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`student_id`, `id_number`, `first_name`, `last_name`, `year_level`) VALUES
-(1, 'C23-0139', 'Elizabeth', 'Rebonza', '3rd Year'),
-(2, 'C23-0149', 'Cris Martin ', 'Tirariray', '1st Year');
+INSERT INTO `student` (`student_id`, `id_number`, `first_name`, `last_name`, `gender`, `year_level`, `mobile_number`, `email`, `password`) VALUES
+(1, 'C23-0139', 'Elizabeth', 'Rebonza', 'Female', '3rd Year', '09635689745', 'elizabeth@gmail.com', '123'),
+(2, 'C23-0149', 'Cris Martin ', 'Tirariray', 'Male', '1st Year', '09897856328', 'martin@gmail.com', '123');
 
 -- --------------------------------------------------------
 
@@ -122,7 +147,7 @@ CREATE TABLE `student_subject` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
-  `status` int(11) NOT NULL,
+  `status` varchar(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -131,7 +156,7 @@ CREATE TABLE `student_subject` (
 --
 
 INSERT INTO `student_subject` (`id`, `student_id`, `subject_id`, `status`, `created_at`) VALUES
-(11, 1, 1, 1, '2025-10-12 04:34:02');
+(16, 2, 4, 'approved', '2025-10-14 04:46:24');
 
 -- --------------------------------------------------------
 
@@ -178,7 +203,8 @@ CREATE TABLE `subject_allocations` (
 
 INSERT INTO `subject_allocations` (`id`, `subject_id`, `faculty_id`, `status`, `created_at`) VALUES
 (4, '3', '3', 'Approved', '2025-10-12 04:10:36'),
-(5, '1', '3', 'Approved', '2025-10-12 04:30:27');
+(5, '1', '3', 'Approved', '2025-10-12 04:30:27'),
+(6, '4', '3', 'Approved', '2025-10-13 18:31:01');
 
 --
 -- Indexes for dumped tables
@@ -204,6 +230,12 @@ ALTER TABLE `grading`
   ADD PRIMARY KEY (`id`),
   ADD KEY `student_id` (`student_id`),
   ADD KEY `subject_id` (`subject_id`);
+
+--
+-- Indexes for table `reject_archive`
+--
+ALTER TABLE `reject_archive`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `student`
@@ -253,7 +285,13 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `grading`
 --
 ALTER TABLE `grading`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `reject_archive`
+--
+ALTER TABLE `reject_archive`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `student`
@@ -265,7 +303,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `student_subject`
 --
 ALTER TABLE `student_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `subject`
@@ -277,7 +315,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT for table `subject_allocations`
 --
 ALTER TABLE `subject_allocations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
