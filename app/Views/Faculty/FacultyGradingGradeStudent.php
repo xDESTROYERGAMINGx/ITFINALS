@@ -38,7 +38,7 @@ $this->insert('Errors/Toasts');
         </table>
         <?php if (empty($grade['status'])): ?>
             <?php if (!empty($grade['prelim']) && !empty($grade['midterm']) && !empty($grade['finals'])): ?>
-                <a href="/faculty-grading/GradeStudent/<?= $subject['code'] ?>/<?= $student['student_id'] ?>/publish" class="btn btn-sm btn-success px-3">Publish Grade</a>
+                <a href="/faculty-grading/GradeStudent/<?= $subject['subject_id'] ?>/<?= $student['student_id'] ?>/publish" class="btn btn-sm btn-success px-3">Publish Grade</a>
             <?php else: ?>
                 <button type="button" class="btn btn-sm btn-primary px-3" data-bs-toggle="modal" data-bs-target="#addFormModal">
                     Add Grade
@@ -66,6 +66,7 @@ $this->insert('Errors/Toasts');
                 <form method="POST" action="/faculty-grading/GradeStudent/<?= $subject['subject_id'] ?>/<?= $student['student_id'] ?>/edit">
                     <div class="modal-body">
                         <div class="mb-3">
+                            <input type="hidden" name="type" id="" value="add">
                             <label class="form-label">Select Grading Term</label>
                             <select name="term" class="form-select" required>
                                 <option value="" disabled selected>-- --</option>
@@ -105,7 +106,7 @@ $this->insert('Errors/Toasts');
                 <form method="POST" action="/faculty-grading/GradeStudent/<?= $subject['subject_id'] ?>/<?= $student['student_id'] ?>/edit">
                     <div class="modal-body">
                         <div class="mb-3">
-                            <input type="hidden" name="edit" id="" value="edit">
+                            <input type="hidden" name="type" id="" value="edit">
                             <label class="form-label">Select Grading Term</label>
                             <select name="term" class="form-select" required>
                                 <option value="" disabled selected>-- --</option>

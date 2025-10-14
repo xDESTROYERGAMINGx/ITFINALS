@@ -118,7 +118,7 @@ class FacultyController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $gradingTerm = $_POST['term'];
             $grade = $_POST['grade'];
-            $edit = $_POST['edit'] ?? ' ';
+            $type = $_POST['type'];
 
             // Security: validate input
             $validTerms = ['prelim', 'midterm', 'finals'];
@@ -127,7 +127,7 @@ class FacultyController
             }
 
             $this->FacultyModel->edit($code, $studentId, $gradingTerm, $grade);
-            if (!empty($edit)) {
+            if ($type === 'edit') {
                 $_SESSION['success'][] = "Grade Edited Successfully!";
             } else {
                 $_SESSION['success'][] = "Grade Added Successfully!";
@@ -206,7 +206,8 @@ class FacultyController
     public function facultyStudentAppplication()
     {
         $result = $this->FacultyModel->getFacultyStudentApplication($_SESSION['faculty_id']);
-        echo $GLOBALS['templates']->render('Faculty/FacultyStudentApplication', ['results' => $result]);
+        $rejected = $this->FacultyModel->getFacultyStudentRejectedApplication($_SESSION['faculty_id']);
+        echo $GLOBALS['templates']->render('Faculty/FacultyStudentApplication', ['results' => $result, 'rejected' => $rejected]);
     }
     public function facultyStudentAppplicationConfirm($code, $studentId)
     {

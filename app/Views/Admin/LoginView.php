@@ -1,4 +1,3 @@
-
 <!-- Admin Login Page -->
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +9,9 @@
 
 <body>
     <h2>Admin Login</h2>
-    
+
     <!-- The form should point to the controller route -->
-    <form action="/login" method="POST">
+    <form action="/login-admin" method="POST">
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br><br>
 
@@ -23,6 +22,7 @@
     </form>
 
     <a href="/faculty">Login as Faculty</a>
+    <a href="/student">Login as Student</a>
     <?php
     if (isset($_SESSION['error'])) {
         echo "<p style='color:red'>" . $_SESSION['error'] . "</p>";
@@ -32,4 +32,3 @@
 </body>
 
 </html>
-

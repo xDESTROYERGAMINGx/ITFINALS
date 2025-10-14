@@ -57,7 +57,7 @@ class FacultyModel
         $stmt = $this->db->prepare("SELECT COUNT(*) AS subject_count
         FROM student_subject ss
         JOIN subject_allocations sa ON ss.subject_id = sa.subject_id
-        WHERE sa.faculty_id = :faculty_id AND ss.status = 0
+        WHERE sa.faculty_id = :faculty_id AND ss.status = 'pending'
     ");
         $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_STR);
         $stmt->execute();
@@ -140,8 +140,20 @@ class FacultyModel
         $stmt = $this->db->prepare("SELECT st.*, s.* 
         FROM subject_allocations sa 
         JOIN subject s ON sa.subject_id = s.subject_id
-        JOIN student_subject ss ON s.subject_id = ss.subject_id AND ss.status = 0
+        JOIN student_subject ss ON s.subject_id = ss.subject_id AND ss.status = 'pending'
         JOIN student st ON ss.student_id = st.student_id
+        WHERE sa.faculty_id = :faculty_id");
+        $stmt->bindParam('faculty_id', $facultyId, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getFacultyStudentRejectedApplication($facultyId)
+    {
+        $stmt = $this->db->prepare("SELECT st.*, s.* 
+        FROM subject_allocations sa 
+        JOIN subject s ON sa.subject_id = s.subject_id
+        JOIN reject_archive ra ON s.subject_id = ra.subject_id AND ra.origin = 'student'
+        JOIN student st ON ra.id_number = st.student_id
         WHERE sa.faculty_id = :faculty_id");
         $stmt->bindParam('faculty_id', $facultyId, PDO::PARAM_STR);
         $stmt->execute();
@@ -151,7 +163,7 @@ class FacultyModel
     // set student subject application to 1
     public function setFacultyStudentApplicationConfirm($code, $studentId)
     {
-        $stmt = $this->db->prepare("UPDATE student_subject SET status = 1 WHERE student_id = :student_id AND subject_id = :subject_id");
+        $stmt = $this->db->prepare("UPDATE student_subject SET status = 'approved' WHERE student_id = :student_id AND subject_id = :subject_id");
         $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         $confirmStudent = $stmt->execute();
@@ -170,6 +182,11 @@ class FacultyModel
         $stmt = $this->db->prepare("DELETE FROM student_subject WHERE subject_id = :subject_id AND student_id = :student_id");
         $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         $stmt->bindParam(':student_id', $studentId, PDO::PARAM_STR);
+        $remove = $stmt->execute();
+
+        $stmt = $this->db->prepare("INSERT INTO reject_archive(id_number, subject_id, origin, created_at) VALUES (:id_number, :subject_id, 'student', NOW())");
+        $stmt->bindParam(':id_number', $studentId, PDO::PARAM_STR);
+        $stmt->bindParam(':subject_id', $code, PDO::PARAM_STR);
         return $stmt->execute();
     }
 
@@ -262,7 +279,7 @@ class FacultyModel
         FROM student st
         JOIN student_subject ss ON st.student_id = ss.student_id
         JOIN grading g ON ss.student_id = g.student_id AND ss.subject_id = g.subject_id
-        WHERE ss.subject_id = :subject_code AND ss.status = 1
+        WHERE ss.subject_id = :subject_code AND ss.status = 'approved'
         ");
         $stmt->bindParam(':subject_code', $code, PDO::PARAM_STR);
         $stmt->execute();

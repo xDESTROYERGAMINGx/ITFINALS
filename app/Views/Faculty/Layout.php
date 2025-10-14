@@ -18,7 +18,7 @@ if (!isset($_SESSION['faculty_id'])) {
     <link rel="shortcut icon" href="<?= htmlspecialchars($_ENV['APP_ICON'] ?? '') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/faculty.css">
 
     <!-- ✅ DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -78,7 +78,7 @@ if (!isset($_SESSION['faculty_id'])) {
             <div class="collapse ms-3" id="subjectsCollapse">
                 <a href="/faculty-subjects"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
                 <a href="/faculty-subjectsAvailable"><i class="bi bi-book"></i> Available Subjects</a>
-                <a href="/faculty-subject/PendingApplication"><i class="bi bi-clock-history"></i>Pending Subjects</a>
+                <a href="/faculty-subject/PendingApplication"><i class="bi bi-clock-history"></i>Pending Applications</a>
             </div>
             <a data-bs-toggle="collapse" href="#studentsCollapse" role="button" aria-expanded="false" aria-controls="studentsCollapse" class="d-flex justify-content-between align-items-center"><span><i class="bi bi-people-fill me-1"></i> Students </span> <i class="bi bi-chevron-down"></i></a>
             <div class="collapse ms-3" id="studentsCollapse">
