@@ -2,6 +2,9 @@
 
 namespace app;
 
+use app\Controllers\TaskController;
+use app\Controllers\LoginController;
+use app\Controllers\RegisterController;
 use app\Controllers\FacultyController;
 use app\Controllers\AdminController;
 use app\Controllers\StudentController;
@@ -12,10 +15,32 @@ class Router
 
     public static function init()
     {
-        // ============================================== LOGIN ROUTES ==============================================//
-        Router::add('/', fn() => Router::render('PilotLogin'));
-        Router::add('/faculty', fn() => Router::render('Faculty/PilotLogin'));
-        Router::add('/login', fn() => (new FacultyController())->login(), 'POST');
+        Router::add('/', fn() => Router::render('Welcome'));
+
+        // Task routes
+        Router::add('/task', fn() => (new TaskController())->index());
+        Router::add('/task/create', fn() => (new TaskController())->create(), 'POST');
+        Router::add('/task/update/{id}', fn($data) => (new TaskController())->edit($data['id']), 'GET');
+        Router::add('/task/update', fn() => (new TaskController())->update($_POST['id'], $_POST['title'], $_POST['completed'] ?? 0), 'POST');
+        Router::add('/task/delete/{id}', fn($data) => (new TaskController())->delete($data['id']));
+
+        // Login
+        Router::add('/login', fn() => (new LoginController())->index(), 'GET');
+        Router::add('/login', fn() => (new LoginController())->login(), 'POST');
+        Router::add('/login/parent', fn() => (new LoginController())->parentLogin(), 'POST');
+        Router::add('/login/security-question', fn() => (new LoginController())->getSecurityQuestion(), 'GET');
+
+        // Register
+        Router::add('/register', fn() => (new RegisterController())->index(), 'GET');
+        Router::add('/register', fn() => (new RegisterController())->register(), 'POST');
+        Router::add('/register/send-code', fn() => (new RegisterController())->sendCode(), 'POST');
+
+        // Dashboard (kamo change if unsay file name)
+        Router::add('/student-dashboard', fn() => Router::render('Dashboards/Student'));
+        Router::add('/faculty-dashboard', fn() => Router::render('Dashboards/Faculty'));
+        Router::add('/admin-dashboard', fn() => Router::render('Dashboards/Admin'));
+        Router::add('/parents-dashboard', fn() => Router::render('Dashboards/Parents'));
+
 
         // ============================================== FACULTY DASHBORAD ROUTES ============================================== //
         Router::add('/faculty-dashboard', fn() => (new FacultyController())->facultyDashboard());
@@ -35,7 +60,7 @@ class Router
         Router::add('/faculty-grading/{code}', fn($data) => (new FacultyController())->facultyGradingStudents($data['code']));
         Router::add('/faculty-grading/GradeStudent/{code}/{studentId}', fn($data) => (new FacultyController())->recordedStudentGrade($data['code'], $data['studentId']), 'GET');
         Router::add('/faculty-grading/GradeStudent/{code}/{studentId}/edit', fn($data) => (new FacultyController())->edit($data['code'], $data['studentId']), 'POST');
-        Router::add('/faculty-grading/GradeStudent/{code}/{studentId}/publish', fn($data) => (new FacultyController())->publish($data['code'],$data['studentId']));
+        Router::add('/faculty-grading/GradeStudent/{code}/{studentId}/publish', fn($data) => (new FacultyController())->publish($data['code'], $data['studentId']));
 
         // ============================================== FACULTY STUDENT ROUTES ============================================== //
         Router::add('/faculty-students', fn() => (new FacultyController())->facultyStudents());
@@ -47,7 +72,7 @@ class Router
 
         Router::add('/faculty-gradeSummary', fn() => (new FacultyController())->facultyGradeSummary());
         Router::add('/faculty-gradeSummary/{code}', fn($data) => (new FacultyController())->facultyViewGradeSummary($data['code']));
-        
+
 
 
         // ============================================== LOGOUT ROUTE ============================================== //
@@ -57,11 +82,9 @@ class Router
 
         // admin
 
-        Router::add('/login-admin', fn() => (new AdminController())->login(), 'POST'); // login form submit
-
 
         // ============================================ DASHBOARD ROUTE ============================================ //
-        Router::add('/Admin-Dashboard', fn() => (new AdminController())->dashboard());
+        Router::add('/admin-dashboard', fn() => (new AdminController())->dashboard());
 
         // ============================================ FACULTY ROUTE ============================================ //
         Router::add('/ViewFaculty', fn() => (new AdminController())->readfaculty());
@@ -83,11 +106,7 @@ class Router
         Router::add('/subject-verification/submit', fn() => (new AdminController())->submitForVerification(), 'POST');
 
 
-
-
         // ============================================ STUDENT PAGE =============================================== //
-        Router::add('/student', fn() => Router::render('Student/Login'));
-        Router::add('/login-student', fn() => (new StudentController())->login());
         Router::add('/student-dashboard', fn() => (new StudentController())->studentDashboard());
         Router::add('/joinClassView', fn() => (new StudentController())->availableClass());
         Router::add('/joinClass/{subjectCode}', fn($data) => (new StudentController())->joinClass($data['subjectCode']));
@@ -97,28 +116,45 @@ class Router
         Router::add('/profile', fn() => (new StudentController())->getStudentInfo());
         Router::add('/parent-dashboard', fn() => (new StudentController())->getGradeSummary());
 
+        // ============================================== NOTIFICATION ==============================================//
+        Router::add('/notifications/open/{id}', fn($data) => (new StudentController())->openNotification($data['id']));
+
         Router::run();
     }
 
-    public static function add($path, $callback)
+    public static function add($path, $callback, $method = 'GET')
     {
         $path = str_replace(['{', '}'], ['(?P<', '>[^/]+)'], $path);
-
-        Router::$routes[$path] = $callback;
+        Router::$routes[$method][$path] = $callback;
     }
 
     public static function run()
     {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-        foreach (self::$routes as $route => $callback) {
-            if (preg_match("#^$route$#", $requestUri, $matches)) {
-                $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
-                echo call_user_func($callback, $params);
-
-                return;
+        // Check for matching route with specific method
+        if (isset(Router::$routes[$requestMethod])) {
+            foreach (Router::$routes[$requestMethod] as $route => $callback) {
+                if (preg_match("#^$route$#", $requestUri, $matches)) {
+                    $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
+                    echo call_user_func($callback, $params);
+                    return;
+                }
             }
         }
+
+        // Check for GET routes if method is GET
+        if ($requestMethod === 'GET' && isset(Router::$routes['GET'])) {
+            foreach (Router::$routes['GET'] as $route => $callback) {
+                if (preg_match("#^$route$#", $requestUri, $matches)) {
+                    $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
+                    echo call_user_func($callback, $params);
+                    return;
+                }
+            }
+        }
+
         echo template()->render('Errors/404');
     }
 

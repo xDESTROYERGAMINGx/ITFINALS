@@ -4,15 +4,22 @@ namespace app\Controllers;
 
 use config\DBConnection;
 use app\Models\StudentModel;
+use app\Models\NotificationModel;
 
 class StudentController
 {
     private $StudentModel;
+    private $NotificationModel;
 
     public function __construct()
     {
         $db = new DBConnection();
         $this->StudentModel = new StudentModel($db);
+        $this->NotificationModel = new NotificationModel($db);
+
+        if (isset($_SESSION['student_id'])) {
+            $GLOBALS['notifications'] = $this->NotificationModel->getNotification($_SESSION['student_id']);
+        }
     }
 
     // Add your custom controllers below to handle business logic.
@@ -153,7 +160,20 @@ class StudentController
         return $count;
     }
 
+    // ================================================= NOTIFICATION CONTROLLER ================================================ //
+    public function openNotification($id)
+    {
+        $notification = $this->NotificationModel->getById($id);
 
+        if ($notification) {
+            $this->NotificationModel->markAsRead($id);
+            header("Location: " . $notification['link']);
+            exit();
+        } else {
+            header("Location: /student-dashboard"); // fallback if missing
+            exit();
+        }
+    }
 
 }
 

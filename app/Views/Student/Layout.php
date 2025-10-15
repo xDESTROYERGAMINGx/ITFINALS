@@ -37,15 +37,35 @@
 
 
                 <!-- Notifications Dropdown -->
+                <?php if (!empty($GLOBALS['notifications'])): ?>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light position-relative" data-bs-toggle="dropdown">
+                            🔔
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?= count(array_filter($GLOBALS['notifications'], fn($n) => !$n['is_read'])) ?>
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <?php foreach ($GLOBALS['notifications'] as $notif): ?>
+                                <li>
+                                    <a href="/notifications/open/<?= $notif['id'] ?>" class="dropdown-item <?= $notif['is_read'] ? 'text-muted' : 'fw-bold' ?>">
+                                        <h5><?= htmlspecialchars($notif['title']) ?></h5>
+                                        <p ><?= htmlspecialchars($notif['message']) ?></p>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
 
-                <img src="img/ckc_bg.jpg" class="profile-pic" alt="Student Profile" />
+                <img src="https://ui-avatars.com/api/?name=<?= $_SESSION['student_name'] ?>" class="profile-pic" alt="Student Profile" />
             </div>
         </div>
     </nav>
 
     <!-- Sidebar (Desktop) -->
     <nav class="sidebar d-none d-lg-flex flex-column">
-        <a href="/student-dashboard"><i class="bi bi-house"></i> Dashboard</a>
+        <a href="/student-dashboard"><i class="bi bi-house"></i> Home</a>
         <a href="/profile"><i class="bi bi-person"></i> Profile</a>
         <a href="/joinClassView"><i class="bi bi-plus-circle"></i> Join Class</a>
         <a href="/mysubjects"><i class="bi bi-book"></i> My Subjects</a>
@@ -60,7 +80,7 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
-            <a href="/studentdashboard" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Dashboard</a>
+            <a href="/studentdashboard" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Home</a>
             <a href="/profile" class="px-3 py-2 d-flex align-items-center gap-2 active"><i class="bi bi-person"></i> Profile</a>
             <a href="/joinclass" class="active px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-plus-circle"></i> Join Class</a>
             <a href="/mysubjects" class="active px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-journal-bookmark"></i> My Subjects

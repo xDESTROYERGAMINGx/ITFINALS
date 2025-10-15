@@ -25,9 +25,7 @@ $this->insert('Errors/Toasts');
             <div class="col-12 col-lg-8">
               <h3 class="fw-bold mb-2"><?= $student['first_name'] ?> <?= $student['last_name'] ?></h3>
               <p class="text-light mb-1">Faculty ID: <?= $student['id_number'] ?></p>
-              <p class="text-light mb-1">Gender: <?= $student['gender'] ?></p>
               <p class="text-light mb-1">Email: <?= $student['email'] ?></p>
-              <p class="text-light mb-3">Phone: <?= $student['mobile_number'] ?></p>
             </div>
 
             <!-- Buttons -->

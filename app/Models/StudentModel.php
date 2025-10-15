@@ -144,4 +144,7 @@ class StudentModel
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row ? $row['total'] : 0;
     }
+
+    // ========================================== NOTIFICATION ========================================== //
+    
 }

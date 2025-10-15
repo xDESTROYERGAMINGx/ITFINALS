@@ -34,7 +34,7 @@ $this->insert('Errors/Toasts');
 
         <a href="/faculty-student/studentApplication" class="col-md-4">
             <div class="card-glass">
-                <i class="bi bi-bell metric-icon"></i>
+                <i class="bi bi-file-person-fill metric-icon"></i>
                 <div>
                     <div class="card-title">Pending Student Applications</div>
                     <div class="card-value"><?= $studentPending ?: '0' ?></div>
@@ -44,7 +44,7 @@ $this->insert('Errors/Toasts');
     </div>
 
     <div class="card-glass2">
-        <h5><i class="bi bi-journals me-1"></i> MY STUDENTS</h5>
+        <h5><i class="bi bi-person-lines-fill me-1"></i> MY STUDENTS</h5>
         <hr class="my-4">
         <div class="row text-center mt-4">
             <?php foreach ($subjects as $subject): ?>

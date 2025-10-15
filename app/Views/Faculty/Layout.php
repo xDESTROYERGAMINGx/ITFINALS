@@ -29,11 +29,10 @@ if (!isset($_SESSION['faculty_id'])) {
 <body>
     <nav class="navbar navbar-expand-lg navbar-blur fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="https://www.facebook.com/CKCITProgram/">
-                <img src="/img/logo.png" alt="logo" class="logo">
-                <span class="d-none d-md-block">CKC Information Technology</span>
+           <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <i class="bi bi-mortarboard"></i>
+                Faculty Dashboard
             </a>
-
             <!-- Mobile Sidebar Toggle -->
             <button class="btn btn-outline-light d-lg-none" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#mobileSidebar">
@@ -73,7 +72,7 @@ if (!isset($_SESSION['faculty_id'])) {
     <!-- Sidebar (Desktop) -->
     <nav class="sidebar d-none d-lg-flex flex-column justify-content-between" style="min-height: 100vh;">
         <div>
-            <a href="/faculty-dashboard"><i class="bi bi-house"></i> Dashboard</a>
+            <a href="/faculty-dashboard"><i class="bi bi-house"></i> Home</a>
             <a data-bs-toggle="collapse" href="#subjectsCollapse" role="button" aria-expanded="false" aria-controls="subjectsCollapse" class="d-flex justify-content-between align-items-center"><span><i class="bi bi-journals me-1"></i> Subjects </span> <i class="bi bi-chevron-down"></i></a>
             <div class="collapse ms-3" id="subjectsCollapse">
                 <a href="/faculty-subjects"><i class="bi bi-person-lines-fill"></i> My Subjects</a>
@@ -85,7 +84,7 @@ if (!isset($_SESSION['faculty_id'])) {
                 <a href="/faculty-students"><i class="bi bi-person-lines-fill"></i> My Students</a>
                 <a href="/faculty-student/studentApplication"><i class="bi bi-file-person-fill"></i> Student Applications</a>
             </div>
-            <a href="/faculty-gradeSummary"><i class="bi bi-journal"></i> Grade Summary</a>
+            <a href="/faculty-gradeSummary"><i class="bi bi-journal-check"></i> Grade Summary</a>
             <a href="/faculty-profile"><i class="bi bi-person-circle"></i> Profile</a>
             <a href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
         </div>
@@ -105,7 +104,7 @@ if (!isset($_SESSION['faculty_id'])) {
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
-            <a href="/faculty-dashboard" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Dashboard</a>
+            <a href="/faculty-dashboard" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Home</a>
             <a href="/faculty-subjects" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-book"></i> My Subject</a>
             <a href="/faculty-subjectsAvailable" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-person-lines-fill"></i>Available Subjects</a>
             <a href="/faculty-subject/PendingApplication" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-clock-history"></i>Pending Subjects</a>

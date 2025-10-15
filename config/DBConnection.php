@@ -26,6 +26,7 @@ class DBConnection
             ]);
         } catch (PDOException $e) {
             echo template()->render('Errors/500');
+            exit;
         }
     }
 

@@ -17,7 +17,7 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/img/ckc_bg.jpg') no-repeat center center/cover;
+    background: url('/img/bg.jpg') no-repeat center center/cover;
     filter: blur(10px) brightness(0.6);
     z-index: -1;
 }
@@ -92,12 +92,12 @@ body::before {
     }
 }
 
-.profile-pic {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #4ac8e0;
+.profile-pic,
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .card-glass {

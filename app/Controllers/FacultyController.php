@@ -4,15 +4,22 @@ namespace app\Controllers;
 
 use config\DBConnection;
 use app\Models\FacultyModel;
+use app\Models\NotificationModel;
 
 class FacultyController
 {
     private $FacultyModel;
+    private $NotificationModel; 
 
     public function __construct()
     {
         $db = new DBConnection();
         $this->FacultyModel = new FacultyModel($db);
+        $this->NotificationModel = new NotificationModel($db);
+
+        if (isset($_SESSION['student_id'])) {
+            $GLOBALS['notifications'] = $this->NotificationModel->getNotification($_SESSION['student_id']);
+        }
     }
 
 
@@ -127,6 +134,16 @@ class FacultyController
             }
 
             $this->FacultyModel->edit($code, $studentId, $gradingTerm, $grade);
+
+            $subject = $this->FacultyModel->getSubjectInfo($code);
+            $this->NotificationModel->addNotification(
+                $studentId,
+                $_SESSION['faculty_id'],
+                "New Grade Posted",
+                "Your grade in {$subject['subject_name']} for {$gradingTerm} has been posted by your instructor.",
+                "/subjectGrade/$code"
+            );
+
             if ($type === 'edit') {
                 $_SESSION['success'][] = "Grade Edited Successfully!";
             } else {
@@ -246,7 +263,7 @@ class FacultyController
         echo $GLOBALS['templates']->render('Faculty/FacultyGradeSummary', ['subject' => $subjects]);
     }
 
-     public function facultyViewGradeSummary($code)
+    public function facultyViewGradeSummary($code)
     {
         $grade = $this->FacultyModel->getGradeSummary($code);
         $subject = $this->FacultyModel->getSubjectInfo($code);
