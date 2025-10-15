@@ -38,7 +38,7 @@
 
         <!-- Notifications Dropdown -->
 
-        <img src="img/ckc_bg.jpg" class="profile-pic" alt="Student Profile" />
+        <a href="/logout"><img src="img/ckc_bg.jpg" class="profile-pic" alt="Student Profile" /></a>
       </div>
     </div>
   </nav>

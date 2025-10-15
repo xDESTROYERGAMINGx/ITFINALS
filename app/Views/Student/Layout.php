@@ -80,9 +80,9 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
-            <a href="/studentdashboard" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Home</a>
+            <a href="/student-dashboard" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-house"></i> Dashboard</a>
             <a href="/profile" class="px-3 py-2 d-flex align-items-center gap-2 active"><i class="bi bi-person"></i> Profile</a>
-            <a href="/joinclass" class="active px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-plus-circle"></i> Join Class</a>
+            <a href="/joinClassView" class="active px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-plus-circle"></i> Join Class</a>
             <a href="/mysubjects" class="active px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-journal-bookmark"></i> My Subjects
                 <a href="/viewgrade" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-journal-check"></i> View Grades</a>
                 <a href="/logout" class="px-3 py-2 d-flex align-items-center gap-2"><i class="bi bi-box-arrow-right"></i> Logout</a>
