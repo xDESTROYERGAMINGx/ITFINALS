@@ -10,6 +10,8 @@ body {
   height: 100vh;
   color: #eee;
 }
+
+/* ======== Form Scroll Bar Hide ======== */
 form {
   overflow: auto;
   scrollbar-width: none;
@@ -17,25 +19,6 @@ form {
 
 form::-webkit-scrollbar {
   display: none;
-}
-
-.close-parent-btn1 {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  color: #94a3b8;
-  font-size: 25px;
-  cursor: pointer;
-  width: auto;
-  height: 0;
-  padding: 5px 10px;
-  transition: color 0.3s ease;
-}
-
-.close-parent-btn1:hover {
-  color: #ff0000;
 }
 
 /* ======== Form Container ======== */
@@ -71,7 +54,7 @@ form {
   margin: 0;
 }
 
-/* ======== Input Fields ======== */
+/* ======== Name, Email, Password ======== */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -110,8 +93,8 @@ select:focus {
 }
 
 .id-number input {
-  width: 35px;
-  height: 35px;
+  width: 41.3px;
+  height: 45px;
   text-align: center;
   font-size: 16px;
   background-color: #0f172a;
@@ -151,16 +134,16 @@ select:focus {
   display: flex;
 }
 
-/* ======== Email + Verification ======== */
+/* ======== Email ======== */
 .email-verify-group {
   display: flex;
   align-items: center;
-  gap: 10px; /* space between input and button */
+  gap: 10px;
   margin-top: 10px;
 }
 
 .email-verify-group input {
-  flex: 1; /* makes input take available space */
+  flex: 1;
   padding: 12px;
   border: 1px solid #334155;
   border-radius: 6px;
@@ -176,10 +159,10 @@ select:focus {
 }
 
 .verification-code input {
-  width: 35px;
-  height: 35px;
+  width: 55.9px;
+  height: 45px;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   background-color: #0f172a;
   color: #ffffff;
   border: 1px solid #334155;
@@ -191,7 +174,7 @@ select:focus {
   background-color: #1e293b;
 }
 
-/* ======== Buttons ======== */
+/* ======== Email Send Code Button ======== */
 button,
 #sendCodeBtn {
   background-color: #1d4ed8;
@@ -200,10 +183,11 @@ button,
   padding: 15px;
   width: 30%;
   height: 20%;
+  max-height: 20%;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
   transition: 0.3s ease;
   box-shadow: 0 4px 12px rgba(29, 78, 216, 0.4);
   margin-top: 1%;
@@ -222,19 +206,7 @@ button:hover,
   color: #94a3b8;
 }
 
-/* ======== Error & Success ======== */
-.error {
-  color: #f87171;
-  text-align: center;
-  font-weight: 600;
-}
-
-.success {
-  color: #4ade80;
-  text-align: center;
-  font-weight: 600;
-}
-
+/* ======== Register Button ======== */
 button,
 #registerBtn {
   background-color: #1d4ed8;
@@ -264,6 +236,20 @@ button:hover,
   color: #94a3b8;
 }
 
+/* ======== Error & Success Message ======== */
+.error {
+  color: #f87171;
+  text-align: center;
+  font-weight: 600;
+}
+
+.success {
+  color: #4ade80;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ======== Signup Link (Already have an account?) ======== */
 .signup-link {
   text-align: center;
   margin-top: 15px;
@@ -281,17 +267,98 @@ button:hover,
   text-decoration: underline;
 }
 
-/* ======== Responsive ======== */
-@media (max-width: 480px) {
-  form {
-    width: 90%;
-    padding: 20px;
-  }
+/* ======== Year Level ======== */
 
-  .name-group {
-    flex-direction: column;
-  }
+.year-level-group {
+  display: flex;
+  gap: 19px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
+
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: #0f172a;
+  min-width: 75px;
+  justify-content: center;
+}
+
+.radio-label:hover {
+  border-color: #2465ce;
+  background-color: #1e293b;
+}
+
+.radio-label input[type="radio"] {
+  display: none;
+}
+
+.radio-label input[type="radio"]:checked + span,
+.radio-label input[type="radio"]:checked ~ span {
+  color: #fff;
+}
+
+.radio-label:has(input[type="radio"]:checked) {
+  background-color: #385179;
+  border-color: #3b82f6;
+  color: #fff;
+}
+
+.radio-label span {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.radio-label span:hover {
+  color: #ffffff;
+}
+
+.radio-label:has(input[type="radio"]:checked) span {
+  color: #fff;
+}
+
+/* ======== Cellphone number ======== */
+
+input[type="tel"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  background-color: #0f172a;
+}
+
+input[type="tel"]:focus {
+  outline: none;
+  border-color: #34517e;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+input[type="tel"]:invalid:not(:placeholder-shown) {
+  border-color: #f44336;
+}
+
+input[type="tel"]:valid {
+  border-color: #3b82f6;
+  color: white;
+}
+
+input[type="tel"]::placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+/* ======== Recaptcha ======== */
 
 a:-webkit-any-link {
   color: #3b82f6;
@@ -310,4 +377,50 @@ a:-webkit-any-link:hover {
   align-items: center;
   padding: 10px;
   margin-bottom: 3%;
+}
+
+/* ======== Cellphone Responsive ======== */
+@media (max-width: 599px) {
+  form {
+    width: 90%;
+    padding: 20px;
+    transform: translateX(5.8%);
+    align-items: center;
+  }
+
+  .name-group {
+    flex-direction: column;
+  }
+  .id-number input {
+    width: 32.5px;
+  }
+
+  .year-level-group {
+    gap: 10px;
+  }
+
+  .radio-label {
+    padding: 8px 16px;
+    min-width: 22.305%;
+  }
+
+  .radio-label span {
+    font-size: 14px;
+  }
+
+  button,
+  #sendCodeBtn {
+    font-size: 10px;
+  }
+  .verification-code input {
+    width: 15.33%;
+  }
+
+  .g-recaptcha {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 3%;
+  }
 }
