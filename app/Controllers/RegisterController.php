@@ -11,6 +11,7 @@ class RegisterController
 {
     private $RegisterModel;
     private $allowedSuffixes = ['Jr.', 'Sr.', 'II', 'III', 'IV', ''];
+    private $allowedYearLevels = [1, 2, 3, 4];
     private $securityQuestions = [
         "What is your mother's maiden name?",
         "What is the name of your first pet?",
@@ -34,6 +35,7 @@ class RegisterController
             'error' => '',
             'success' => '',
             'allowedSuffixes' => $this->allowedSuffixes,
+            'allowedYearLevels' => $this->allowedYearLevels,
             'securityQuestions' => $this->securityQuestions,
             'formData' => [],
             'recaptchaSiteKey' => $_ENV['RECAPTCHA_SITE_KEY_V2'] ?? ''
@@ -68,13 +70,29 @@ class RegisterController
             exit;
         }
 
+        // delete clean expired registration
+        $this->RegisterModel->cleanExpiredTempRegistrations();
+
         $lastSent = $this->RegisterModel->getLastTempRegistration($email);
 
         if ($lastSent) {
             $last_sent_ts = strtotime($lastSent['created_at']);
-            if (time() - $last_sent_ts < 300) {
-                $remaining = 300 - (time() - $last_sent_ts);
-                echo json_encode(['success' => false, 'message' => "Please wait $remaining seconds before resending."]);
+            $current_time = time();
+            $time_diff = $current_time - $last_sent_ts;
+            
+            // block if less than 5 minutes
+            if ($time_diff < 300) {
+                $remaining = 300 - $time_diff;
+                $minutes = floor($remaining / 60);
+                $seconds = $remaining % 60;
+                
+                if ($minutes > 0) {
+                    $time_msg = $minutes . " minute(s) and " . $seconds . " second(s)";
+                } else {
+                    $time_msg = $seconds . " second(s)";
+                }
+                
+                echo json_encode(['success' => false, 'message' => "You need to wait 5 minutes to send another verification code."]);
                 exit;
             }
         }
@@ -117,6 +135,7 @@ class RegisterController
             $middle_name = $middle_name === '' ? null : $middle_name;
             $last_name = trim($_POST['last_name'] ?? '');
             $suffix = $_POST['suffix'] ?? '';
+            $year_level = isset($_POST['year_level']) ? (int)$_POST['year_level'] : null;
             $security_question = $_POST['security_question'] ?? '';
             $security_answer = trim($_POST['security_answer'] ?? '');
 
@@ -128,6 +147,12 @@ class RegisterController
             }
             if (!in_array($suffix, $this->allowedSuffixes)) {
                 $error = "Invalid suffix selected.";
+            }
+            if ($year_level !== null && !in_array($year_level, $this->allowedYearLevels)) {
+                $error = "Invalid year level selected.";
+            }
+            if ($year_level === null) {
+                $error = "Please select your year level.";
             }
 
             $digit2 = trim($_POST['digit2'] ?? '');
@@ -147,10 +172,21 @@ class RegisterController
             }
 
             $id_number = "C{$digit2}{$digit3}-{$digit5}{$digit6}{$digit7}{$digit8}";
+            $phone_number = trim($_POST['phone_number'] ?? '');
             $email = trim($_POST['email'] ?? '');
 
-            if ($this->RegisterModel->checkEmailExists($email)) {
+            if (!$error && empty($phone_number)) {
+                $error = "Phone number is required.";
+            } elseif (!$error && !preg_match('/^(09|\+639)\d{9}$/', $phone_number)) {
+                $error = "Invalid phone number format.";
+            }
+
+            if (!$error && $this->RegisterModel->checkEmailExists($email)) {
                 $error = "Email already registered. Please use a different email.";
+            }
+
+            if (!$error && $this->RegisterModel->checkPhoneExists($phone_number)) {
+                $error = "Phone number already registered.";
             }
 
             $verification_code_input = '';
@@ -206,7 +242,9 @@ class RegisterController
                     'middle_name' => $middle_name,
                     'last_name' => $last_name,
                     'suffix' => $suffix === '' ? null : $suffix,
+                    'year_level' => $year_level,
                     'id_number' => $id_number,
+                    'phone_number' => $phone_number,
                     'email' => $email,
                     'password' => password_hash($password, PASSWORD_DEFAULT),
                     'security_question' => $security_question,
@@ -229,6 +267,7 @@ class RegisterController
             'error' => $error,
             'success' => '',
             'allowedSuffixes' => $this->allowedSuffixes,
+            'allowedYearLevels' => $this->allowedYearLevels,
             'securityQuestions' => $this->securityQuestions,
             'formData' => $formData,
             'recaptchaSiteKey' => $_ENV['RECAPTCHA_SITE_KEY_V2'] ?? ''
@@ -285,8 +324,8 @@ class RegisterController
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // For local development only
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); // For local development only
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
         $result = curl_exec($ch);

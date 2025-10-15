@@ -101,13 +101,13 @@ class LoginController
             session_regenerate_id(true);
             $_SESSION['faculty_id'] = $faculty['faculty_id'];
             $_SESSION['id_number'] = $faculty['id_number'];
-            $_SESSION['name'] = $faculty['first_name'] . ' ' . $faculty['last_name']; // assuming faculty table has 'name'
+            $_SESSION['name'] = $faculty['first_name'] . ' ' . $faculty['last_name']; 
             $_SESSION['email'] = $faculty['email'];
 
             header("Location: /faculty-dashboard");
             exit;
         }
-        
+
         $admin = $this->LoginModel->getAdminByEmail($email);
 
         if ($admin) {
@@ -131,7 +131,7 @@ class LoginController
         $_SESSION['student_id'] = $user['student_id'];
         $_SESSION['id_number'] = $user['id_number'];
         $_SESSION['email'] = $user['email'];
-        $_SESSION['student_name'] = $user['first_name'].' '.$user['last_name'];
+        $_SESSION['student_name'] = $user['first_name'] . ' ' . $user['last_name'];
 
 
         header("Location: /student-dashboard");
@@ -180,7 +180,7 @@ class LoginController
         $user = $this->LoginModel->getUserByUsername($parent_id);
 
         if (!$user) {
-            $this->renderWithParentError("", true, $digit2, $digit3, $digit5, $digit6, $digit7, $digit8);
+            $this->renderWithParentError("ID number not found.", true, $digit2, $digit3, $digit5, $digit6, $digit7, $digit8);
             return;
         }
 
@@ -192,14 +192,13 @@ class LoginController
         $this->LoginModel->resetParentAttempts($parent_id);
 
         session_regenerate_id(true);
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
+        $_SESSION['student_id'] = $user['student_id'];
+        $_SESSION['id_number'] = $user['id_number'];
         $_SESSION['email'] = $user['email'];
-        $_SESSION['role'] = $user['role'];
         $_SESSION['first_name'] = $user['first_name'];
         $_SESSION['last_name'] = $user['last_name'];
 
-        header("Location: /parents-dashboard");
+        header("Location: /parent-dashboard");
         exit;
     }
 
