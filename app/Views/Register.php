@@ -18,6 +18,11 @@ function is_selected_view($val, $compare)
 {
     return $val === $compare ? 'selected' : '';
 }
+
+function is_checked_view($val, $compare)
+{
+    return $val == $compare ? 'checked' : '';
+}
 ?>
 
 <link rel="stylesheet" href="/css/register-style.css">
@@ -55,17 +60,30 @@ function is_selected_view($val, $compare)
         <?php endforeach; ?>
     </select><br>
 
-    <label>ID Number (Format: C _ _ - _ _ _ _):</label><br>
+    <label>Year Level:</label><br>
+    <div class="year-level-group">
+        <?php foreach ($allowedYearLevels as $level): ?>
+            <label class="radio-label">
+                <input type="radio" name="year_level" value="<?= $level ?>" <?= is_checked_view(preserve_post_view('year_level', $this->data), $level) ?> required>
+                <span><?= $level ?></span>
+            </label>
+        <?php endforeach; ?>
+    </div>
+
+    <label>ID Number:</label><br>
     <div class="id-number">
-        <input type="text" name="digit1" maxlength="1" value="C" readonly tabindex="-1" style="background:#eee;color:#555;font-weight:bold;">
+        <input type="text" name="digit1" maxlength="1" value="C" readonly tabindex="-1" style="background: #0b0b18ff;color:#555;font-weight:bold;">
         <input type="text" name="digit2" maxlength="1" pattern="\d" title="Digit 2" required autocomplete="off" value="<?= preserve_digit_view(2, $this->data) ?>">
         <input type="text" name="digit3" maxlength="1" pattern="\d" title="Digit 3" required autocomplete="off" value="<?= preserve_digit_view(3, $this->data) ?>">
-        <input type="text" name="digit4" maxlength="1" value="-" readonly tabindex="-1" style="background:#eee;color:#555;font-weight:bold;">
+        <input type="text" name="digit4" maxlength="1" value="-" readonly tabindex="-1" style="background: #0b0b18ff;color:#555;font-weight:bold;">
         <input type="text" name="digit5" maxlength="1" pattern="\d" title="Digit 5" required autocomplete="off" value="<?= preserve_digit_view(5, $this->data) ?>">
         <input type="text" name="digit6" maxlength="1" pattern="\d" title="Digit 6" required autocomplete="off" value="<?= preserve_digit_view(6, $this->data) ?>">
         <input type="text" name="digit7" maxlength="1" pattern="\d" title="Digit 7" required autocomplete="off" value="<?= preserve_digit_view(7, $this->data) ?>">
         <input type="text" name="digit8" maxlength="1" pattern="\d" title="Digit 8" required autocomplete="off" value="<?= preserve_digit_view(8, $this->data) ?>">
     </div>
+
+    <label>Phone Number:</label><br>
+    <input type="tel" name="phone_number" placeholder="09XXXXXXXXX or +639XXXXXXXXX" required autocomplete="off" value="<?= preserve_post_view('phone_number', $this->data) ?>"><br>
 
     <label>Email (@ckcgingoog.edu.ph only):</label><br>
     <div class="email-verify-group">
