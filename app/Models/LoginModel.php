@@ -67,6 +67,7 @@ class LoginModel
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
     public function getAdminByEmail($email)
     {
         $stmt = $this->db->prepare("SELECT * FROM admin WHERE email = :email LIMIT 1");

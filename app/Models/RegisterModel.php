@@ -8,7 +8,7 @@ use PDO;
 class RegisterModel
 {
     private $db;
-    
+
     public function __construct(DBConnection $db)
     {
         $this->db = $db->getConnection();
@@ -29,7 +29,11 @@ class RegisterModel
 
     public function getLastTempRegistration($email)
     {
-        $stmt = $this->db->prepare("SELECT created_at FROM temp_registrations WHERE email = ? ORDER BY created_at DESC LIMIT 1");
+        // Only 5 minutes can get code
+        $stmt = $this->db->prepare("SELECT created_at FROM temp_registrations 
+                                     WHERE email = ? 
+                                     AND created_at > NOW() - INTERVAL 5 MINUTE 
+                                     ORDER BY created_at DESC LIMIT 1");
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -60,22 +64,45 @@ class RegisterModel
         return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
     }
 
+    public function checkPhoneExists($phone_number)
+    {
+        $stmt = $this->db->prepare("SELECT student_id FROM student WHERE phone_number = ? LIMIT 1");
+        $stmt->execute([$phone_number]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+    }
+
     public function createUser($data)
     {
-        $stmt = $this->db->prepare("INSERT INTO student 
-            (first_name, middle_name, last_name, suffix, id_number, email, password, security_question, security_answer, is_verified, created_at) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, NOW())");
-        
-        return $stmt->execute([
-            $data['first_name'],
-            $data['middle_name'],
-            $data['last_name'],
-            $data['suffix'],
-            $data['id_number'],
-            $data['email'],
-            $data['password'],
-            $data['security_question'],
-            $data['security_answer'],
-        ]);
+        try {
+            $stmt = $this->db->prepare("INSERT INTO student 
+                (first_name, middle_name, last_name, suffix, year_level, id_number, phone_number, email, password, security_question, security_answer, is_verified) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
+
+            $result = $stmt->execute([
+                $data['first_name'],
+                $data['middle_name'],
+                $data['last_name'],
+                $data['suffix'],
+                $data['year_level'],
+                $data['id_number'],
+                $data['phone_number'],
+                $data['email'],
+                $data['password'],
+                $data['security_question'],
+                $data['security_answer']
+            ]);
+
+            return $result;
+        } catch (\PDOException $e) {
+            error_log("Database error in createUser: " . $e->getMessage());
+            error_log("SQL State: " . $e->getCode());
+            error_log("Student data: " . json_encode([
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'id_number' => $data['id_number']
+            ]));
+            return false;
+        }
     }
 }
