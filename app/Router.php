@@ -35,13 +35,6 @@ class Router
         Router::add('/register', fn() => (new RegisterController())->register(), 'POST');
         Router::add('/register/send-code', fn() => (new RegisterController())->sendCode(), 'POST');
 
-        // Dashboard (kamo change if unsay file name)
-        Router::add('/student-dashboard', fn() => Router::render('Dashboards/Student'));
-        Router::add('/faculty-dashboard', fn() => Router::render('Dashboards/Faculty'));
-        Router::add('/admin-dashboard', fn() => Router::render('Dashboards/Admin'));
-        Router::add('/parents-dashboard', fn() => Router::render('Dashboards/Parents'));
-
-
         // ============================================== FACULTY DASHBORAD ROUTES ============================================== //
         Router::add('/faculty-dashboard', fn() => (new FacultyController())->facultyDashboard());
         Router::add('/faculty-subjectsAvailable', fn() => (new FacultyController())->availableSubjects());
