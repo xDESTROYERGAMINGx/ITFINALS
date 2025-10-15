@@ -16,7 +16,7 @@ Tiwana, Ken Wilson D.
 Macarate, Kert Christian
 Quitat, Vladymir
 
-## PLEASE DOWNLOAD THE BACKGROUD VIDEO LOCALLY (from the zip file provided by group 1)
+# PLEASE DOWNLOAD THE BACKGROUD VIDEO LOCALLY (from the zip file provided by group 1)
 - If you want to do tests, make changes/updates, put the video file on the videos folder.
 - If you want to commit your changes, REMOVE THE VIDEO FROM THE FOLDER FIRST before committing.
 - YOU CAN'T UPLOAD THE VIDEO FILE. TO AVOID CONFLICTS, REMOVE IT BEFORE COMMITTING.
