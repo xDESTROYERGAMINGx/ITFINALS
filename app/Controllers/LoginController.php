@@ -101,7 +101,7 @@ class LoginController
             session_regenerate_id(true);
             $_SESSION['faculty_id'] = $faculty['faculty_id'];
             $_SESSION['id_number'] = $faculty['id_number'];
-            $_SESSION['name'] = $faculty['first_name'] . ' ' . $faculty['last_name']; 
+            $_SESSION['name'] = $faculty['first_name'] . ' ' . $faculty['last_name'];
             $_SESSION['email'] = $faculty['email'];
 
             header("Location: /faculty-dashboard");
@@ -227,21 +227,40 @@ class LoginController
         }
     }
 
+
     private function verifyRecaptchaV3($token, $secret)
     {
         $url = 'https://www.google.com/recaptcha/api/siteverify';
-        $data = ['secret' => $secret, 'response' => $token];
-        $options = [
-            'http' => [
-                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query($data),
-            ],
+        $data = [
+            'secret' => $secret,
+            'response' => $token
         ];
-        $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
-        if ($result === false) return false;
-        return json_decode($result, true);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+        $result = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            error_log('cURL Error in verifyRecaptchaV3: ' . curl_error($ch));
+            curl_close($ch);
+            return false;
+        }
+
+        curl_close($ch);
+
+        if ($result === false) {
+            return false;
+        }
+
+        $json = json_decode($result, true);
+        return $json; // Return the full response array
     }
 
     private function renderWithError($error, $email = '')
