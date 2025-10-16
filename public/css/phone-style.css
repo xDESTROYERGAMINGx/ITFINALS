@@ -4,7 +4,7 @@
   }
 
   .navbar-brand {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .navbar-toggler {
@@ -239,12 +239,13 @@
   }
 
   .footer-logos {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
     align-items: center;
   }
 
   .footer-logos img {
-    width: 100px;
-    transform: translateX(50%);
+    width: 50px;
   }
   .footer-bottom-bar {
     display: flex;
@@ -276,5 +277,4 @@
     color: #ccc;
     font-size: 0.85rem;
   }
-
 }

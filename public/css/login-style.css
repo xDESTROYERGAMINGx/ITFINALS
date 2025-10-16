@@ -331,7 +331,7 @@ button[type="submit"]:hover {
   /* Parent login goes below main login */
   .login-container {
     order: 1;
-    margin-bottom: 3%;
+    margin: 3%;
   }
 
   .parent-login-wrapper {
@@ -340,7 +340,7 @@ button[type="submit"]:hover {
     transform: none;
     flex-direction: column;
     align-items: center;
-    margin-top: 3%;
+    margin: 3%;
   }
 
   .parent-login-container {
