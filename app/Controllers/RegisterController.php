@@ -29,6 +29,7 @@ class RegisterController
         $this->RegisterModel = new RegisterModel($db);
     }
 
+    //loads the register.php
     public function index()
     {
         $data = [
@@ -44,6 +45,7 @@ class RegisterController
         echo $GLOBALS['templates']->render('Register', $data);
     }
 
+    //reads the email output, validates the email first then it will send a random code using PHPMailer, saves the code in the temporary.
     public function sendCode()
     {
         header('Content-Type: application/json');
@@ -79,19 +81,19 @@ class RegisterController
             $last_sent_ts = strtotime($lastSent['created_at']);
             $current_time = time();
             $time_diff = $current_time - $last_sent_ts;
-            
+
             // block if less than 5 minutes
             if ($time_diff < 300) {
                 $remaining = 300 - $time_diff;
                 $minutes = floor($remaining / 60);
                 $seconds = $remaining % 60;
-                
+
                 if ($minutes > 0) {
                     $time_msg = $minutes . " minute(s) and " . $seconds . " second(s)";
                 } else {
                     $time_msg = $seconds . " second(s)";
                 }
-                
+
                 echo json_encode(['success' => false, 'message' => "You need to wait 5 minutes to send another verification code."]);
                 exit;
             }
@@ -112,6 +114,7 @@ class RegisterController
         exit;
     }
 
+    //reads all the input field, then validates everything, then verifies the captcha, and will hashed the password, will be saved at the db
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -276,6 +279,7 @@ class RegisterController
         echo $GLOBALS['templates']->render('Register', $data);
     }
 
+    //uses phpmailer to send code
     private function sendVerificationEmail($email, $verificationCode)
     {
         $mail = new PHPMailer(true);
@@ -311,6 +315,7 @@ class RegisterController
         }
     }
 
+    //verifies the token sent to the url
     private function verifyRecaptcha($token, $secret)
     {
         $url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -324,18 +329,18 @@ class RegisterController
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
         $result = curl_exec($ch);
-        
+
         if (curl_errno($ch)) {
             error_log('cURL Error: ' . curl_error($ch));
             curl_close($ch);
             return false;
         }
-        
+
         curl_close($ch);
 
         if ($result === false) {

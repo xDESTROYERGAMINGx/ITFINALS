@@ -18,6 +18,7 @@ class LoginController
         $this->LoginModel = new LoginModel($db);
     }
 
+    //loads the login.php
     public function index()
     {
         $data = [
@@ -39,6 +40,7 @@ class LoginController
         echo $GLOBALS['templates']->render('Login', $data);
     }
 
+    //reads the parent_id, fetches security questions from loginmodel.php, returns to JS for dynamic change.
     public function getSecurityQuestion()
     {
         header('Content-Type: application/json');
@@ -58,6 +60,7 @@ class LoginController
         exit;
     }
 
+    //reads the email and password, next validate recaptcha token, then passes the data to loginmodel.php, if success create a session and will go admin/faculty/student, if not it will error message.
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -85,7 +88,7 @@ class LoginController
         }
 
         $recaptchaResponse = $this->verifyRecaptchaV3($recaptchaToken, $_ENV['RECAPTCHA_SECRET_KEY_V3'] ?? '');
-        if (!$recaptchaResponse || !$recaptchaResponse['success'] || $recaptchaResponse['score'] < 0.5) {
+        if (!$recaptchaResponse || !$recaptchaResponse['success'] || $recaptchaResponse['score'] < 0.3) {
             $this->renderWithError("reCAPTCHA verification failed. Please try again.", $email);
             return;
         }
@@ -138,6 +141,7 @@ class LoginController
         exit;
     }
 
+    //reads the input, verifies SQ and SA to loginmodel.php. Correct = create a session and will go to PD. If not, error back.
     public function parentLogin()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -202,6 +206,7 @@ class LoginController
         exit;
     }
 
+    //check how many attemps in the parent login, it locks for 300s (5mins), then you can do it again
     private function checkAndIncrementParentAttempts($id_number)
     {
         $result = $this->LoginModel->getParentAttempts($id_number);
@@ -227,7 +232,7 @@ class LoginController
         }
     }
 
-
+    //verifies the token sent to the url
     private function verifyRecaptchaV3($token, $secret)
     {
         $url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -260,9 +265,10 @@ class LoginController
         }
 
         $json = json_decode($result, true);
-        return $json; // Return the full response array
+        return $json;
     }
 
+    //when login fail, it re-renders the login.php, it will not go anywhere just the page with an error message
     private function renderWithError($error, $email = '')
     {
         $data = [
@@ -283,6 +289,7 @@ class LoginController
         echo $GLOBALS['templates']->render('Login', $data);
     }
 
+    //same concept for the renderwitherror
     private function renderWithParentError($error, $keepOpen = false, $d2 = '', $d3 = '', $d5 = '', $d6 = '', $d7 = '', $d8 = '')
     {
         $security_question = '';
