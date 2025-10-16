@@ -111,6 +111,7 @@ sendCodeBtn.addEventListener("click", () => {
   }
   sendCodeBtn.disabled = true;
   sendCodeBtn.textContent = "Sending...";
+  //AJAX example
   fetch("/register/send-code", {
     method: "POST",
     headers: {

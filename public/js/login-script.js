@@ -1,3 +1,4 @@
+//password toggle
 const password = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");
 
@@ -122,7 +123,6 @@ function checkAndFetchSecurityQuestion() {
     'button[name="parent_authenticate"]'
   );
 
-  // DYnamic
   let dynamicErrorDiv = document.getElementById("parentDynamicError");
   if (!dynamicErrorDiv) {
     dynamicErrorDiv = document.createElement("div");
@@ -143,7 +143,7 @@ function checkAndFetchSecurityQuestion() {
   if (digit2 && digit3 && digit5 && digit6 && digit7 && digit8) {
     const parentId =
       "C" + digit2 + digit3 + "-" + digit5 + digit6 + digit7 + digit8;
-
+    //AJAX example
     fetch(
       "/login/security-question?action=get_security_question&parent_id=" +
         encodeURIComponent(parentId)
@@ -196,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // reCAPTCHA v3
+// AJAX example
 grecaptcha.ready(function () {
   grecaptcha
     .execute("6Lfod-YrAAAAAJHEWDGLF8ZWhmV40eELvq8prMaL", {
