@@ -14,12 +14,14 @@ class RegisterModel
         $this->db = $db->getConnection();
     }
 
+    //delete/clean temp db if over 5 mins
     public function cleanExpiredTempRegistrations()
     {
         $stmt = $this->db->prepare("DELETE FROM temp_registrations WHERE created_at < NOW() - INTERVAL 5 MINUTE");
         return $stmt->execute();
     }
 
+    //check if already used
     public function checkEmailExists($email)
     {
         $stmt = $this->db->prepare("SELECT student_id FROM student WHERE email = ? LIMIT 1");
@@ -27,6 +29,7 @@ class RegisterModel
         return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
     }
 
+    //prevent spam verification code
     public function getLastTempRegistration($email)
     {
         // Only 5 minutes can get code
@@ -38,18 +41,21 @@ class RegisterModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    //delete old code
     public function deleteTempRegistration($email)
     {
         $stmt = $this->db->prepare("DELETE FROM temp_registrations WHERE email = ?");
         return $stmt->execute([$email]);
     }
 
+    //create new code
     public function createTempRegistration($email, $code)
     {
         $stmt = $this->db->prepare("INSERT INTO temp_registrations (email, verification_code, created_at) VALUES (?, ?, NOW())");
         return $stmt->execute([$email, $code]);
     }
 
+    //check if code matches in the sent code to email
     public function verifyCode($email, $code)
     {
         $stmt = $this->db->prepare("SELECT created_at FROM temp_registrations WHERE email = ? AND verification_code = ? ORDER BY created_at DESC LIMIT 1");
@@ -57,6 +63,7 @@ class RegisterModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    //check user if exited
     public function checkUserExists($email, $username)
     {
         $stmt = $this->db->prepare("SELECT student_id FROM student WHERE email = ? OR id_number = ?");
@@ -64,6 +71,7 @@ class RegisterModel
         return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
     }
 
+    //check phone if existed
     public function checkPhoneExists($phone_number)
     {
         $stmt = $this->db->prepare("SELECT student_id FROM student WHERE phone_number = ? LIMIT 1");
@@ -71,6 +79,7 @@ class RegisterModel
         return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
     }
 
+    //insert new student in student table in db
     public function createUser($data)
     {
         try {
